@@ -58,6 +58,13 @@
       max-width: 950px;
       margin: auto;
       border-bottom: 1px solid #1a1a1a;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2 {
@@ -78,12 +85,30 @@
       padding: 25px;
       border-radius: 12px;
       margin-bottom: 40px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 2px;
+      background: linear-gradient(135deg, #1e90ff, #00ffc6);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      pointer-events: none;
     }
 
     .project:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(30, 144, 255, 0.2);
+      box-shadow: 0 0 25px rgba(30, 144, 255, 0.25);
     }
 
     .project h3 {
@@ -228,6 +253,12 @@
   <section id="work">
     <h2>Previous Work (Project Planning)</h2>
     <div class="project">
+      <h3>📑 Project Report – Resource & Schedule Planning</h3>
+      <p>Comprehensive Primavera-based project planning with detailed resources and timelines.</p>
+      <iframe src="PM3.pdf"></iframe>
+      <button onclick="openModal('PM3.pdf')">Expand PDF</button>
+    </div>
+    <div class="project">
       <h3>📑 Project Report – Baseline & Progress Tracking</h3>
       <p>Baseline schedule and progress monitoring documentation for a residential project.</p>
       <iframe src="PM4.pdf"></iframe>
@@ -256,10 +287,15 @@
   </div>
 
   <script>
+    // Open PDF in modal with Google Docs fallback
     function openModal(pdf) {
       const modal = document.getElementById("pdfModal");
       const frame = document.getElementById("pdfFrame");
-      frame.src = pdf;
+
+      // Force Google Docs Viewer (prevents IDM from hijacking)
+      const url = window.location.origin + "/" + pdf;
+      frame.src = "https://docs.google.com/viewer?embedded=true&url=" + encodeURIComponent(url);
+
       modal.classList.add("show");
     }
 
@@ -267,8 +303,21 @@
       const modal = document.getElementById("pdfModal");
       const frame = document.getElementById("pdfFrame");
       modal.classList.remove("show");
-      setTimeout(() => frame.src = "", 400); // clear after fade-out
+      setTimeout(() => frame.src = "", 400);
     }
+
+    // Scroll animations
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
   </script>
 
 </body>
