@@ -228,12 +228,6 @@
   <section id="work">
     <h2>Previous Work (Project Planning)</h2>
     <div class="project">
-      <h3>📑 Project Report – Resource & Schedule Planning</h3>
-      <p>Comprehensive Primavera-based project planning with detailed resources and timelines.</p>
-      <iframe src="PM3.pdf"></iframe>
-      <button onclick="openModal('PM3.pdf')">Expand PDF</button>
-    </div>
-    <div class="project">
       <h3>📑 Project Report – Baseline & Progress Tracking</h3>
       <p>Baseline schedule and progress monitoring documentation for a residential project.</p>
       <iframe src="PM4.pdf"></iframe>
@@ -265,14 +259,7 @@
     function openModal(pdf) {
       const modal = document.getElementById("pdfModal");
       const frame = document.getElementById("pdfFrame");
-
-      // Force Google Docs Viewer for PM3 if browser downloads it
-      if (pdf.toLowerCase().includes("pm3")) {
-        frame.src = "https://docs.google.com/viewer?embedded=true&url=" + window.location.origin + "/" + pdf;
-      } else {
-        frame.src = pdf;
-      }
-
+      frame.src = pdf;
       modal.classList.add("show");
     }
 
