@@ -255,14 +255,14 @@
     <div class="project">
       <h3>📑 Project Report – Resource & Schedule Planning</h3>
       <p>Comprehensive Primavera-based project planning with detailed resources and timelines.</p>
-      <iframe src="PM3.pdf"></iframe>
-      <button onclick="openModal('PM3.pdf')">Expand PDF</button>
+      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM3.view"></iframe>
+      <button onclick="openModal('https://yourdomain.com/docs/PM3.view')">Expand PDF</button>
     </div>
     <div class="project">
       <h3>📑 Project Report – Baseline & Progress Tracking</h3>
       <p>Baseline schedule and progress monitoring documentation for a residential project.</p>
-      <iframe src="PM4.pdf"></iframe>
-      <button onclick="openModal('PM4.pdf')">Expand PDF</button>
+      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM4.view"></iframe>
+      <button onclick="openModal('https://yourdomain.com/docs/PM4.view')">Expand PDF</button>
     </div>
   </section>
 
@@ -287,15 +287,11 @@
   </div>
 
   <script>
-    // Open PDF in modal with Google Docs fallback
-    function openModal(pdf) {
+    // Open PDF in modal with PDF.js embed
+    function openModal(file) {
       const modal = document.getElementById("pdfModal");
       const frame = document.getElementById("pdfFrame");
-
-      // Force Google Docs Viewer (prevents IDM from hijacking)
-      const url = window.location.origin + "/" + pdf;
-      frame.src = "https://docs.google.com/viewer?embedded=true&url=" + encodeURIComponent(url);
-
+      frame.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(file);
       modal.classList.add("show");
     }
 
