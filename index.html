@@ -4,21 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hossam Sabry | BIM Developer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #0f1115;
-      color: #e4e6eb;
-      font-family: "Segoe UI", Arial, sans-serif;
+      color: #eaeaea;
+      font-family: "Inter", Arial, sans-serif;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
     }
 
+    /* HEADER */
     header {
       background: linear-gradient(135deg, #0f1115, #1a1d24);
       padding: 50px 20px;
       text-align: center;
       border-bottom: 2px solid #1e90ff;
-      box-shadow: 0 4px 15px rgba(30, 144, 255, 0.25);
+      box-shadow: 0 4px 15px rgba(30, 144, 255, 0.2);
     }
 
     header img {
@@ -32,16 +35,23 @@
     header h1 {
       margin: 10px 0 0;
       font-size: 2.8em;
+      font-family: "Montserrat", sans-serif;
       color: #1e90ff;
-      text-shadow: 0 0 12px rgba(30, 144, 255, 0.7);
+    }
+
+    header .tagline {
+      font-size: 1.2em;
+      color: #aaa;
+      margin-top: 8px;
+      font-weight: 500;
     }
 
     nav {
-      margin-top: 20px;
+      margin-top: 25px;
     }
 
     nav a {
-      margin: 0 20px;
+      margin: 0 18px;
       color: #1e90ff;
       text-decoration: none;
       font-weight: 600;
@@ -49,71 +59,71 @@
     }
 
     nav a:hover {
-      color: #00ffc6;
-      text-shadow: 0 0 8px #00ffc6;
+      color: #00b894;
     }
 
+    /* SECTIONS */
     section {
       padding: 70px 20px;
-      max-width: 950px;
+      max-width: 1000px;
       margin: auto;
       border-bottom: 1px solid #1a1a1a;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     h2 {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
       color: #ffffff;
       border-left: 5px solid #1e90ff;
       padding-left: 12px;
-      margin-bottom: 25px;
-      font-size: 1.8em;
+      margin-bottom: 30px;
+      font-size: 1.9em;
     }
 
-    p {
-      line-height: 1.7;
-      font-size: 1.05em;
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .skill {
+      background: #1a1d24;
+      padding: 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(30, 144, 255, 0.2);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
     }
 
     .project {
       background: #1a1d24;
       padding: 25px;
       border-radius: 12px;
-      margin-bottom: 40px;
-      border: 2px solid transparent;
-      background-clip: padding-box;
-      position: relative;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .project::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      padding: 2px;
-      background: linear-gradient(135deg, #1e90ff, #00ffc6);
-      -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      pointer-events: none;
     }
 
     .project:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(30, 144, 255, 0.25);
+      box-shadow: 0 8px 20px rgba(30, 144, 255, 0.2);
     }
 
     .project h3 {
+      font-family: "Montserrat", sans-serif;
       margin-top: 0;
-      color: #00ffc6;
+      color: #00b894;
     }
 
     iframe {
@@ -127,20 +137,33 @@
 
     button {
       background: #1e90ff;
-      color: #0f1115;
+      color: #fff;
       border: none;
-      padding: 12px 24px;
+      padding: 10px 20px;
       font-size: 15px;
       cursor: pointer;
       border-radius: 6px;
       font-weight: 600;
       transition: 0.3s;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     button:hover {
-      background: #00ffc6;
-      box-shadow: 0 0 15px #00ffc6;
+      background: #00b894;
+    }
+
+    /* CONTACT */
+    .social-links a {
+      display: inline-block;
+      margin: 12px;
+      color: #1e90ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #00b894;
     }
 
     footer {
@@ -149,24 +172,10 @@
       background: #1a1d24;
       border-top: 2px solid #1e90ff;
       font-size: 14px;
-      color: #999;
+      color: #aaa;
     }
 
-    .social-links a {
-      display: inline-block;
-      margin: 10px;
-      color: #1e90ff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .social-links a:hover {
-      color: #00ffc6;
-      text-shadow: 0 0 8px #00ffc6;
-    }
-
-    /* Modal with fade animation */
+    /* MODAL */
     .modal {
       display: none;
       position: fixed;
@@ -179,13 +188,10 @@
       backdrop-filter: blur(5px);
       justify-content: center;
       align-items: center;
-      opacity: 0;
-      transition: opacity 0.4s ease;
     }
 
     .modal.show {
       display: flex;
-      opacity: 1;
     }
 
     .modal-content {
@@ -193,13 +199,6 @@
       height: 90%;
       border: none;
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(30,144,255,0.3);
-      animation: zoomIn 0.4s ease;
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(0.9); opacity: 0.7; }
-      to { transform: scale(1); opacity: 1; }
     }
 
     .close-btn {
@@ -220,55 +219,77 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
     <img src="me.jpg" alt="Hossam Sabry">
     <h1>Hossam Sabry</h1>
+    <p class="tagline">BIM Developer | Civil Engineer | Project Planning</p>
     <nav>
       <a href="#about">About</a>
+      <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#work">Previous Work</a>
+      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
+  <!-- ABOUT -->
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer with expertise in <em>Building Information Modeling</em>, project planning, and digital construction technologies. I enjoy integrating modern workflows that bridge design, execution, and project management.</p>
+    <p>Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer with expertise in <em>Building Information Modeling</em>, project planning, and digital construction technologies. My work bridges design, execution, and management, enabling smarter workflows and better project outcomes.</p>
   </section>
 
+  <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">Revit</div>
+      <div class="skill">Navisworks</div>
+      <div class="skill">Dynamo</div>
+      <div class="skill">Primavera P6</div>
+      <div class="skill">AutoCAD</div>
+      <div class="skill">Python / C# (Automation)</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
   <section id="projects">
     <h2>Featured Projects</h2>
-    <div class="project">
-      <h3>⚡ BIM Automation Tool</h3>
-      <p>A Revit and Dynamo-based automation script that reduces repetitive modeling tasks and increases design efficiency.</p>
-      <button onclick="window.location.href='https://github.com/M2Dawn'">View on GitHub</button>
-    </div>
-    <div class="project">
-      <h3>⚡ Clash Detection Dashboard</h3>
-      <p>A Navisworks plugin with a modern UI that visualizes clashes and generates reports automatically for faster coordination.</p>
-      <button>Demo</button>
+    <div class="projects-grid">
+      <div class="project">
+        <h3>⚡ BIM Automation Tool</h3>
+        <p>A Revit + Dynamo automation tool that reduces repetitive modeling tasks and improves efficiency by 30%.</p>
+        <button onclick="window.location.href='https://github.com/M2Dawn'">View on GitHub</button>
+      </div>
+      <div class="project">
+        <h3>⚡ Clash Detection Dashboard</h3>
+        <p>A Navisworks plugin with a modern UI that visualizes clashes and generates reports automatically for faster coordination.</p>
+        <button>Demo</button>
+      </div>
     </div>
   </section>
 
+  <!-- WORK -->
   <section id="work">
     <h2>Previous Work (Project Planning)</h2>
     <div class="project">
       <h3>📑 Project Report – Resource & Schedule Planning</h3>
       <p>Comprehensive Primavera-based project planning with detailed resources and timelines.</p>
-      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM3.view"></iframe>
-      <button onclick="openModal('https://yourdomain.com/docs/PM3.view')">Expand PDF</button>
+      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM3.pdf"></iframe>
+      <button onclick="openModal('https://yourdomain.com/docs/PM3.pdf')">Expand PDF</button>
     </div>
     <div class="project">
       <h3>📑 Project Report – Baseline & Progress Tracking</h3>
       <p>Baseline schedule and progress monitoring documentation for a residential project.</p>
-      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM4.view"></iframe>
-      <button onclick="openModal('https://yourdomain.com/docs/PM4.view')">Expand PDF</button>
+      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM4.pdf"></iframe>
+      <button onclick="openModal('https://yourdomain.com/docs/PM4.pdf')">Expand PDF</button>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <h2>Contact</h2>
-    <p>If you’d like to collaborate or discuss opportunities, reach me here:</p>
+    <p>If you’d like to collaborate or discuss opportunities, you can reach me here:</p>
     <div class="social-links">
       <a href="mailto:e.hossamsabry@gmail.com">📧 Email</a>
       <a href="https://www.linkedin.com/in/hossamsabry0" target="_blank">💼 LinkedIn</a>
@@ -280,40 +301,25 @@
     <p>© 2025 Hossam Sabry | BIM Developer Portfolio</p>
   </footer>
 
-  <!-- Modal -->
+  <!-- MODAL -->
   <div id="pdfModal" class="modal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <iframe id="pdfFrame" class="modal-content"></iframe>
   </div>
 
   <script>
-    // Open PDF in modal with PDF.js embed
     function openModal(file) {
       const modal = document.getElementById("pdfModal");
       const frame = document.getElementById("pdfFrame");
       frame.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(file);
       modal.classList.add("show");
     }
-
     function closeModal() {
       const modal = document.getElementById("pdfModal");
       const frame = document.getElementById("pdfFrame");
       modal.classList.remove("show");
-      setTimeout(() => frame.src = "", 400);
+      frame.src = "";
     }
-
-    // Scroll animations
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    sections.forEach(section => observer.observe(section));
   </script>
 
 </body>
