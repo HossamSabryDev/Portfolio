@@ -907,6 +907,27 @@
         setTimeout(() => {
           successMessage.classList.remove('show');
         }, 3000);
+      }).catch(function(err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = emailText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        copyButton.textContent = 'Copied!';
+        copyButton.classList.add('copied');
+        successMessage.classList.add('show');
+        
+        setTimeout(() => {
+          copyButton.textContent = 'Copy';
+          copyButton.classList.remove('copied');
+        }, 2000);
+        
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 3000);
       });
     }
 
@@ -986,8 +1007,8 @@
         if (i > originalText.length) {
           clearInterval(typeInterval);
         }
-      }, 50);
-    }, 1500);
+      }, 120); // Slower typing speed - was 50ms, now 120ms
+    }, 500); // Start earlier - changed from 2000ms to 500ms
   </script>
 </body>
 </html>remove('copied');
