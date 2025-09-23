@@ -457,7 +457,7 @@
       flex-wrap: wrap;
     }
 
-    .social-links a {
+    .social-links a, .social-links .email-button {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -469,13 +469,155 @@
       text-decoration: none;
       font-weight: 500;
       transition: all 0.3s ease;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
     }
 
-    .social-links a:hover {
+    .social-links a:hover, .social-links .email-button:hover {
       background: var(--gradient-1);
       border-color: transparent;
       transform: translateY(-2px);
       box-shadow: var(--shadow);
+    }
+
+    /* EMAIL MODAL */
+    .email-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .email-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .email-modal-content {
+      background: var(--bg-card);
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+      box-shadow: var(--shadow-hover);
+    }
+
+    .email-modal.active .email-modal-content {
+      transform: scale(1);
+    }
+
+    .email-modal h3 {
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .email-display {
+      background: var(--bg-secondary);
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      margin: 1.5rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      user-select: all;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .copy-button {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.3rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .copy-button:hover {
+      transform: scale(1.05);
+    }
+
+    .copy-button.copied {
+      background: var(--gradient-3);
+      animation: pulse 0.6s ease;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .close-modal {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .close-modal:hover {
+      background: var(--bg-secondary);
+    }
+
+    .mailto-button {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .mailto-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .success-message {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .success-message.show {
+      opacity: 1;
     }
 
     /* FOOTER */
@@ -536,6 +678,19 @@
         flex-direction: column;
         align-items: center;
       }
+
+      .email-display {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .modal-buttons {
+        flex-direction: column;
+      }
+
+      .email-modal-content {
+        padding: 2rem 1rem;
+      }
     }
 
     /* SMOOTH ANIMATIONS */
@@ -555,6 +710,25 @@
   <!-- Scroll Progress Indicator -->
   <div class="scroll-indicator">
     <div class="scroll-progress" id="scrollProgress"></div>
+  </div>
+
+  <!-- Email Modal -->
+  <div class="email-modal" id="emailModal">
+    <div class="email-modal-content">
+      <h3>Contact Me via Email</h3>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">Here's my email address:</p>
+      <div class="email-display">
+        <span id="emailText">e.hossamsabry@gmail.com</span>
+        <button class="copy-button" onclick="copyEmail()">Copy</button>
+      </div>
+      <div class="success-message" id="successMessage">
+        Email copied to clipboard! ✨
+      </div>
+      <div class="modal-buttons">
+        <button class="close-modal" onclick="closeEmailModal()">Close</button>
+        <a href="mailto:e.hossamsabry@gmail.com" class="mailto-button">Open Email App</a>
+      </div>
+    </div>
   </div>
 
   <!-- HEADER -->
@@ -580,7 +754,7 @@
     <h2>About Me</h2>
     <div class="about-content">
       <p>
-  Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer specializing in 
+  Hello! I'm <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer specializing in 
   <em>Building Information Modeling</em>, project planning, and advanced digital construction technologies. 
   I design innovative solutions that connect design, execution, and management, enabling smarter workflows 
   and delivering exceptional project outcomes across the AEC industry.
@@ -682,9 +856,9 @@
     <div class="contact-content">
       <p class="contact-description">Ready to collaborate on innovative BIM solutions or discuss exciting opportunities in digital construction? I'd love to hear from you!</p>
       <div class="social-links">
-        <a href="mailto:e.hossamsabry@gmail.com">
+        <button class="email-button" onclick="openEmailModal()">
           <span style="color: var(--primary);">📧</span> Email
-        </a>
+        </button>
         <a href="https://www.linkedin.com/in/hossamsabry0" target="_blank">
           <span style="color: var(--secondary);">💼</span> LinkedIn
         </a>
@@ -700,6 +874,56 @@
   </footer>
 
   <script>
+    // Email Modal Functions
+    function openEmailModal() {
+      const modal = document.getElementById('emailModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEmailModal() {
+      const modal = document.getElementById('emailModal');
+      const successMessage = document.getElementById('successMessage');
+      modal.classList.remove('active');
+      successMessage.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+
+    function copyEmail() {
+      const emailText = document.getElementById('emailText').textContent;
+      const copyButton = document.querySelector('.copy-button');
+      const successMessage = document.getElementById('successMessage');
+      
+      navigator.clipboard.writeText(emailText).then(function() {
+        copyButton.textContent = 'Copied!';
+        copyButton.classList.add('copied');
+        successMessage.classList.add('show');
+        
+        setTimeout(() => {
+          copyButton.textContent = 'Copy';
+          copyButton.classList.remove('copied');
+        }, 2000);
+        
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 3000);
+      });
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('emailModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeEmailModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('emailModal').classList.contains('active')) {
+        closeEmailModal();
+      }
+    });
+
     // Scroll progress indicator
     window.addEventListener('scroll', () => {
       const scrollTop = document.documentElement.scrollTop;
@@ -766,5 +990,25 @@
     }, 1500);
   </script>
 </body>
-</html>
-
+</html>remove('copied');
+        }, 2000);
+        
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+        }, 3000);
+      }).catch(function(err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = emailText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        copyButton.textContent = 'Copied!';
+        copyButton.classList.add('copied');
+        successMessage.classList.add('show');
+        
+        setTimeout(() => {
+          copyButton.textContent = 'Copy';
+          copyButton.classList.
