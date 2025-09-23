@@ -1,48 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name | BIM Developer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    /* Dark Theme */
+    body {
+      background-color: #0d0d0d;
+      color: #f5f5f5;
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #111;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #00ffcc;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #00ffcc;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #00ffaa;
+      text-shadow: 0 0 8px #00ffaa;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+      border-bottom: 1px solid #222;
+    }
+
+    h2 {
+      color: #ffffff;
+      border-left: 4px solid #00ffcc;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    .project {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .project h3 {
+      margin-top: 0;
+      color: #00ffaa;
+    }
+
+    button {
+      background: #00ffcc;
+      color: #0d0d0d;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background: #00ffaa;
+      box-shadow: 0 0 10px #00ffaa;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      border-top: 2px solid #00ffcc;
+      font-size: 14px;
+    }
+  </style>
 </head>
-<link rel="stylesheet" href="style.css">
-<body class="bg-gray-50 text-gray-800 flex items-center justify-center min-h-screen">
-  <div class="max-w-lg w-full bg-white shadow-lg rounded-2xl p-8 text-center">
-    <!-- Avatar -->
-    <img src="https://via.placeholder.com/120" alt="Profile" class="mx-auto rounded-full border-4 border-gray-200 shadow-md mb-4">
+<body>
 
-    <!-- Name + Title -->
-    <h1 class="text-2xl font-bold">Your Name</h1>
-    <p class="text-gray-500 text-sm mb-4">🏗️ BIM Developer | 🚀 Building the Future</p>
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <!-- Bio -->
-    <p class="mb-6">
-      Civil Engineer specializing in BIM and digital construction.  
-      Passionate about designing smarter workflows and bringing structures to life.
-    </p>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I’m a passionate developer who loves creating cool, modern, and functional websites. This is my dark-themed portfolio powered by GitHub Pages 🚀.</p>
+  </section>
 
-    <!-- Links -->
-    <div class="flex flex-col space-y-3">
-      <a href="mailto:yourname@email.com" 
-         class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
-         📧 Email Me
-      </a>
-      <a href="https://linkedin.com/in/yourname" target="_blank" 
-         class="px-4 py-2 bg-gray-800 text-white rounded-lg shadow hover:bg-gray-900">
-         🔗 LinkedIn
-      </a>
-      <a href="https://github.com/yourname" target="_blank" 
-         class="px-4 py-2 bg-gray-100 border rounded-lg shadow hover:bg-gray-200">
-         💻 GitHub
-      </a>
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>⚡ Project One</h3>
+      <p>A description of your first project goes here. You can add GitHub links, screenshots, or demos.</p>
+      <button onclick="window.location.href='https://github.com/M2Dawn'">View on GitHub</button>
     </div>
+    <div class="project">
+      <h3>⚡ Project Two</h3>
+      <p>A description of your second project. Make sure to show off your best work!</p>
+      <button>Demo</button>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <p class="mt-6 text-xs text-gray-400">
-      © 2025 Your Name. All rights reserved.
-    </p>
-  </div>
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>If you’d like to get in touch, feel free to email me at <a href="mailto:your@email.com">your@email.com</a>.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 My Portfolio | Built with ❤️ and GitHub Pages</p>
+  </footer>
+
 </body>
 </html>
-
