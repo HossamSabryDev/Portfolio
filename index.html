@@ -83,7 +83,7 @@
     /* SKILLS */
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 20px;
       text-align: center;
     }
@@ -126,15 +126,6 @@
       color: #00b894;
     }
 
-    iframe {
-      width: 100%;
-      height: 400px;
-      border: none;
-      margin-top: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(30, 144, 255, 0.1);
-    }
-
     button {
       background: #1e90ff;
       color: #fff;
@@ -174,58 +165,6 @@
       font-size: 14px;
       color: #aaa;
     }
-
-    footer nav a {
-      margin: 0 10px;
-      color: #aaa;
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    footer nav a:hover {
-      color: #1e90ff;
-    }
-
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      backdrop-filter: blur(5px);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-content {
-      width: 90%;
-      height: 90%;
-      border: none;
-      border-radius: 10px;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      color: #fff;
-      font-size: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .close-btn:hover {
-      color: #1e90ff;
-    }
   </style>
 </head>
 <body>
@@ -239,7 +178,6 @@
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -247,9 +185,7 @@
   <!-- ABOUT -->
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer passionate about <em>digital construction</em> and <em>workflow automation</em>.  
-       I specialize in <strong>Building Information Modeling (BIM)</strong>, project planning, and custom software tools that improve coordination, reduce errors, and save time in large-scale projects.  
-       My goal is to bridge the gap between engineering and technology by developing smarter solutions for the construction industry.</p>
+    <p>Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer with expertise in <em>Building Information Modeling</em>, project planning, and digital construction technologies. My work bridges design, execution, and management, enabling smarter workflows and better project outcomes.</p>
   </section>
 
   <!-- SKILLS -->
@@ -262,8 +198,6 @@
       <div class="skill">Primavera P6</div>
       <div class="skill">AutoCAD</div>
       <div class="skill">Python / C# (Automation)</div>
-      <div class="skill">Project Scheduling</div>
-      <div class="skill">Clash Detection & Coordination</div>
     </div>
   </section>
 
@@ -272,50 +206,25 @@
     <h2>Featured Projects</h2>
     <div class="projects-grid">
 
-      <!-- BIM Automation Tool -->
+      <!-- BIM Automation Tool (TOP PROJECT) -->
       <div class="project">
         <h3>⚡ BIM Automation Tool</h3>
-        <p>A Revit add-in (C#) that automates batch export of views to DWG and exports schedule data to CSV.  
-           Saves hours of repetitive work and improves coordination efficiency.</p>
-        <a href="https://github.com/M2Dawn/BIM-Automation-Tool" target="_blank">
-          <button>View Source</button>
-        </a>
+        <p>A Revit add-in (C#) that automates batch export of views to DWG and exports schedule data to CSV. 
+           Built with the Revit API — saves time during coordination and reporting.</p>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <a href="https://github.com/M2Dawn/BIM-Automation-Tool" target="_blank">
+            <button>Source (GitHub)</button>
+          </a>
+        </div>
       </div>
 
-      <!-- Clash Detection Dashboard -->
-      <div class="project">
-        <h3>⚡ Clash Detection Dashboard</h3>
-        <p>A Navisworks plugin with a modern UI that visualizes clashes, categorizes issues, and generates automated reports.  
-           Designed to accelerate design coordination meetings.</p>
-        <a href="https://github.com/M2Dawn/Clash-Detection-Dashboard" target="_blank">
-          <button>View Source</button>
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <h2>Previous Work (Project Planning)</h2>
-    <div class="project">
-      <h3>📑 Project Report – Resource & Schedule Planning</h3>
-      <p>Comprehensive Primavera-based project planning with resource allocation, dependencies, and optimized execution paths.</p>
-      <iframe src="docs/PM3.pdf"></iframe>
-      <button onclick="openModal('docs/PM3.pdf')">Read Full Report</button>
-    </div>
-    <div class="project">
-      <h3>📑 Project Report – Baseline & Progress Tracking</h3>
-      <p>Baseline schedules with ongoing progress monitoring and earned value analysis for a residential project.</p>
-      <iframe src="docs/PM4.pdf"></iframe>
-      <button onclick="openModal('docs/PM4.pdf')">Read Full Report</button>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
     <h2>Contact</h2>
-    <p>If you’d like to collaborate or discuss opportunities, feel free to reach out:</p>
+    <p>If you’d like to collaborate or discuss opportunities, you can reach me here:</p>
     <div class="social-links">
       <a href="mailto:e.hossamsabry@gmail.com">📧 Email</a>
       <a href="https://www.linkedin.com/in/hossamsabry0" target="_blank">💼 LinkedIn</a>
@@ -325,35 +234,7 @@
 
   <footer>
     <p>© 2025 Hossam Sabry | BIM Developer Portfolio</p>
-    <nav>
-      <a href="#about">About</a> | 
-      <a href="#skills">Skills</a> | 
-      <a href="#projects">Projects</a> | 
-      <a href="#work">Work</a> | 
-      <a href="#contact">Contact</a>
-    </nav>
   </footer>
-
-  <!-- MODAL -->
-  <div id="pdfModal" class="modal">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <iframe id="pdfFrame" class="modal-content"></iframe>
-  </div>
-
-  <script>
-    function openModal(file) {
-      const modal = document.getElementById("pdfModal");
-      const frame = document.getElementById("pdfFrame");
-      frame.src = file;
-      modal.classList.add("show");
-    }
-    function closeModal() {
-      const modal = document.getElementById("pdfModal");
-      const frame = document.getElementById("pdfFrame");
-      modal.classList.remove("show");
-      frame.src = "";
-    }
-  </script>
 
 </body>
 </html>
