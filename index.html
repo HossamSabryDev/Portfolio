@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
+  <title>Hossam Sabry | Portfolio</title>
   <style>
-    /* Dark Theme */
     body {
       background-color: #0d0d0d;
       color: #f5f5f5;
@@ -16,19 +15,27 @@
 
     header {
       background: #111;
-      padding: 20px;
+      padding: 40px 20px;
       text-align: center;
       border-bottom: 2px solid #00ffcc;
     }
 
+    header img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #00ffcc;
+      margin-bottom: 15px;
+    }
+
     header h1 {
-      margin: 0;
+      margin: 10px 0 0;
       font-size: 2.5em;
       color: #00ffcc;
     }
 
     nav {
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     nav a {
@@ -95,12 +102,27 @@
       border-top: 2px solid #00ffcc;
       font-size: 14px;
     }
+
+    .social-links a {
+      display: inline-block;
+      margin: 10px;
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .social-links a:hover {
+      color: #00ffaa;
+      text-shadow: 0 0 8px #00ffaa;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>My Portfolio</h1>
+    <!-- Profile picture -->
+    <img src="me.jpg" alt="Hossam Sabry">
+    <h1>Hossam Sabry</h1>
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -110,7 +132,7 @@
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m a passionate developer who loves creating cool, modern, and functional websites. This is my dark-themed portfolio powered by GitHub Pages 🚀.</p>
+    <p>Hello! I’m <strong>Hossam Sabry</strong>, a passionate developer who loves creating modern, functional, and visually engaging websites. Welcome to my portfolio 🚀.</p>
   </section>
 
   <section id="projects">
@@ -129,11 +151,16 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>If you’d like to get in touch, feel free to email me at <a href="mailto:your@email.com">your@email.com</a>.</p>
+    <p>If you’d like to get in touch, you can reach me through:</p>
+    <div class="social-links">
+      <a href="mailto:e.hossamsabry@gmail.com">📧 Email</a>
+      <a href="https://www.linkedin.com/in/hossamsabry09" target="_blank">💼 LinkedIn</a>
+      <a href="https://github.com/M2Dawn" target="_blank">💻 GitHub</a>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 My Portfolio | Built with ❤️ and GitHub Pages</p>
+    <p>© 2025 Hossam Sabry | Built with ❤️ and GitHub Pages</p>
   </footer>
 
 </body>
