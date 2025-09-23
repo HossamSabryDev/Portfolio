@@ -894,23 +894,27 @@
       const copyButton = document.querySelector('.copy-button');
       const successMessage = document.getElementById('successMessage');
       
-      navigator.clipboard.writeText(emailText).then(function() {
-        copyButton.textContent = 'Copied!';
-        copyButton.classList.add('copied');
-        successMessage.classList.add('show');
-        
-        setTimeout(() => {
-          copyButton.textContent = 'Copy';
-          copyButton.classList.remove('copied');
-        }, 2000);
-        
-        setTimeout(() => {
-          successMessage.classList.remove('show');
-        }, 3000);
-      }).catch(function(err) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(emailText).then(function() {
+          copyButton.textContent = 'Copied!';
+          copyButton.classList.add('copied');
+          successMessage.classList.add('show');
+          
+          setTimeout(() => {
+            copyButton.textContent = 'Copy';
+            copyButton.classList.remove('copied');
+          }, 2000);
+          
+          setTimeout(() => {
+            successMessage.classList.remove('show');
+          }, 3000);
+        });
+      } else {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = emailText;
+        textArea.style.position = 'absolute';
+        textArea.style.left = '-9999px';
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
@@ -928,7 +932,7 @@
         setTimeout(() => {
           successMessage.classList.remove('show');
         }, 3000);
-      });
+      }
     }
 
     // Close modal when clicking outside
@@ -1007,29 +1011,8 @@
         if (i > originalText.length) {
           clearInterval(typeInterval);
         }
-      }, 120); // Slower typing speed - was 50ms, now 120ms
-    }, 500); // Start earlier - changed from 2000ms to 500ms
+      }, 80);
+    }, 500);
   </script>
 </body>
-</html>remove('copied');
-        }, 2000);
-        
-        setTimeout(() => {
-          successMessage.classList.remove('show');
-        }, 3000);
-      }).catch(function(err) {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = emailText;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
-        copyButton.textContent = 'Copied!';
-        copyButton.classList.add('copied');
-        successMessage.classList.add('show');
-        
-        setTimeout(() => {
-          copyButton.textContent = 'Copy';
-          copyButton.classList.
+</html>
