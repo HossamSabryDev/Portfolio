@@ -232,7 +232,7 @@
 
   <!-- HEADER -->
   <header>
-    <img src="me.jpg" alt="Hossam Sabry">
+    <img src="docs/me.jpg" alt="Hossam Sabry">
     <h1>Hossam Sabry</h1>
     <p class="tagline">BIM Developer | Civil Engineer | Project Planning</p>
     <nav>
@@ -277,14 +277,9 @@
         <h3>⚡ BIM Automation Tool</h3>
         <p>A Revit add-in (C#) that automates batch export of views to DWG and exports schedule data to CSV.  
            Saves hours of repetitive work and improves coordination efficiency.</p>
-        <div style="display:flex;gap:10px;margin-top:12px;">
-          <a href="https://github.com/M2Dawn/BIM-Automation-Tool" target="_blank">
-            <button>View Source</button>
-          </a>
-          <a href="#" target="_blank">
-            <button>Live Demo</button>
-          </a>
-        </div>
+        <a href="https://github.com/M2Dawn/BIM-Automation-Tool" target="_blank">
+          <button>View Source</button>
+        </a>
       </div>
 
       <!-- Clash Detection Dashboard -->
@@ -292,7 +287,9 @@
         <h3>⚡ Clash Detection Dashboard</h3>
         <p>A Navisworks plugin with a modern UI that visualizes clashes, categorizes issues, and generates automated reports.  
            Designed to accelerate design coordination meetings.</p>
-        <a href="#" target="_blank"><button>View Demo</button></a>
+        <a href="https://github.com/M2Dawn/Clash-Detection-Dashboard" target="_blank">
+          <button>View Source</button>
+        </a>
       </div>
 
     </div>
@@ -304,14 +301,14 @@
     <div class="project">
       <h3>📑 Project Report – Resource & Schedule Planning</h3>
       <p>Comprehensive Primavera-based project planning with resource allocation, dependencies, and optimized execution paths.</p>
-      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM3.pdf"></iframe>
-      <button onclick="openModal('https://yourdomain.com/docs/PM3.pdf')">Read Full Report</button>
+      <iframe src="docs/PM3.pdf"></iframe>
+      <button onclick="openModal('docs/PM3.pdf')">Read Full Report</button>
     </div>
     <div class="project">
       <h3>📑 Project Report – Baseline & Progress Tracking</h3>
       <p>Baseline schedules with ongoing progress monitoring and earned value analysis for a residential project.</p>
-      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://yourdomain.com/docs/PM4.pdf"></iframe>
-      <button onclick="openModal('https://yourdomain.com/docs/PM4.pdf')">Read Full Report</button>
+      <iframe src="docs/PM4.pdf"></iframe>
+      <button onclick="openModal('docs/PM4.pdf')">Read Full Report</button>
     </div>
   </section>
 
@@ -347,7 +344,7 @@
     function openModal(file) {
       const modal = document.getElementById("pdfModal");
       const frame = document.getElementById("pdfFrame");
-      frame.src = "https://mozilla.github.io/pdf.js/web/viewer.html?file=" + encodeURIComponent(file);
+      frame.src = file;
       modal.classList.add("show");
     }
     function closeModal() {
