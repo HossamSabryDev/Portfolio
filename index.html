@@ -4,25 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hossam Sabry | BIM Developer Portfolio</title>
-  <meta name="description" content="Hossam Sabry - BIM Developer & Civil Engineer specializing in Building Information Modeling, Revit automation, and digital construction technologies.">
-  <meta name="keywords" content="BIM Developer, Civil Engineer, Revit, Navisworks, Dynamo, Building Information Modeling, Construction Technology">
-  
-  <!-- Open Graph / Social Media -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="">
-  <meta property="og:title" content="Hossam Sabry | BIM Developer Portfolio">
-  <meta property="og:description" content="BIM Developer & Civil Engineer specializing in Building Information Modeling and digital construction technologies.">
-  <meta property="og:image" content="">
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MWW9X0CJQF"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MWW9X0CJQF');
-  </script>
-  
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MWW9X0CJQF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MWW9X0CJQF');
+</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * {
@@ -48,8 +38,6 @@
       --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
       --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
       --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
-      --border-radius: 1rem;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
@@ -61,7 +49,7 @@
       overflow-x: hidden;
     }
 
-    /* Optimized animated background */
+    /* Animated background */
     body::before {
       content: '';
       position: fixed;
@@ -74,36 +62,12 @@
                   radial-gradient(circle at 40% 40%, rgba(255, 230, 109, 0.04) 0%, transparent 50%);
       z-index: -1;
       animation: backgroundShift 20s ease-in-out infinite;
-      will-change: transform;
     }
 
     @keyframes backgroundShift {
-      0%, 100% { transform: translate3d(0, 0, 0); }
-      33% { transform: translate3d(-20px, -10px, 0); }
-      66% { transform: translate3d(20px, 10px, 0); }
-    }
-
-    /* Optimized animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translate3d(0, 30px, 0);
-      }
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate3d(0, 0, 0); }
-      50% { transform: translate3d(0, -10px, 0); }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+      0%, 100% { transform: translateX(0) translateY(0); }
+      33% { transform: translateX(-20px) translateY(-10px); }
+      66% { transform: translateX(20px) translateY(10px); }
     }
 
     /* HEADER */
@@ -123,7 +87,10 @@
     header::before {
       content: '';
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: var(--gradient-1);
       opacity: 0.1;
       z-index: 0;
@@ -144,8 +111,7 @@
       padding: 4px;
       margin-bottom: 2rem;
       animation: float 3s ease-in-out infinite;
-      transition: var(--transition);
-      will-change: transform;
+      transition: all 0.3s ease;
     }
 
     .profile-image img {
@@ -155,8 +121,13 @@
       object-fit: cover;
     }
 
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
     header h1 {
-      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-size: 4rem;
       font-weight: 700;
       margin-bottom: 1rem;
       background: var(--gradient-1);
@@ -167,17 +138,16 @@
     }
 
     .tagline {
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      font-size: 1.5rem;
       color: var(--text-secondary);
       font-weight: 300;
       margin-bottom: 3rem;
       animation: fadeInUp 1s ease-out 0.2s both;
     }
 
-    /* Enhanced Navigation */
     .nav-links {
       display: flex;
-      gap: clamp(1rem, 3vw, 2rem);
+      gap: 2rem;
       flex-wrap: wrap;
       justify-content: center;
       animation: fadeInUp 1s ease-out 0.4s both;
@@ -190,69 +160,37 @@
       padding: 0.8rem 1.5rem;
       border: 1px solid var(--border);
       border-radius: 50px;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-      min-height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    .nav-links a::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+    .nav-links a:hover {
       background: var(--gradient-1);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .nav-links a:hover::before,
-    .nav-links a.active::before {
-      opacity: 1;
-    }
-
-    .nav-links a span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
       border-color: transparent;
       transform: translateY(-2px);
       box-shadow: var(--shadow);
     }
 
-    /* Mobile Navigation */
-    .mobile-nav-toggle {
-      display: none;
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      padding: 0.8rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: var(--transition);
-      min-height: 44px;
-      min-width: 44px;
-    }
-
-    .mobile-nav-toggle:hover {
-      background: var(--bg-card);
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* SECTIONS */
     section {
-      padding: clamp(4rem, 10vw, 6rem) clamp(1rem, 5vw, 2rem);
+      padding: 6rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     h2 {
-      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-size: 2.5rem;
       font-weight: 600;
       margin-bottom: 3rem;
       text-align: center;
@@ -274,7 +212,7 @@
     /* ABOUT */
     .about-content {
       text-align: center;
-      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-size: 1.2rem;
       max-width: 800px;
       margin: 0 auto;
       color: var(--text-secondary);
@@ -289,38 +227,35 @@
       background-clip: text;
     }
 
-    /* ENHANCED SKILLS */
+    /* SKILLS */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: clamp(1.5rem, 3vw, 2rem);
+      gap: 2rem;
     }
 
     .skill {
       background: var(--bg-card);
       padding: 2.5rem 2rem;
-      border-radius: var(--border-radius);
+      border-radius: 1.2rem;
       text-align: center;
+      font-weight: 500;
       border: 1px solid var(--border);
-      transition: var(--transition);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
-      will-change: transform;
     }
 
     .skill::before {
       content: '';
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
       background: var(--gradient-1);
-      opacity: 0;
-      transition: var(--transition);
-      transform: translateX(-100%);
-    }
-
-    .skill:hover::before {
-      transform: translateX(0);
       opacity: 0.1;
+      transition: all 0.4s ease;
     }
 
     .skill-icon {
@@ -331,35 +266,40 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       position: relative;
+      overflow: hidden;
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255, 255, 255, 0.1);
-      will-change: transform;
     }
 
     .skill-icon svg {
       width: 48px;
       height: 48px;
-      transition: var(--transition);
-      will-change: transform;
+      transition: all 0.3s ease;
     }
 
-    .skill:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--primary);
+    .skill-icon::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: inherit;
+      filter: brightness(1.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .skill:hover .skill-icon {
-      transform: scale(1.1) rotate(5deg);
+    .skill:hover .skill-icon::before {
+      opacity: 1;
     }
 
     .skill:hover .skill-icon svg {
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(5deg);
     }
 
-    /* Brand colors for skills */
     .skill-revit .skill-icon { background: linear-gradient(135deg, #0696d7, #1976d2); }
     .skill-navisworks .skill-icon { background: linear-gradient(135deg, #4caf50, #2e7d32); }
     .skill-dynamo .skill-icon { background: linear-gradient(135deg, #ff9800, #f57c00); }
@@ -372,34 +312,43 @@
       font-weight: 600;
       margin-bottom: 0.5rem;
       color: var(--text-primary);
-      position: relative;
-      z-index: 1;
     }
 
     .skill-subtitle {
       font-size: 0.9rem;
       color: var(--text-secondary);
       opacity: 0.8;
-      position: relative;
-      z-index: 1;
     }
 
-    /* ENHANCED PROJECTS */
+    .skill:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--primary);
+    }
+
+    .skill:hover::before {
+      left: 0;
+    }
+
+    .skill:hover .skill-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* PROJECTS */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: clamp(1.5rem, 3vw, 2rem);
+      gap: 2rem;
     }
 
     .project {
       background: var(--bg-card);
       padding: 2rem;
-      border-radius: var(--border-radius);
+      border-radius: 1rem;
       border: 1px solid var(--border);
-      transition: var(--transition);
+      transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      will-change: transform;
     }
 
     .project::before {
@@ -411,8 +360,7 @@
       height: 4px;
       background: var(--gradient-1);
       transform: scaleX(0);
-      transition: var(--transition);
-      transform-origin: left;
+      transition: transform 0.3s ease;
     }
 
     .project:hover {
@@ -453,34 +401,10 @@
       border-radius: 0.5rem;
       font-weight: 500;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
       font-family: inherit;
-      font-size: 0.95rem;
-      min-height: 44px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #ff5252, #26a69a);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .btn:hover::before {
-      opacity: 1;
-    }
-
-    .btn span {
-      position: relative;
-      z-index: 1;
     }
 
     .btn:hover {
@@ -494,24 +418,22 @@
       color: var(--text-primary);
     }
 
-    .btn-secondary::before {
+    .btn-secondary:hover {
       background: var(--bg-secondary);
     }
 
-    /* ENHANCED WORK SECTION */
+    /* WORK SECTION */
     .work-item {
       background: var(--bg-card);
-      border-radius: var(--border-radius);
+      border-radius: 1rem;
       border: 1px solid var(--border);
       overflow: hidden;
       margin-bottom: 2rem;
-      transition: var(--transition);
-      position: relative;
+      transition: all 0.3s ease;
     }
 
     .work-item:hover {
       box-shadow: var(--shadow);
-      transform: translateY(-4px);
     }
 
     .work-header {
@@ -525,56 +447,15 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: clamp(1.1rem, 3vw, 1.3rem);
-    }
-
-    /* Loading state for embeds */
-    .work-embed-container {
-      position: relative;
-      width: 100%;
-      height: 500px;
-      background: var(--bg-secondary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .work-embed {
       width: 100%;
-      height: 100%;
+      height: 500px;
       border: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
     }
 
-    .work-embed.loaded {
-      opacity: 1;
-    }
-
-    .embed-loading {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      color: var(--text-secondary);
-    }
-
-    .loading-spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* ENHANCED CONTACT */
+    /* CONTACT */
     .contact-content {
       text-align: center;
       max-width: 600px;
@@ -582,10 +463,9 @@
     }
 
     .contact-description {
-      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-size: 1.1rem;
       color: var(--text-secondary);
       margin-bottom: 2rem;
-      line-height: 1.7;
     }
 
     .social-links {
@@ -595,7 +475,7 @@
       flex-wrap: wrap;
     }
 
-    .social-links .email-button {
+    .social-links a, .social-links .email-button {
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -606,43 +486,26 @@
       color: var(--text-primary);
       text-decoration: none;
       font-weight: 500;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       cursor: pointer;
       font-family: inherit;
       font-size: inherit;
-      min-height: 44px;
-      position: relative;
-      overflow: hidden;
     }
 
-    .social-links .email-button::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+    .social-links a:hover, .social-links .email-button:hover {
       background: var(--gradient-1);
-      opacity: 0;
-      transition: var(--transition);
-    }
-
-    .social-links .email-button:hover::before {
-      opacity: 1;
-    }
-
-    .social-links .email-button span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .social-links .email-button:hover {
       border-color: transparent;
       transform: translateY(-2px);
       box-shadow: var(--shadow);
     }
 
-    /* ENHANCED MODALS */
-    .modal {
+    /* EMAIL MODAL */
+    .email-modal {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.8);
       display: flex;
       align-items: center;
@@ -650,42 +513,36 @@
       z-index: 1000;
       opacity: 0;
       visibility: hidden;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       backdrop-filter: blur(8px);
-      padding: 1rem;
     }
 
-    .modal.active {
+    .email-modal.active {
       opacity: 1;
       visibility: visible;
     }
 
-    .modal-content {
+    .email-modal-content {
       background: var(--bg-card);
-      padding: clamp(2rem, 5vw, 3rem);
-      border-radius: var(--border-radius);
+      padding: 3rem 2rem;
+      border-radius: 1rem;
       border: 1px solid var(--border);
       text-align: center;
       max-width: 500px;
-      width: 100%;
+      width: 90%;
       transform: scale(0.8);
-      transition: var(--transition);
+      transition: transform 0.3s ease;
       box-shadow: var(--shadow-hover);
-      position: relative;
     }
 
-    .modal.active .modal-content {
+    .email-modal.active .email-modal-content {
       transform: scale(1);
     }
 
-    .modal h3 {
+    .email-modal h3 {
       color: var(--text-primary);
-      margin-bottom: 1.5rem;
-      font-size: clamp(1.3rem, 4vw, 1.8rem);
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
     }
 
     .email-display {
@@ -695,14 +552,14 @@
       border: 1px solid var(--border);
       margin: 1.5rem 0;
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-size: 1.1rem;
       color: var(--text-primary);
       user-select: all;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      flex-wrap: wrap;
     }
 
     .copy-button {
@@ -713,9 +570,8 @@
       border-radius: 0.3rem;
       font-size: 0.9rem;
       cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       flex-shrink: 0;
-      min-height: 40px;
     }
 
     .copy-button:hover {
@@ -727,35 +583,34 @@
       animation: pulse 0.6s ease;
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
     .modal-buttons {
       display: flex;
       gap: 1rem;
       justify-content: center;
       margin-top: 2rem;
-      flex-wrap: wrap;
     }
 
-    .close-modal,
-    .close-contact-modal {
+    .close-modal {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text-primary);
       padding: 0.8rem 1.5rem;
       border-radius: 0.5rem;
       cursor: pointer;
-      transition: var(--transition);
-      font-family: inherit;
-      font-size: inherit;
-      min-height: 44px;
+      transition: all 0.3s ease;
     }
 
-    .close-modal:hover,
-    .close-contact-modal:hover {
+    .close-modal:hover {
       background: var(--bg-secondary);
     }
 
-    .mailto-button,
-    .contact-email-button {
+    .mailto-button {
       background: var(--gradient-1);
       color: white;
       border: none;
@@ -763,18 +618,10 @@
       border-radius: 0.5rem;
       cursor: pointer;
       text-decoration: none;
-      transition: var(--transition);
-      font-family: inherit;
-      font-size: inherit;
-      font-weight: 500;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      transition: all 0.3s ease;
     }
 
-    .mailto-button:hover,
-    .contact-email-button:hover {
+    .mailto-button:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow);
     }
@@ -784,16 +631,67 @@
       font-size: 0.9rem;
       margin-top: 1rem;
       opacity: 0;
-      transition: var(--transition);
+      transition: opacity 0.3s ease;
     }
 
     .success-message.show {
       opacity: 1;
     }
 
+    /* CONTACT INFO MODAL */
+    .contact-info-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .contact-info-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contact-info-modal-content {
+      background: var(--bg-card);
+      padding: 3rem 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+      box-shadow: var(--shadow-hover);
+      position: relative;
+    }
+
+    .contact-info-modal.active .contact-info-modal-content {
+      transform: scale(1);
+    }
+
+    .contact-info-modal h3 {
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     .contact-info-text {
       color: var(--text-secondary);
-      font-size: clamp(1rem, 3vw, 1.1rem);
+      font-size: 1.1rem;
       line-height: 1.7;
       margin-bottom: 2rem;
     }
@@ -805,13 +703,56 @@
       border: 1px solid var(--border);
       margin: 1.5rem 0;
       font-family: 'JetBrains Mono', monospace;
-      font-size: clamp(1rem, 3vw, 1.2rem);
+      font-size: 1.2rem;
       color: var(--secondary);
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+    }
+
+    .contact-info-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .close-contact-modal {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .close-contact-modal:hover {
+      background: var(--bg-secondary);
+    }
+
+    .contact-email-button {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 500;
+    }
+
+    .contact-email-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
     }
 
     /* FOOTER */
@@ -839,91 +780,28 @@
       background: var(--gradient-1);
       width: 0%;
       transition: width 0.1s ease;
-      will-change: width;
     }
 
-    /* BACK TO TOP BUTTON */
-    .back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 50px;
-      height: 50px;
-      background: var(--gradient-1);
-      border: none;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      transition: var(--transition);
-      opacity: 0;
-      visibility: hidden;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .back-to-top:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-
-    /* SMOOTH ANIMATIONS */
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translate3d(0, 30px, 0);
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .animate-on-scroll.animated {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-
-    /* Enhanced staggered animations */
-    .animate-on-scroll:nth-child(1) { transition-delay: 0ms; }
-    .animate-on-scroll:nth-child(2) { transition-delay: 100ms; }
-    .animate-on-scroll:nth-child(3) { transition-delay: 200ms; }
-    .animate-on-scroll:nth-child(4) { transition-delay: 300ms; }
-
-    /* RESPONSIVE DESIGN */
-    @media (max-width: 1024px) {
-      .skills-grid,
-      .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      }
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      .tagline {
+        font-size: 1.2rem;
+      }
+
       .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--border-radius);
-        padding: 1rem;
-        flex-direction: column;
-        gap: 0.5rem;
-        min-width: 200px;
-        box-shadow: var(--shadow);
+        gap: 1rem;
       }
 
-      .nav-links.active {
-        display: flex;
+      section {
+        padding: 4rem 1rem;
       }
 
-      .mobile-nav-toggle {
-        display: block;
-        margin-top: 2rem;
+      h2 {
+        font-size: 2rem;
       }
 
       .skills-grid,
@@ -939,91 +817,29 @@
       .email-display {
         flex-direction: column;
         gap: 0.5rem;
-        text-align: center;
       }
 
-      .modal-buttons {
+      .modal-buttons,
+      .contact-info-buttons {
         flex-direction: column;
       }
 
-      .work-embed-container {
-        height: 400px;
-      }
-
-      .back-to-top {
-        bottom: 1rem;
-        right: 1rem;
-        width: 45px;
-        height: 45px;
+      .email-modal-content,
+      .contact-info-modal-content {
+        padding: 2rem 1rem;
       }
     }
 
-    @media (max-width: 480px) {
-      .work-embed-container {
-        height: 300px;
-      }
-
-      .project {
-        padding: 1.5rem;
-      }
-
-      .skill {
-        padding: 2rem 1.5rem;
-      }
+    /* SMOOTH ANIMATIONS */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
     }
 
-    /* Focus states for accessibility */
-    .btn:focus,
-    .nav-links a:focus,
-    .copy-button:focus,
-    .close-modal:focus,
-    .email-button:focus,
-    .back-to-top:focus {
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
-    }
-
-    /* High contrast mode support */
-    @media (prefers-contrast: high) {
-      :root {
-        --text-secondary: #e0e0e0;
-        --border: #555555;
-      }
-    }
-
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
-    /* Dark theme toggle (future enhancement) */
-    .theme-toggle {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      width: 50px;
-      height: 50px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: var(--transition);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .theme-toggle:hover {
-      background: var(--gradient-1);
-      border-color: transparent;
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -1033,36 +849,30 @@
     <div class="scroll-progress" id="scrollProgress"></div>
   </div>
 
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <span>↑</span>
-  </button>
-
   <!-- Email Modal -->
-  <div class="modal" id="emailModal" role="dialog" aria-labelledby="emailModalTitle" aria-modal="true">
-    <div class="modal-content">
-      <h3 id="emailModalTitle">Contact Me via Email</h3>
+  <div class="email-modal" id="emailModal">
+    <div class="email-modal-content">
+      <h3>Contact Me via Email</h3>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">Here's my email address:</p>
       <div class="email-display">
         <span id="emailText">e.hossamsabry@gmail.com</span>
-        <button class="copy-button" onclick="copyEmail()" aria-label="Copy email address">Copy</button>
+        <button class="copy-button" onclick="copyEmail()">Copy</button>
       </div>
-      <div class="success-message" id="successMessage" role="status" aria-live="polite">
+      <div class="success-message" id="successMessage">
         Email copied to clipboard! ✨
       </div>
       <div class="modal-buttons">
         <button class="close-modal" onclick="closeEmailModal()">Close</button>
-        <a href="mailto:e.hossamsabry@gmail.com" class="mailto-button" onclick="gtag('event','click',{event_category:'Button',event_label:'Open Email App'})">
-          <span>Open Email App</span>
-        </a>
+        <!-- Track open email app -->
+        <a href="mailto:e.hossamsabry@gmail.com" class="mailto-button" onclick="gtag('event','click',{event_category:'Button',event_label:'Open Email App'})">Open Email App</a>
       </div>
     </div>
   </div>
 
   <!-- Contact Info Modal -->
-  <div class="modal" id="contactInfoModal" role="dialog" aria-labelledby="contactInfoModalTitle" aria-modal="true">
-    <div class="modal-content">
-      <h3 id="contactInfoModalTitle">💡 Interested in Learning More?</h3>
+  <div class="contact-info-modal" id="contactInfoModal">
+    <div class="contact-info-modal-content">
+      <h3>💡 Interested in Learning More?</h3>
       <div class="contact-info-text">
         <p>For access to comprehensive documentation, code examples, and implementation guides, please reach out directly.</p>
       </div>
@@ -1070,12 +880,12 @@
         <span>📧</span>
         <span>e.hossamsabry@gmail.com</span>
       </div>
-      <div class="modal-buttons">
+      <div class="contact-info-buttons">
         <button class="close-contact-modal" onclick="closeContactInfoModal()">Close</button>
         <a href="mailto:e.hossamsabry@gmail.com?subject=Request%20for%20Project%20Details&body=Hi%20Hossam,%0A%0AI'm%20interested%20in%20learning%20more%20about%20your%20BIM%20projects%20and%20would%20like%20to%20request%20access%20to%20detailed%20case%20studies.%0A%0ASpecifically,%20I'm%20interested%20in:%0A%0A-%20%0A-%20%0A-%20%0A%0AThanks!" 
            class="contact-email-button" 
            onclick="gtag('event','click',{event_category:'Button',event_label:'Contact for More Info'})">
-          <span>Send Email</span>
+          Send Email
         </a>
       </div>
     </div>
@@ -1086,17 +896,12 @@
     <div class="header-content">
       <h1>Hossam Sabry</h1>
       <p class="tagline">BIM Developer</p>
-      <nav>
-        <div class="nav-links" id="navLinks">
-          <a href="#about"><span>About</span></a>
-          <a href="#skills"><span>Skills</span></a>
-          <a href="#projects"><span>Projects</span></a>
-          <a href="#work"><span>Work</span></a>
-          <a href="#contact"><span>Contact</span></a>
-        </div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu">
-          <span>☰</span>
-        </button>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -1106,11 +911,11 @@
     <h2>About Me</h2>
     <div class="about-content">
       <p>
-        Hello! I'm <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer specializing in 
-        <em>Building Information Modeling</em>, project planning, and advanced digital construction technologies. 
-        I design innovative solutions that connect design, execution, and management, enabling smarter workflows 
-        and delivering exceptional project outcomes across the AEC industry.
-      </p>
+  Hello! I'm <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer specializing in 
+  <em>Building Information Modeling</em>, project planning, and advanced digital construction technologies. 
+  I design innovative solutions that connect design, execution, and management, enabling smarter workflows 
+  and delivering exceptional project outcomes across the AEC industry.
+</p>
     </div>
   </section>
 
@@ -1118,7 +923,7 @@
   <section id="skills" class="animate-on-scroll">
     <h2>Technical Skills</h2>
     <div class="skills-grid">
-      <div class="skill skill-revit animate-on-scroll">
+      <div class="skill skill-revit">
         <div class="skill-icon">
           <svg viewBox="0 0 24 24" fill="#ffffff">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
@@ -1127,7 +932,7 @@
         <div class="skill-title">Revit</div>
         <div class="skill-subtitle">BIM Modeling & Design</div>
       </div>
-      <div class="skill skill-navisworks animate-on-scroll">
+      <div class="skill skill-navisworks">
         <div class="skill-icon">
           <svg viewBox="0 0 24 24" fill="#ffffff">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
@@ -1138,7 +943,7 @@
         <div class="skill-title">Navisworks</div>
         <div class="skill-subtitle">Model Review & Coordination</div>
       </div>
-      <div class="skill skill-dynamo animate-on-scroll">
+      <div class="skill skill-dynamo">
         <div class="skill-icon">
           <svg viewBox="0 0 24 24" fill="#ffffff">
             <circle cx="12" cy="12" r="3"/>
@@ -1148,7 +953,7 @@
         <div class="skill-title">Dynamo</div>
         <div class="skill-subtitle">Visual Programming</div>
       </div>
-      <div class="skill skill-primavera animate-on-scroll">
+      <div class="skill skill-primavera">
         <div class="skill-icon">
           <svg viewBox="0 0 24 24" fill="#ffffff">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -1161,7 +966,7 @@
         <div class="skill-title">Primavera P6</div>
         <div class="skill-subtitle">Project Scheduling</div>
       </div>
-      <div class="skill skill-autocad animate-on-scroll">
+      <div class="skill skill-autocad">
         <div class="skill-icon">
           <svg viewBox="0 0 24 24" fill="#ffffff">
             <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
@@ -1174,7 +979,7 @@
         <div class="skill-title">AutoCAD</div>
         <div class="skill-subtitle">2D/3D Drafting</div>
       </div>
-      <div class="skill skill-programming animate-on-scroll">
+      <div class="skill skill-programming">
         <div class="skill-icon">
           <svg viewBox="0 0 24 24" fill="#ffffff">
             <polyline points="16,18 22,12 16,6"/>
@@ -1192,7 +997,7 @@
     <h2>Open-Source Projects</h2>
     <div class="projects-grid">
       <!-- BIM Automation Tool -->
-      <div class="project animate-on-scroll">
+      <div class="project">
         <h3>
           <span style="color: var(--primary);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
@@ -1207,17 +1012,17 @@
         <div class="project-buttons">
           <a href="https://github.com/M2Dawn/BIM-Automation-Tool" target="_blank" class="btn"
              onclick="gtag('event','click',{event_category:'Button',event_label:'GitHub - BIM Automation Tool'})">
-            <span>View on GitHub</span>
+            View on GitHub
           </a>
           <button class="btn btn-secondary"
              onclick="openContactInfoModal(); gtag('event','click',{event_category:'Button',event_label:'Learn More - BIM Automation Tool'})">
-             <span>Learn More</span>
+             Learn More
           </button>
         </div>
       </div>
 
       <!-- Clash Detection Dashboard -->
-      <div class="project animate-on-scroll">
+      <div class="project">
         <h3>
           <span style="color: var(--secondary);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
@@ -1233,11 +1038,11 @@
         <div class="project-buttons">
           <a href="clash-dashboard/index.html" target="_blank" class="btn"
              onclick="gtag('event','click',{event_category:'Button',event_label:'Open Dashboard'})">
-            <span>Open Dashboard</span>
+            Open Dashboard
           </a>
           <button class="btn btn-secondary"
              onclick="openContactInfoModal(); gtag('event','click',{event_category:'Button',event_label:'Case Study - Clash Dashboard'})">
-             <span>Case Study</span>
+             Case Study
           </button>
         </div>
       </div>
@@ -1248,7 +1053,7 @@
   <section id="work" class="animate-on-scroll">
     <h2>Previous Work</h2>
     
-    <div class="work-item animate-on-scroll">
+    <div class="work-item">
       <div class="work-header">
         <h3>
           <span style="color: var(--accent);">
@@ -1268,16 +1073,10 @@
         </h3>
         <p>Comprehensive Primavera P6-based project planning documentation featuring detailed resource allocation, timeline optimization, and milestone tracking for complex construction projects.</p>
       </div>
-      <div class="work-embed-container">
-        <div class="embed-loading" id="loading1">
-          <div class="loading-spinner"></div>
-          <span>Loading document...</span>
-        </div>
-        <embed src="docs/PM3.pdf" type="application/pdf" class="work-embed" onload="handleEmbedLoad(this, 'loading1')" />
-      </div>
+      <embed src="docs/PM3.pdf" type="application/pdf" class="work-embed" />
     </div>
     
-    <div class="work-item animate-on-scroll">
+    <div class="work-item">
       <div class="work-header">
         <h3>
           <span style="color: var(--purple);">
@@ -1294,13 +1093,7 @@
         </h3>
         <p>Advanced baseline schedule establishment and progress tracking documentation for residential construction projects, demonstrating proficiency in project control methodologies.</p>
       </div>
-      <div class="work-embed-container">
-        <div class="embed-loading" id="loading2">
-          <div class="loading-spinner"></div>
-          <span>Loading document...</span>
-        </div>
-        <embed src="docs/PM4.pdf" type="application/pdf" class="work-embed" onload="handleEmbedLoad(this, 'loading2')" />
-      </div>
+      <embed src="docs/PM4.pdf" type="application/pdf" class="work-embed" />
     </div>
   </section>
 
@@ -1310,9 +1103,9 @@
     <div class="contact-content">
       <p class="contact-description">Ready to collaborate on innovative BIM solutions or discuss exciting opportunities in digital construction? I'd love to hear from you!</p>
       <div class="social-links">
-        <button class="email-button" onclick="openEmailModal(); gtag('event','click',{event_category:'Button',event_label:'Email Modal Open'})" aria-label="Open email contact modal">
-          <span style="color: var(--primary);">📧</span>
-          <span>Email</span>
+        <!-- Track opening the email modal -->
+        <button class="email-button" onclick="openEmailModal(); gtag('event','click',{event_category:'Button',event_label:'Email Modal Open'})">
+          <span style="color: var(--primary);">📧</span> Email
         </button>
       </div>
     </div>
@@ -1323,107 +1116,31 @@
   </footer>
 
   <script>
-    // Optimized element caching
-    const elements = {
-      scrollProgress: document.getElementById('scrollProgress'),
-      backToTop: document.getElementById('backToTop'),
-      emailModal: document.getElementById('emailModal'),
-      contactInfoModal: document.getElementById('contactInfoModal'),
-      navLinks: document.getElementById('navLinks'),
-      mobileNavToggle: document.getElementById('mobileNavToggle')
-    };
-
-    // Debounced scroll handler
-    let ticking = false;
-    function updateScrollProgress() {
-      const scrollTop = document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = (scrollTop / scrollHeight) * 100;
-      elements.scrollProgress.style.width = progress + '%';
-      
-      // Back to top button visibility
-      if (scrollTop > 500) {
-        elements.backToTop.classList.add('visible');
-      } else {
-        elements.backToTop.classList.remove('visible');
-      }
-      
-      // Update active nav link
-      updateActiveNavLink();
-      
-      ticking = false;
-    }
-
-    function handleScroll() {
-      if (!ticking) {
-        requestAnimationFrame(updateScrollProgress);
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // Active navigation highlighting
-    function updateActiveNavLink() {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.nav-links a');
-      
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
-    }
-
-    // Mobile navigation
-    elements.mobileNavToggle.addEventListener('click', () => {
-      elements.navLinks.classList.toggle('active');
-    });
-
-    // Close mobile nav when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('nav') && elements.navLinks.classList.contains('active')) {
-        elements.navLinks.classList.remove('active');
-      }
-    });
-
-    // Back to top functionality
-    elements.backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Modal functions
+    // Email Modal Functions
     function openEmailModal() {
-      elements.emailModal.classList.add('active');
+      const modal = document.getElementById('emailModal');
+      modal.classList.add('active');
       document.body.style.overflow = 'hidden';
-      elements.emailModal.focus();
     }
 
     function closeEmailModal() {
+      const modal = document.getElementById('emailModal');
       const successMessage = document.getElementById('successMessage');
-      elements.emailModal.classList.remove('active');
+      modal.classList.remove('active');
       successMessage.classList.remove('show');
       document.body.style.overflow = 'auto';
     }
 
+    // Contact Info Modal Functions
     function openContactInfoModal() {
-      elements.contactInfoModal.classList.add('active');
+      const modal = document.getElementById('contactInfoModal');
+      modal.classList.add('active');
       document.body.style.overflow = 'hidden';
-      elements.contactInfoModal.focus();
     }
 
     function closeContactInfoModal() {
-      elements.contactInfoModal.classList.remove('active');
+      const modal = document.getElementById('contactInfoModal');
+      modal.classList.remove('active');
       document.body.style.overflow = 'auto';
     }
 
@@ -1434,66 +1151,92 @@
       
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(emailText).then(function() {
-          showCopySuccess(copyButton, successMessage);
+          copyButton.textContent = 'Copied!';
+          copyButton.classList.add('copied');
+          successMessage.classList.add('show');
+          // GA event for successful copy
           try { gtag('event','copy',{event_category:'Email',event_label:'Copied Email'}); } catch(e){}
+
+          setTimeout(() => {
+            copyButton.textContent = 'Copy';
+            copyButton.classList.remove('copied');
+          }, 2000);
+          
+          setTimeout(() => {
+            successMessage.classList.remove('show');
+          }, 3000);
         }).catch(function(err){
+          // If clipboard fails for some reason, fall back to textarea below
           fallbackCopyEmail(emailText, copyButton, successMessage);
         });
       } else {
+        // Fallback for older browsers
         fallbackCopyEmail(emailText, copyButton, successMessage);
       }
-    }
 
-    function showCopySuccess(copyButton, successMessage) {
-      copyButton.textContent = 'Copied!';
-      copyButton.classList.add('copied');
-      successMessage.classList.add('show');
+      function fallbackCopyEmail(text, copyButton, successMessage) {
+        try {
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          textArea.style.position = 'absolute';
+          textArea.style.left = '-9999px';
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          
+          copyButton.textContent = 'Copied!';
+          copyButton.classList.add('copied');
+          successMessage.classList.add('show');
+          // GA event for successful copy via fallback
+          try { gtag('event','copy',{event_category:'Email',event_label:'Copied Email - Fallback'}); } catch(e){}
 
-      setTimeout(() => {
-        copyButton.textContent = 'Copy';
-        copyButton.classList.remove('copied');
-      }, 2000);
-      
-      setTimeout(() => {
-        successMessage.classList.remove('show');
-      }, 3000);
-    }
-
-    function fallbackCopyEmail(text, copyButton, successMessage) {
-      try {
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.position = 'absolute';
-        textArea.style.left = '-9999px';
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
-        showCopySuccess(copyButton, successMessage);
-        try { gtag('event','copy',{event_category:'Email',event_label:'Copied Email - Fallback'}); } catch(e){}
-      } catch (err) {
-        try { gtag('event','copy_failed',{event_category:'Email',event_label:'Copy Email Failed'}); } catch(e){}
+          setTimeout(() => {
+            copyButton.textContent = 'Copy';
+            copyButton.classList.remove('copied');
+          }, 2000);
+          
+          setTimeout(() => {
+            successMessage.classList.remove('show');
+          }, 3000);
+        } catch (err) {
+          // if everything fails, still log an event that copy failed (optional)
+          try { gtag('event','copy_failed',{event_category:'Email',event_label:'Copy Email Failed'}); } catch(e){}
+        }
       }
     }
 
-    // Modal event listeners
-    [elements.emailModal, elements.contactInfoModal].forEach(modal => {
-      modal.addEventListener('click', function(e) {
-        if (e.target === this) {
-          if (this === elements.emailModal) closeEmailModal();
-          if (this === elements.contactInfoModal) closeContactInfoModal();
-        }
-      });
+    // Close modals when clicking outside
+    document.getElementById('emailModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeEmailModal();
+      }
     });
 
-    // Keyboard navigation
+    document.getElementById('contactInfoModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeContactInfoModal();
+      }
+    });
+
+    // Close modals with Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        if (elements.emailModal.classList.contains('active')) closeEmailModal();
-        if (elements.contactInfoModal.classList.contains('active')) closeContactInfoModal();
-        if (elements.navLinks.classList.contains('active')) elements.navLinks.classList.remove('active');
+        if (document.getElementById('emailModal').classList.contains('active')) {
+          closeEmailModal();
+        }
+        if (document.getElementById('contactInfoModal').classList.contains('active')) {
+          closeContactInfoModal();
+        }
       }
+    });
+
+    // Scroll progress indicator
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      document.getElementById('scrollProgress').style.width = progress + '%';
     });
 
     // Smooth scroll for navigation links
@@ -1502,23 +1245,24 @@
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          elements.navLinks.classList.remove('active');
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
       });
     });
 
-    // Enhanced intersection observer for animations
+    // Intersection Observer for animations
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: '0px 0px -100px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animated');
-          observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
@@ -1527,67 +1271,46 @@
       observer.observe(el);
     });
 
-    // Embed loading handlers
-    function handleEmbedLoad(embed, loadingId) {
-      const loading = document.getElementById(loadingId);
-      setTimeout(() => {
-        loading.style.display = 'none';
-        embed.classList.add('loaded');
-      }, 1000);
-    }
-
-    // Dynamic typing effect
-    function typeWriter() {
-      const tagline = document.querySelector('.tagline');
-      const originalText = tagline.textContent;
-      tagline.textContent = '';
-      
-      setTimeout(() => {
-        let i = 0;
-        const typeInterval = setInterval(() => {
-          tagline.textContent = originalText.slice(0, i);
-          i++;
-          if (i > originalText.length) {
-            clearInterval(typeInterval);
-          }
-        }, 120);
-      }, 500);
-    }
-
-    // Initialize typing effect
-    typeWriter();
-
-    // Performance optimization: Preload critical resources
-    function preloadResources() {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = 'docs/PM3.pdf';
-      link.as = 'document';
-      document.head.appendChild(link);
-    }
-
-    // Track outbound links
-    function trackOutboundLinks() {
-      document.querySelectorAll('a[target="_blank"]').forEach(a => {
-        a.addEventListener('click', function () {
-          try {
-            gtag('event','outbound_click',{event_category:'Outbound Link', event_label: a.href});
-          } catch (e) {}
-        });
+    // Add hover effect to navigation links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        link.style.transform = 'translateY(-2px)';
       });
-    }
-
-    // Initialize on DOM load
-    document.addEventListener('DOMContentLoaded', () => {
-      preloadResources();
-      trackOutboundLinks();
-      updateActiveNavLink();
+      link.addEventListener('mouseleave', () => {
+        link.style.transform = 'translateY(0)';
+      });
     });
 
-    // Handle reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.documentElement.style.setProperty('scroll-behavior', 'auto');
-    }
+    // Dynamic typing effect for tagline
+    const tagline = document.querySelector('.tagline');
+    const originalText = tagline.textContent;
+    tagline.textContent = '';
+    
+    setTimeout(() => {
+      let i = 0;
+      const typeInterval = setInterval(() => {
+        tagline.textContent = originalText.slice(0, i);
+        i++;
+        if (i > originalText.length) {
+          clearInterval(typeInterval);
+        }
+      }, 120);
+    }, 500);
+
+    // OPTIONAL: track any other external link clicks automatically (keeps things comprehensive)
+    // This is non-invasive and won't alter existing inline events. It will send an event for outbound links.
+    (function trackOutboundLinks() {
+      try {
+        document.querySelectorAll('a[target="_blank"]').forEach(a => {
+          a.addEventListener('click', function () {
+            try {
+              gtag('event','outbound_click',{event_category:'Outbound Link', event_label: a.href});
+            } catch (e) { /* ignore */ }
+          });
+        });
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>
