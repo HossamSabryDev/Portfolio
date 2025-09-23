@@ -4,739 +4,173 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hossam Sabry | BIM Developer Portfolio</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Hossam Sabry – BIM Developer Portfolio showcasing Revit, Navisworks, Dynamo, Primavera P6, AutoCAD, and automation projects.">
+  <meta name="keywords" content="BIM Developer, Revit, Dynamo, Navisworks, Primavera P6, AutoCAD, C#, Python, BIM Automation">
+  <meta name="author" content="Hossam Sabry">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hossam Sabry | BIM Developer Portfolio">
+  <meta property="og:description" content="Explore projects, skills, and work in BIM development and construction technology.">
+  <meta property="og:image" content="profile.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Favicon & Manifest -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X8F9FE06H4'); // Replace with your GA4 Measurement ID
+  </script>
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* === Root Variables === */
     :root {
-      --primary: #ff6b6b;
-      --secondary: #4ecdc4;
-      --accent: #ffe66d;
-      --purple: #a8e6cf;
-      --orange: #ffa726;
-      --bg-primary: #0f0f23;
-      --bg-secondary: #1a1a2e;
-      --bg-card: #16213e;
-      --text-primary: #ffffff;
-      --text-secondary: #b8bcc8;
-      --border: #2d3748;
-      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-      --gradient-2: linear-gradient(135deg, #4ecdc4, #ffe66d);
-      --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
-      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
-      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+      --bg: #0a0a0a;
+      --card-bg: #161616;
+      --text: #ffffff;
+      --text-secondary: #9ca3af;
+      --accent: #22d3ee;
+      --purple: #a855f7;
+      --green: #4ade80;
+      --orange: #f97316;
+      --red: #ef4444;
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
+    /* === Base Styles === */
     body {
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: "Inter", sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
       line-height: 1.6;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
     }
 
-    /* Animated background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.08) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.06) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 40%, rgba(255, 230, 109, 0.04) 0%, transparent 50%);
-      z-index: -1;
-      animation: backgroundShift 20s ease-in-out infinite;
-    }
+    h1, h2, h3 { margin: 0 0 0.5em; }
+    h2 { font-size: 1.8rem; color: var(--accent); }
+    h3 { font-size: 1.2rem; }
 
-    @keyframes backgroundShift {
-      0%, 100% { transform: translateX(0) translateY(0); }
-      33% { transform: translateX(-20px) translateY(-10px); }
-      66% { transform: translateX(20px) translateY(10px); }
-    }
+    a { color: var(--accent); text-decoration: none; }
 
-    /* HEADER */
+    section { padding: 4rem 2rem; max-width: 900px; margin: auto; }
+
+    /* === Header === */
     header {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       text-align: center;
-      padding: 2rem;
-      background: var(--bg-secondary);
-      overflow: hidden;
+      padding: 4rem 2rem;
+      background: linear-gradient(to right, var(--accent), var(--purple));
+      color: black;
     }
 
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--gradient-1);
-      opacity: 0.1;
-      z-index: 0;
-    }
-
-    .header-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-    }
-
-    .profile-image {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 4px solid transparent;
-      background: var(--gradient-1);
-      padding: 4px;
-      margin-bottom: 2rem;
-      animation: float 3s ease-in-out infinite;
-      transition: all 0.3s ease;
-    }
-
-    .profile-image img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    header h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fadeInUp 1s ease-out;
-    }
-
-    .tagline {
-      font-size: 1.5rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      margin-bottom: 3rem;
-      animation: fadeInUp 1s ease-out 0.2s both;
-    }
+    .header-content h1 { font-size: 2.5rem; }
+    .tagline { font-size: 1.2rem; margin: 0.5rem 0 1rem; }
 
     .nav-links {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeInUp 1s ease-out 0.4s both;
-    }
-
-    .nav-links a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.8rem 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-links a:hover {
-      background: var(--gradient-1);
-      border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 6rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin-bottom: 3rem;
-      text-align: center;
-      position: relative;
-    }
-
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: -1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: var(--gradient-1);
-      border-radius: 2px;
-    }
-
-    /* ABOUT */
-    .about-content {
-      text-align: center;
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      color: var(--text-secondary);
-      line-height: 1.8;
-    }
-
-    .about-content strong {
-      color: var(--text-primary);
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* SKILLS */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .skill {
-      background: var(--bg-card);
-      padding: 2.5rem 2rem;
-      border-radius: 1.2rem;
-      text-align: center;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .skill::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: var(--gradient-1);
-      opacity: 0.1;
-      transition: all 0.4s ease;
-    }
-
-    .skill-icon {
-      width: 60px;
-      height: 60px;
-      margin: 0 auto 1.5rem;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: bold;
-      color: white;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .skill-icon::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: inherit;
-      filter: brightness(1.2);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .skill:hover .skill-icon::before {
-      opacity: 1;
-    }
-
-    .skill-revit .skill-icon { background: linear-gradient(135deg, #ff6b6b, #ff5252); }
-    .skill-navisworks .skill-icon { background: linear-gradient(135deg, #4ecdc4, #26a69a); }
-    .skill-dynamo .skill-icon { background: linear-gradient(135deg, #ffe66d, #ffc107); }
-    .skill-primavera .skill-icon { background: linear-gradient(135deg, #a8e6cf, #66bb6a); }
-    .skill-autocad .skill-icon { background: linear-gradient(135deg, #ffa726, #ff9800); }
-    .skill-programming .skill-icon { background: linear-gradient(135deg, #ba68c8, #9c27b0); }
-
-    .skill-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-    }
-
-    .skill-subtitle {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      opacity: 0.8;
-    }
-
-    .skill:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--primary);
-    }
-
-    .skill:hover::before {
-      left: 0;
-    }
-
-    .skill:hover .skill-icon {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    /* PROJECTS */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    .project {
-      background: var(--bg-card);
-      padding: 2rem;
-      border-radius: 1rem;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--gradient-1);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .project:hover::before {
-      transform: scaleX(1);
-    }
-
-    .project h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .project p {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    .project-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      background: var(--gradient-1);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.5rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-block;
-      font-family: inherit;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-secondary);
-    }
-
-    /* WORK SECTION */
-    .work-item {
-      background: var(--bg-card);
-      border-radius: 1rem;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      margin-bottom: 2rem;
-      transition: all 0.3s ease;
-    }
-
-    .work-item:hover {
-      box-shadow: var(--shadow);
-    }
-
-    .work-header {
-      padding: 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .work-header h3 {
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .work-embed {
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
-
-    /* CONTACT */
-    .contact-content {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-description {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-    }
-
-    .social-links {
       display: flex;
       justify-content: center;
       gap: 1.5rem;
       flex-wrap: wrap;
     }
 
-    .social-links a, .social-links .email-button {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 1rem 2rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 0.5rem;
-      color: var(--text-primary);
-      text-decoration: none;
+    .nav-links a {
       font-weight: 500;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: inherit;
+      transition: color 0.3s;
     }
 
-    .social-links a:hover, .social-links .email-button:hover {
-      background: var(--gradient-1);
-      border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+    .nav-links a:hover { color: var(--bg); }
+
+    /* === Cards === */
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
     }
 
-    /* EMAIL MODAL */
-    .email-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .card:hover { transform: translate3d(0, -5px, 0); }
+
+    /* === Work Section === */
+    .work-item { margin-bottom: 2rem; }
+    .work-embed {
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(8px);
-    }
-
-    .email-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .email-modal-content {
-      background: var(--bg-card);
-      padding: 3rem 2rem;
-      border-radius: 1rem;
-      border: 1px solid var(--border);
-      text-align: center;
-      max-width: 500px;
-      width: 90%;
-      transform: scale(0.8);
-      transition: transform 0.3s ease;
-      box-shadow: var(--shadow-hover);
-    }
-
-    .email-modal.active .email-modal-content {
-      transform: scale(1);
-    }
-
-    .email-modal h3 {
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-
-    .email-display {
-      background: var(--bg-secondary);
-      padding: 1rem 1.5rem;
-      border-radius: 0.5rem;
-      border: 1px solid var(--border);
-      margin: 1.5rem 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.1rem;
-      color: var(--text-primary);
-      user-select: all;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .copy-button {
-      background: var(--gradient-1);
-      color: white;
+      height: 500px;
       border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.3rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      flex-shrink: 0;
-    }
-
-    .copy-button:hover {
-      transform: scale(1.05);
-    }
-
-    .copy-button.copied {
-      background: var(--gradient-3);
-      animation: pulse 0.6s ease;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    .modal-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-
-    .close-modal {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-primary);
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .close-modal:hover {
-      background: var(--bg-secondary);
-    }
-
-    .mailto-button {
-      background: var(--gradient-1);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .mailto-button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .success-message {
-      color: var(--secondary);
-      font-size: 0.9rem;
+      border-radius: 12px;
       margin-top: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
     }
 
-    .success-message.show {
-      opacity: 1;
+    /* === Contact Section === */
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    /* FOOTER */
-    footer {
-      background: var(--bg-secondary);
-      padding: 2rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      color: var(--text-secondary);
+    .contact-links a {
+      padding: 0.8rem 1.2rem;
+      background: var(--accent);
+      color: black;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
     }
 
-    /* SCROLL INDICATOR */
-    .scroll-indicator {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--bg-secondary);
-      z-index: 1000;
+    .contact-links a:hover { background: var(--purple); color: white; }
+
+    /* === Animations === */
+    @keyframes float {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -10px, 0); }
     }
 
-    .scroll-progress {
-      height: 100%;
-      background: var(--gradient-1);
-      width: 0%;
-      transition: width 0.1s ease;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.5rem;
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 30px, 0);
       }
-
-      .tagline {
-        font-size: 1.2rem;
-      }
-
-      .nav-links {
-        gap: 1rem;
-      }
-
-      section {
-        padding: 4rem 1rem;
-      }
-
-      h2 {
-        font-size: 2rem;
-      }
-
-      .skills-grid,
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .social-links {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .email-display {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .modal-buttons {
-        flex-direction: column;
-      }
-
-      .email-modal-content {
-        padding: 2rem 1rem;
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
       }
     }
 
-    /* SMOOTH ANIMATIONS */
     .animate-on-scroll {
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
+      transform: translate3d(0, 30px, 0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
     .animate-on-scroll.animated {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
     }
   </style>
 </head>
 <body>
-  <!-- Scroll Progress Indicator -->
-  <div class="scroll-indicator">
-    <div class="scroll-progress" id="scrollProgress"></div>
-  </div>
-
-  <!-- Email Modal -->
-  <div class="email-modal" id="emailModal">
-    <div class="email-modal-content">
-      <h3>Contact Me via Email</h3>
-      <p style="color: var(--text-secondary); margin-bottom: 1rem;">Here's my email address:</p>
-      <div class="email-display">
-        <span id="emailText">e.hossamsabry@gmail.com</span>
-        <button class="copy-button" onclick="copyEmail()">Copy</button>
-      </div>
-      <div class="success-message" id="successMessage">
-        Email copied to clipboard! ✨
-      </div>
-      <div class="modal-buttons">
-        <button class="close-modal" onclick="closeEmailModal()">Close</button>
-        <a href="mailto:e.hossamsabry@gmail.com" class="mailto-button">Open Email App</a>
-      </div>
-    </div>
-  </div>
-
   <!-- HEADER -->
   <header>
     <div class="header-content">
       <h1>Hossam Sabry</h1>
       <p class="tagline">BIM Developer</p>
-      <nav class="nav-links">
+      <nav class="nav-links" aria-label="Main Navigation">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
@@ -748,264 +182,66 @@
 
   <!-- ABOUT -->
   <section id="about" class="animate-on-scroll">
-    <h2>About Me</h2>
-    <div class="about-content">
-      <p>
-  Hello! I'm <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer specializing in 
-  <em>Building Information Modeling</em>, project planning, and advanced digital construction technologies. 
-  I design innovative solutions that connect design, execution, and management, enabling smarter workflows 
-  and delivering exceptional project outcomes across the AEC industry.
-</p>
-    </div>
+    <h2>About</h2>
+    <p>Hello! I’m Hossam Sabry, a passionate BIM Developer specializing in automating workflows and enhancing efficiency using tools like Revit, Navisworks, Dynamo, and Primavera P6.</p>
   </section>
 
   <!-- SKILLS -->
   <section id="skills" class="animate-on-scroll">
-    <h2>Technical Skills</h2>
-    <div class="skills-grid">
-      <div class="skill skill-revit">
-        <div class="skill-icon">R</div>
-        <div class="skill-title">Revit</div>
-        <div class="skill-subtitle">BIM Modeling & Design</div>
-      </div>
-      <div class="skill skill-navisworks">
-        <div class="skill-icon">N</div>
-        <div class="skill-title">Navisworks</div>
-        <div class="skill-subtitle">Model Review & Coordination</div>
-      </div>
-      <div class="skill skill-dynamo">
-        <div class="skill-icon">D</div>
-        <div class="skill-title">Dynamo</div>
-        <div class="skill-subtitle">Visual Programming</div>
-      </div>
-      <div class="skill skill-primavera">
-        <div class="skill-icon">P6</div>
-        <div class="skill-title">Primavera P6</div>
-        <div class="skill-subtitle">Project Scheduling</div>
-      </div>
-      <div class="skill skill-autocad">
-        <div class="skill-icon">AC</div>
-        <div class="skill-title">AutoCAD</div>
-        <div class="skill-subtitle">2D/3D Drafting</div>
-      </div>
-      <div class="skill skill-programming">
-        <div class="skill-icon">{}</div>
-        <div class="skill-title">Python / C#</div>
-        <div class="skill-subtitle">Automation & Scripts</div>
-      </div>
-    </div>
+    <h2>Skills</h2>
+    <div class="card">⚡ BIM Tools: Revit, Navisworks, Dynamo</div>
+    <div class="card">🛠️ Programming: Python, C#, Automation</div>
+    <div class="card">📊 Project Planning: Primavera P6, AutoCAD</div>
   </section>
 
   <!-- PROJECTS -->
   <section id="projects" class="animate-on-scroll">
-    <h2>Featured Projects</h2>
-    <div class="projects-grid">
-      <!-- BIM Automation Tool -->
-      <div class="project">
-        <h3><span style="color: var(--primary);">⚡</span> BIM Automation Tool</h3>
-        <p>An advanced Revit add-in built with C# that streamlines batch export of views to DWG format and automates schedule data export to CSV. Leverages the Revit API to significantly reduce coordination time and improve reporting accuracy.</p>
-        <div class="project-buttons">
-          <a href="https://github.com/M2Dawn/BIM-Automation-Tool" target="_blank" class="btn">
-            View on GitHub
-          </a>
-          <button class="btn btn-secondary">Learn More</button>
-        </div>
-      </div>
-
-      <!-- Clash Detection Dashboard -->
-      <div class="project">
-        <h3><span style="color: var(--secondary);">🚧</span> Clash Detection Dashboard</h3>
-        <p>A modern, interactive dashboard inspired by Navisworks that visualizes clash detection results, categorizes issues by severity, and generates automated coordination reports. Features a responsive UI designed to accelerate design review meetings.</p>
-        <div class="project-buttons">
-          <a href="clash-dashboard/index.html" target="_blank" class="btn">
-            Open Dashboard
-          </a>
-          <button class="btn btn-secondary">Case Study</button>
-        </div>
-      </div>
-    </div>
+    <h2>Projects</h2>
+    <div class="card">🚀 Automated clash detection system in Revit with Dynamo.</div>
+    <div class="card">📈 Resource optimization scripts integrated with Primavera P6.</div>
   </section>
 
-  <!-- PREVIOUS WORK -->
+  <!-- WORK -->
   <section id="work" class="animate-on-scroll">
-    <h2>Previous Work</h2>
-    
+    <h2>Work</h2>
     <div class="work-item">
       <div class="work-header">
         <h3><span style="color: var(--accent);">📑</span> Resource & Schedule Planning</h3>
         <p>Comprehensive Primavera P6-based project planning documentation featuring detailed resource allocation, timeline optimization, and milestone tracking for complex construction projects.</p>
       </div>
-      <embed src="docs/PM3.pdf" type="application/pdf" class="work-embed" />
+      <embed src="docs/PM3.pdf" type="application/pdf" class="work-embed" loading="lazy" />
     </div>
-    
     <div class="work-item">
       <div class="work-header">
         <h3><span style="color: var(--purple);">📑</span> Baseline & Progress Monitoring</h3>
         <p>Advanced baseline schedule establishment and progress tracking documentation for residential construction projects, demonstrating proficiency in project control methodologies.</p>
       </div>
-      <embed src="docs/PM4.pdf" type="application/pdf" class="work-embed" />
+      <embed src="docs/PM4.pdf" type="application/pdf" class="work-embed" loading="lazy" />
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="animate-on-scroll">
-    <h2>Let's Connect</h2>
-    <div class="contact-content">
-      <p class="contact-description">Ready to collaborate on innovative BIM solutions or discuss exciting opportunities in digital construction? I'd love to hear from you!</p>
-      <div class="social-links">
-        <button class="email-button" onclick="openEmailModal()">
-          <span style="color: var(--primary);">📧</span> Email
-        </button>
-      </div>
+    <h2>Contact</h2>
+    <div class="contact-links">
+      <a href="mailto:e.hossamsabry@gmail.com">Email</a>
+      <a href="https://github.com/M2Dawn" target="_blank">GitHub</a>
     </div>
   </section>
 
-  <footer>
-    <p>© 2025 Hossam Sabry | Crafted with passion for BIM innovation</p>
-  </footer>
-
+  <!-- Scroll Animation Script -->
   <script>
-    // Email Modal Functions
-    function openEmailModal() {
-      const modal = document.getElementById('emailModal');
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeEmailModal() {
-      const modal = document.getElementById('emailModal');
-      const successMessage = document.getElementById('successMessage');
-      modal.classList.remove('active');
-      successMessage.classList.remove('show');
-      document.body.style.overflow = 'auto';
-    }
-
-    function copyEmail() {
-      const emailText = document.getElementById('emailText').textContent;
-      const copyButton = document.querySelector('.copy-button');
-      const successMessage = document.getElementById('successMessage');
-      
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(emailText).then(function() {
-          copyButton.textContent = 'Copied!';
-          copyButton.classList.add('copied');
-          successMessage.classList.add('show');
-          
-          setTimeout(() => {
-            copyButton.textContent = 'Copy';
-            copyButton.classList.remove('copied');
-          }, 2000);
-          
-          setTimeout(() => {
-            successMessage.classList.remove('show');
-          }, 3000);
-        });
-      } else {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = emailText;
-        textArea.style.position = 'absolute';
-        textArea.style.left = '-9999px';
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
-        copyButton.textContent = 'Copied!';
-        copyButton.classList.add('copied');
-        successMessage.classList.add('show');
-        
-        setTimeout(() => {
-          copyButton.textContent = 'Copy';
-          copyButton.classList.remove('copied');
-        }, 2000);
-        
-        setTimeout(() => {
-          successMessage.classList.remove('show');
-        }, 3000);
-      }
-    }
-
-    // Close modal when clicking outside
-    document.getElementById('emailModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeEmailModal();
-      }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && document.getElementById('emailModal').classList.contains('active')) {
-        closeEmailModal();
-      }
-    });
-
-    // Scroll progress indicator
-    window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = (scrollTop / scrollHeight) * 100;
-      document.getElementById('scrollProgress').style.width = progress + '%';
-    });
-
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
+    const elements = document.querySelectorAll('.animate-on-scroll');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animated');
+          observer.unobserve(entry.target);
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Add hover effect to navigation links
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        link.style.transform = 'translateY(-2px)';
-      });
-      link.addEventListener('mouseleave', () => {
-        link.style.transform = 'translateY(0)';
-      });
-    });
-
-    // Dynamic typing effect for tagline
-    const tagline = document.querySelector('.tagline');
-    const originalText = tagline.textContent;
-    tagline.textContent = '';
-    
-    setTimeout(() => {
-      let i = 0;
-      const typeInterval = setInterval(() => {
-        tagline.textContent = originalText.slice(0, i);
-        i++;
-        if (i > originalText.length) {
-          clearInterval(typeInterval);
-        }
-      }, 120);
-    }, 500);
+    elements.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
