@@ -93,7 +93,7 @@
 
     iframe {
       width: 100%;
-      height: 500px;
+      height: 400px;
       border: none;
       margin-top: 15px;
       border-radius: 8px;
@@ -140,6 +140,44 @@
       color: #33ccff;
       text-shadow: 0 0 8px #33ccff;
     }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      width: 90%;
+      height: 90%;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,180,255,0.3);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .close-btn:hover {
+      color: #00b4ff;
+    }
   </style>
 </head>
 <body>
@@ -157,7 +195,7 @@
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer with expertise in <em>Building Information Modeling</em>, project planning, and digital construction technologies. I love integrating modern workflows that bridge design, execution, and project management.</p>
+    <p>Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer with expertise in <em>Building Information Modeling</em>, project planning, and digital construction technologies. I enjoy integrating modern workflows that bridge design, execution, and project management.</p>
   </section>
 
   <section id="projects">
@@ -180,13 +218,13 @@
       <h3>📑 Project Report – Resource & Schedule Planning</h3>
       <p>Comprehensive Primavera-based project planning with detailed resources and timelines.</p>
       <iframe src="PM3.pdf"></iframe>
-      <button onclick="window.open('PM3.pdf')">Open in New Tab</button>
+      <button onclick="openModal('PM3.pdf')">Expand PDF</button>
     </div>
     <div class="project">
       <h3>📑 Project Report – Baseline & Progress Tracking</h3>
       <p>Baseline schedule and progress monitoring documentation for a residential project.</p>
       <iframe src="PM4.pdf"></iframe>
-      <button onclick="window.open('PM4.pdf')">Open in New Tab</button>
+      <button onclick="openModal('PM4.pdf')">Expand PDF</button>
     </div>
   </section>
 
@@ -203,6 +241,23 @@
   <footer>
     <p>© 2025 Hossam Sabry | BIM Developer Portfolio</p>
   </footer>
+
+  <!-- Modal -->
+  <div id="pdfModal" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <iframe id="pdfFrame" class="modal-content"></iframe>
+  </div>
+
+  <script>
+    function openModal(pdf) {
+      document.getElementById("pdfModal").style.display = "flex";
+      document.getElementById("pdfFrame").src = pdf;
+    }
+    function closeModal() {
+      document.getElementById("pdfModal").style.display = "none";
+      document.getElementById("pdfFrame").src = "";
+    }
+  </script>
 
 </body>
 </html>
