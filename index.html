@@ -3,155 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hossam Sabry | Portfolio</title>
+  <title>Hossam Sabry | BIM Developer Portfolio</title>
   <style>
     body {
-      background-color: #0d0d0d;
-      color: #f5f5f5;
+      background-color: #0b0b0b;
+      color: #eaeaea;
       font-family: "Segoe UI", Arial, sans-serif;
       margin: 0;
       padding: 0;
     }
 
     header {
-      background: #111;
-      padding: 40px 20px;
+      background: linear-gradient(135deg, #0d0d0d, #101820);
+      padding: 50px 20px;
       text-align: center;
-      border-bottom: 2px solid #00ffcc;
+      border-bottom: 2px solid #00b4ff;
+      box-shadow: 0 4px 15px rgba(0, 180, 255, 0.2);
     }
 
     header img {
-      width: 150px;
-      height: 150px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      border: 3px solid #00ffcc;
+      border: 3px solid #00b4ff;
       margin-bottom: 15px;
     }
 
     header h1 {
       margin: 10px 0 0;
-      font-size: 2.5em;
-      color: #00ffcc;
+      font-size: 2.8em;
+      color: #00b4ff;
+      text-shadow: 0 0 12px rgba(0, 180, 255, 0.7);
     }
 
     nav {
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     nav a {
-      margin: 0 15px;
-      color: #00ffcc;
+      margin: 0 20px;
+      color: #00b4ff;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      transition: 0.3s;
     }
 
     nav a:hover {
-      color: #00ffaa;
-      text-shadow: 0 0 8px #00ffaa;
+      color: #33ccff;
+      text-shadow: 0 0 8px #33ccff;
     }
 
     section {
-      padding: 60px 20px;
-      max-width: 900px;
+      padding: 70px 20px;
+      max-width: 950px;
       margin: auto;
-      border-bottom: 1px solid #222;
+      border-bottom: 1px solid #1a1a1a;
     }
 
     h2 {
       color: #ffffff;
-      border-left: 4px solid #00ffcc;
-      padding-left: 10px;
-      margin-bottom: 20px;
+      border-left: 5px solid #00b4ff;
+      padding-left: 12px;
+      margin-bottom: 25px;
+      font-size: 1.8em;
     }
 
     p {
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 1.05em;
     }
 
     .project {
-      background: #1a1a1a;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
+      background: #141414;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 180, 255, 0.15);
     }
 
     .project h3 {
       margin-top: 0;
-      color: #00ffaa;
+      color: #33ccff;
     }
 
     button {
-      background: #00ffcc;
-      color: #0d0d0d;
+      background: #00b4ff;
+      color: #0b0b0b;
       border: none;
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 12px 24px;
+      font-size: 15px;
       cursor: pointer;
-      border-radius: 4px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: 0.3s;
     }
 
     button:hover {
-      background: #00ffaa;
-      box-shadow: 0 0 10px #00ffaa;
+      background: #33ccff;
+      box-shadow: 0 0 15px #33ccff;
     }
 
     footer {
       text-align: center;
-      padding: 20px;
-      background: #111;
-      border-top: 2px solid #00ffcc;
+      padding: 25px;
+      background: #101820;
+      border-top: 2px solid #00b4ff;
       font-size: 14px;
+      color: #aaa;
     }
 
     .social-links a {
       display: inline-block;
       margin: 10px;
-      color: #00ffcc;
+      color: #00b4ff;
       text-decoration: none;
       font-weight: bold;
+      transition: 0.3s;
     }
 
     .social-links a:hover {
-      color: #00ffaa;
-      text-shadow: 0 0 8px #00ffaa;
+      color: #33ccff;
+      text-shadow: 0 0 8px #33ccff;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <!-- Profile picture -->
     <img src="me.jpg" alt="Hossam Sabry">
     <h1>Hossam Sabry</h1>
     <nav>
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
+      <a href="#work">Previous Work</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I’m <strong>Hossam Sabry</strong>, a passionate developer who loves creating modern, functional, and visually engaging websites. Welcome to my portfolio 🚀.</p>
+    <p>Hello! I’m <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer with expertise in <em>Building Information Modeling</em>, project planning, and digital construction technologies. I love integrating modern workflows that bridge design, execution, and project management.</p>
   </section>
 
   <section id="projects">
-    <h2>Projects</h2>
+    <h2>Featured Projects</h2>
     <div class="project">
-      <h3>⚡ Project One</h3>
-      <p>A description of your first project goes here. You can add GitHub links, screenshots, or demos.</p>
+      <h3>⚡ BIM Automation Tool</h3>
+      <p>A Revit and Dynamo-based automation script that reduces repetitive modeling tasks and increases design efficiency.</p>
       <button onclick="window.location.href='https://github.com/M2Dawn'">View on GitHub</button>
     </div>
     <div class="project">
-      <h3>⚡ Project Two</h3>
-      <p>A description of your second project. Make sure to show off your best work!</p>
+      <h3>⚡ Clash Detection Dashboard</h3>
+      <p>A Navisworks plugin with a modern UI that visualizes clashes and generates reports automatically for faster coordination.</p>
       <button>Demo</button>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2>Previous Work (Project Planning)</h2>
+    <div class="project">
+      <h3>📑 Project Report – Resource & Schedule Planning</h3>
+      <p>Comprehensive Primavera-based project planning with detailed resources and timelines.</p>
+      <button onclick="window.open('PM3.pdf')">View PDF</button>
+    </div>
+    <div class="project">
+      <h3>📑 Project Report – Baseline & Progress Tracking</h3>
+      <p>Baseline schedule and progress monitoring documentation for a residential project.</p>
+      <button onclick="window.open('PM4.pdf')">View PDF</button>
     </div>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>If you’d like to get in touch, you can reach me through:</p>
+    <p>If you’d like to collaborate or discuss opportunities, reach me here:</p>
     <div class="social-links">
       <a href="mailto:e.hossamsabry@gmail.com">📧 Email</a>
       <a href="https://www.linkedin.com/in/hossamsabry09" target="_blank">💼 LinkedIn</a>
@@ -160,7 +189,7 @@
   </section>
 
   <footer>
-    <p>© 2025 Hossam Sabry | Built with ❤️ and GitHub Pages</p>
+    <p>© 2025 Hossam Sabry | BIM Developer Portfolio</p>
   </footer>
 
 </body>
