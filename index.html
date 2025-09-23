@@ -734,9 +734,6 @@
   <!-- HEADER -->
   <header>
     <div class="header-content">
-      <div class="profile-image">
-        <img src="docs/me.jpg" alt="Hossam Sabry">
-      </div>
       <h1>Hossam Sabry</h1>
       <p class="tagline">BIM Developer</p>
       <nav class="nav-links">
@@ -989,13 +986,15 @@
       observer.observe(el);
     });
 
-    // Add hover effect to profile image
-    const profileImage = document.querySelector('.profile-image');
-    profileImage.addEventListener('mouseenter', () => {
-      profileImage.style.transform = 'scale(1.1) rotate(5deg)';
-    });
-    profileImage.addEventListener('mouseleave', () => {
-      profileImage.style.transform = 'scale(1) rotate(0deg)';
+    // Add hover effect to navigation links
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        link.style.transform = 'translateY(-2px)';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.transform = 'translateY(0)';
+      });
     });
 
     // Dynamic typing effect for tagline
@@ -1011,7 +1010,7 @@
         if (i > originalText.length) {
           clearInterval(typeInterval);
         }
-      }, 80);
+      }, 120);
     }, 500);
   </script>
 </body>
