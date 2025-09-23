@@ -141,7 +141,7 @@
       text-shadow: 0 0 8px #33ccff;
     }
 
-    /* Modal */
+    /* Modal with fade animation */
     .modal {
       display: none;
       position: fixed;
@@ -154,6 +154,13 @@
       backdrop-filter: blur(5px);
       justify-content: center;
       align-items: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal.show {
+      display: flex;
+      opacity: 1;
     }
 
     .modal-content {
@@ -162,6 +169,12 @@
       border: none;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0,180,255,0.3);
+      animation: zoomIn 0.4s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0.7; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     .close-btn {
@@ -250,12 +263,24 @@
 
   <script>
     function openModal(pdf) {
-      document.getElementById("pdfModal").style.display = "flex";
-      document.getElementById("pdfFrame").src = pdf;
+      const modal = document.getElementById("pdfModal");
+      const frame = document.getElementById("pdfFrame");
+
+      // Force Google Docs Viewer for PM3 if browser downloads it
+      if (pdf.toLowerCase().includes("pm3")) {
+        frame.src = "https://docs.google.com/viewer?embedded=true&url=" + window.location.origin + "/" + pdf;
+      } else {
+        frame.src = pdf;
+      }
+
+      modal.classList.add("show");
     }
+
     function closeModal() {
-      document.getElementById("pdfModal").style.display = "none";
-      document.getElementById("pdfFrame").src = "";
+      const modal = document.getElementById("pdfModal");
+      const frame = document.getElementById("pdfFrame");
+      modal.classList.remove("show");
+      setTimeout(() => frame.src = "", 400); // clear after fade-out
     }
   </script>
 
