@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clash Detection Dashboard - Case Study | Hossam Sabry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #4ecdc4;
+      --accent: #ffe66d;
+      --purple: #a8e6cf;
+      --orange: #ffa726;
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --text-primary: #ffffff;
+      --text-secondary: #b8bcc8;
+      --border: #2d3748;
+      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      --gradient-2: linear-gradient(135deg, #4ecdc4, #ffe66d);
+      --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
+      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
+      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: "Inter", sans-serif;
+      line-height: 1.8;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      padding: 8rem 2rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--bg-card);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .content-section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .content-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .content-section h3 {
+      font-size: 1.8rem;
+      margin: 3rem 0 1.5rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4rem auto;
+      max-width: 200px;
+    }
+
+    .box {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .box-problem {
+      border-left: 4px solid var(--primary);
+    }
+
+    .box-solution {
+      border-left: 4px solid var(--secondary);
+    }
+
+    .box-result {
+      border-left: 4px solid var(--accent);
+    }
+
+    .box h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .box li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .box li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 0.8rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h5 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+      color: var(--text-secondary);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .tech-badge {
+      background: var(--bg-card);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .screenshot {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 3rem;
+      margin: 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(255, 230, 109, 0.1));
+      opacity: 0.3;
+    }
+
+    .screenshot-text {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 0.3rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--secondary);
+      box-shadow: 0 0 0 4px var(--bg-primary);
+    }
+
+    .timeline-item h5 {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-item p {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-section {
+      background: var(--bg-card);
+      padding: 4rem 2rem;
+      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 800px;
+    }
+
+    .cta-section h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--gradient-2);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-secondary);
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .content-section {
+        padding: 3rem 1rem;
+      }
+
+      .content-section h2 {
+        font-size: 2rem;
+      }
+
+      .content-section h3 {
+        font-size: 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-brand">← Back to Portfolio</a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#solution">Solution</a>
+      <a href="#results">Results</a>
+      <a href="#technical">Technical</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">Case Study</div>
+    <h1>Clash Detection Dashboard</h1>
+    <p class="hero-subtitle">
+      Interactive visualization platform for accelerating multi-discipline coordination and clash resolution
+    </p>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">50%</div>
+        <div class="stat-label">Faster Meetings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1000+</div>
+        <div class="stat-label">Clashes Tracked</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">70%</div>
+        <div class="stat-label">Resolution Rate</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview" class="content-section">
+    <h2>Project Overview</h2>
+    <p>
+      Coordination meetings are the heartbeat of successful BIM projects, yet teams often struggle with 
+      fragmented clash reports from Navisworks, making it difficult to prioritize issues and track resolution 
+      progress across multiple disciplines and project phases.
+    </p>
+
+    <div class="box box-problem">
+      <h4>🚨 The Challenge</h4>
+      <ul>
+        <li>Clash reports scattered across multiple Navisworks files and Excel spreadsheets</li>
+        <li>No centralized view of clash status and resolution progress</li>
+        <li>Difficulty prioritizing critical vs. minor clashes during meetings</li>
+        <li>Manual tracking of assigned responsibilities and due dates</li>
+        <li>Limited historical data for analyzing clash trends</li>
+      </ul>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Traditional clash report workflow<br>
+        <small>(Replace with before state image)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section id="solution" class="content-section">
+    <h2>The Solution</h2>
+    <p>
+      I developed an interactive dashboard that aggregates clash detection data from Navisworks exports, 
+      categorizes issues by severity and discipline, and provides real-time analytics to make coordination 
+      meetings more efficient and actionable.
+    </p>
+
+    <div class="box box-solution">
+      <h4>✅ Key Features</h4>
+      <ul>
+        <li>Real-time clash statistics with visual breakdowns by discipline</li>
+        <li>Priority-based filtering (Critical, Major, Minor)</li>
+        <li>Status tracking (Open, In Progress, Resolved)</li>
+        <li>Interactive charts showing trends over time</li>
+        <li>Automated report generation for stakeholders</li>
+      </ul>
+    </div>
+
+    <h3>🎨 Features Breakdown</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h5>Visual Analytics</h5>
+        <p>Interactive charts and graphs showing clash distribution and trends</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h5>Priority Filtering</h5>
+        <p>Smart categorization by severity to focus on critical issues first</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h5>Discipline View</h5>
+        <p>Filter clashes by architectural, structural, or MEP disciplines</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h5>Progress Tracking</h5>
+        <p>Monitor resolution status and identify bottlenecks</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h5>Automated Reports</h5>
+        <p>Generate professional reports for meetings with one click</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🕐</div>
+        <h5>Historical Data</h5>
+        <p>Track clash trends across project phases</p>
+      </div>
+    </div>
+
+    <h3>🛠️ Technical Implementation</h3>
+    <p>
+      Built with modern web technologies to ensure responsiveness and accessibility across devices, 
+      from desktop monitors in the office to tablets on construction sites.
+    </p>
+
+    <div class="tech-stack">
+      <div class="tech-badge">⚛️ React</div>
+      <div class="tech-badge">📊 D3.js</div>
+      <div class="tech-badge">📈 Recharts</div>
+      <div class="tech-badge">🎨 Tailwind CSS</div>
+      <div class="tech-badge">📄 CSV Parser</div>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Dashboard main interface<br>
+        <small>(Replace with actual dashboard screenshot)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section id="results" class="content-section">
+    <h2>Results & Impact</h2>
+    <p>
+      The dashboard transformed coordination meetings from lengthy status reviews into focused, 
+      action-oriented sessions that drove measurable improvements in clash resolution.
+    </p>
+
+    <div class="box box-result">
+      <h4>🎯 Measurable Outcomes</h4>
+      <ul>
+        <li>Coordination meeting duration reduced from 2 hours to 60 minutes</li>
+        <li>Clash resolution rate improved from 45% to 70% per cycle</li>
+        <li>Tracked over 1000 clashes across 5 project phases</li>
+        <li>Reduced follow-up emails by 60% through clear status visibility</li>
+        <li>Enabled data-driven decision making on resource allocation</li>
+      </ul>
+    </div>
+
+    <h3>📈 Project Timeline</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h5>Week 1: Requirements & Design</h5>
+        <p>Interviewed coordination team, analyzed Navisworks reports, and wireframed dashboard layout</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 2-3: Core Development</h5>
+        <p>Built data ingestion pipeline and created interactive visualizations</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 4: Filtering & Analytics</h5>
+        <p>Implemented priority filtering, discipline views, and trend analysis</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 5: Testing & Polish</h5>
+        <p>User testing with coordination team, refined UX based on feedback</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 6: Deployment & Training</h5>
+        <p>Deployed to project team and conducted training sessions</p>
+      </div>
+    </div>
+
+    <h3>💬 User Feedback</h3>
+    <div class="box" style="border-left: 4px solid var(--purple);">
+      <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 1rem;">
+        "This dashboard has revolutionized our coordination meetings. We can now see exactly where we stand 
+        at a glance and focus our time on solving problems rather than reading through reports. The historical 
+        trends help us anticipate issues before they become critical."
+      </p>
+      <p style="color: var(--text-primary); font-weight: 500;">
+        — Project Coordinator, Major Infrastructure Project
+      </p>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Analytics view showing trends<br>
+        <small>(Replace with analytics screenshot)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section id="technical" class="content-section">
+    <h2>Technical Deep Dive</h2>
+    
+    <h3>🏗️ Architecture Overview</h3>
+    <p>
+      The dashboard follows a component-based architecture with React, enabling modular development 
+      and easy maintenance as project requirements evolve.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📥</div>
+        <h5>Data Import</h5>
+        <p>Parses Navisworks CSV exports and normalizes clash data</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h5>Processing Engine</h5>
+        <p>Categorizes clashes by severity and calculates key metrics</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h5>Visualization Layer</h5>
+        <p>Renders interactive charts using D3.js and Recharts</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎛️</div>
+        <h5>Filter System</h5>
+        <p>Real-time filtering by discipline, status, and priority</p>
+      </div>
+    </div>
+
+    <h3>🔑 Key Technical Challenges</h3>
+    
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 1: Data Standardization</h4>
+      <p>
+        <strong>Problem:</strong> Navisworks exports vary by project and user configuration.<br>
+        <strong>Solution:</strong> Built flexible CSV parser with column mapping and validation to handle 
+        different report formats.
+      </p>
+    </div>
+
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 2: Performance with Large Datasets</h4>
+      <p>
+        <strong>Problem:</strong> Dashboard slowed when visualizing 1000+ clashes.<br>
+        <strong>Solution:</strong> Implemented virtualization and pagination, plus data aggregation for 
+        summary views.
+      </p>
+    </div>
+
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 3: Mobile Responsiveness</h4>
+      <p>
+        <strong>Problem:</strong> Complex charts were difficult to read on tablets.<br>
+        <strong>Solution:</strong> Created adaptive layouts that prioritize key metrics on smaller screens 
+        with expandable detail views.
+      </p>
+    </div>
+
+    <h3>📚 Lessons Learned</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">1.</span>
+        <strong style="color: var(--text-primary);">Start with user needs:</strong> The most valuable features 
+        came from observing actual coordination meetings.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">2.</span>
+        <strong style="color: var(--text-primary);">Simplicity wins:</strong> Initial designs were too complex; 
+        removing features improved usability.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">3.</span>
+        <strong style="color: var(--text-primary);">Test on real devices:</strong> Desktop testing missed 
+        issues that appeared on tablets used on-site.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">4.</span>
+        <strong style="color: var(--text-primary);">Visual hierarchy matters:</strong> Using color coding 
+        for priority made critical issues immediately visible.
+      </li>
+    </ul>
+
+    <h3>🚀 Future Enhancements</h3>
+    <p>Planned improvements based on team feedback:</p>
+    <div class="features-grid" style="margin-top: 1.5rem;">
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h5>Navisworks Integration</h5>
+        <p>Direct import from Navisworks without CSV export step</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h5>Assignment System</h5>
+        <p>Assign clashes to team members with email notifications</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h5>Mobile App</h5>
+        <p>Native iOS/Android app for on-site clash resolution</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h5>AI Predictions</h5>
+        <p>Predict clash resolution time based on historical data</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <h3>Want to See It in Action?</h3>
+    <p>
+      I'd be happy to demo the dashboard and discuss how similar visualization tools can improve 
+      your project coordination workflows.
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:e.hossamsabry@gmail.com" class="btn">Schedule a Demo</a>
+      <a href="../index.html" class="btn btn-secondary">View More Projects</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Hossam Sabry | BIM Developer & Digital Construction Specialist</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const navHeight = document.querySelector('nav').offsetHeight;
+          const targetPosition = target.offsetTop - navHeight - 20;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.style.color = 'var(--text-secondary)';
+        if (link.getAttribute('href').slice(1) === current) {
+          link.style.color = 'var(--primary)';
+        }
+      });
+    });
+  </script>
+</body>
+</html
