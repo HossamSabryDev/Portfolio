@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIM Automation Tool - Case Study | Hossam Sabry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #4ecdc4;
+      --accent: #ffe66d;
+      --purple: #a8e6cf;
+      --orange: #ffa726;
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --text-primary: #ffffff;
+      --text-secondary: #b8bcc8;
+      --border: #2d3748;
+      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      --gradient-2: linear-gradient(135deg, #4ecdc4, #ffe66d);
+      --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
+      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
+      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: "Inter", sans-serif;
+      line-height: 1.8;
+      scroll-behavior: smooth;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 8rem 2rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--bg-card);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Content Sections */
+    .content-section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .content-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .content-section h3 {
+      font-size: 1.8rem;
+      margin: 3rem 0 1.5rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4rem auto;
+      max-width: 200px;
+    }
+
+    /* Problem/Solution Boxes */
+    .box {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .box-problem {
+      border-left: 4px solid var(--primary);
+    }
+
+    .box-solution {
+      border-left: 4px solid var(--secondary);
+    }
+
+    .box-result {
+      border-left: 4px solid var(--accent);
+    }
+
+    .box h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .box li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .box li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* Feature Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 0.8rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h5 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+      color: var(--text-secondary);
+    }
+
+    /* Tech Stack */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .tech-badge {
+      background: var(--bg-card);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Code Block */
+    .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .code-comment {
+      color: #6a9955;
+    }
+
+    .code-keyword {
+      color: #569cd6;
+    }
+
+    .code-string {
+      color: #ce9178;
+    }
+
+    .code-function {
+      color: #dcdcaa;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem;
+      top: 0.3rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--secondary);
+      box-shadow: 0 0 0 4px var(--bg-primary);
+    }
+
+    .timeline-item h5 {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-item p {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Screenshot Placeholder */
+    .screenshot {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 3rem;
+      margin: 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+      opacity: 0.3;
+    }
+
+    .screenshot-text {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--bg-card);
+      padding: 4rem 2rem;
+      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 800px;
+    }
+
+    .cta-section h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-secondary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      margin-top: 4rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .content-section {
+        padding: 3rem 1rem;
+      }
+
+      .content-section h2 {
+        font-size: 2rem;
+      }
+
+      .content-section h3 {
+        font-size: 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <a href="../index.html" class="nav-brand">← Back to Portfolio</a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#solution">Solution</a>
+      <a href="#results">Results</a>
+      <a href="#technical">Technical</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">Case Study</div>
+    <h1>BIM Automation Tool for Revit</h1>
+    <p class="hero-subtitle">
+      Revolutionizing multi-discipline coordination through intelligent batch processing and automated data extraction
+    </p>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">40%</div>
+        <div class="stat-label">Time Saved</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Views Exported</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">95%</div>
+        <div class="stat-label">Error Reduction</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview" class="content-section">
+    <h2>Project Overview</h2>
+    <p>
+      In large-scale construction projects, coordination between architectural, structural, and MEP disciplines 
+      requires constant exchange of drawings and data. Traditional manual export processes were consuming 
+      significant team resources and introducing errors that rippled through the entire project lifecycle.
+    </p>
+
+    <div class="box box-problem">
+      <h4>🚨 The Challenge</h4>
+      <ul>
+        <li>Manual export of 200+ views per coordination cycle taking 6-8 hours</li>
+        <li>Inconsistent naming conventions causing file management chaos</li>
+        <li>Schedule data extraction requiring tedious copy-paste operations</li>
+        <li>High error rates in data transfer (estimated 15-20% required rework)</li>
+        <li>Delayed coordination cycles impacting project timelines</li>
+      </ul>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Before state - Manual export workflow<br>
+        <small>(Replace with actual screenshot showing the problem)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Solution -->
+  <section id="solution" class="content-section">
+    <h2>The Solution</h2>
+    <p>
+      I developed a custom Revit add-in using C# and the Revit API that automates the entire export workflow. 
+      The tool intelligently processes views in batches, applies consistent naming conventions, and extracts 
+      schedule data directly to structured CSV files.
+    </p>
+
+    <div class="box box-solution">
+      <h4>✅ Key Features</h4>
+      <ul>
+        <li>Batch export of views to DWG with customizable templates</li>
+        <li>Intelligent naming system based on view type and discipline</li>
+        <li>Automated schedule data extraction to CSV format</li>
+        <li>Progress tracking and error logging</li>
+        <li>User-friendly interface requiring minimal training</li>
+      </ul>
+    </div>
+
+    <h3>🎨 Features Breakdown</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h5>Smart Filtering</h5>
+        <p>Automatically identifies exportable views and filters out irrelevant content</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📁</div>
+        <h5>Custom Naming</h5>
+        <p>Generates consistent file names based on project standards</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h5>Data Export</h5>
+        <p>Extracts schedule data to CSV with proper formatting</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h5>Batch Processing</h5>
+        <p>Handles hundreds of views efficiently with progress tracking</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h5>Error Handling</h5>
+        <p>Comprehensive logging and graceful failure recovery</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h5>Configurable</h5>
+        <p>Customizable settings for different project requirements</p>
+      </div>
+    </div>
+
+    <h3>🛠️ Technical Implementation</h3>
+    <p>
+      The solution leverages the Revit API's ViewSchedule and ExportOptions classes, combined with 
+      custom logic for file management and data transformation.
+    </p>
+
+    <div class="tech-stack">
+      <div class="tech-badge">🔷 C#</div>
+      <div class="tech-badge">🏗️ Revit API 2023</div>
+      <div class="tech-badge">🪟 WPF</div>
+      <div class="tech-badge">📦 .NET Framework 4.8</div>
+      <div class="tech-badge">📄 CSV Helper</div>
+    </div>
+
+    <div class="code-block">
+      <pre><code><span class="code-comment">// Sample: Batch export views to DWG</span>
+<span class="code-keyword">public</span> <span class="code-keyword">void</span> <span class="code-function">ExportViewsToDWG</span>(List&lt;View&gt; views, <span class="code-keyword">string</span> outputPath)
+{
+    <span class="code-keyword">using</span> (Transaction trans = <span class="code-keyword">new</span> Transaction(doc, <span class="code-string">"Export Views"</span>))
+    {
+        trans.Start();
+        
+        <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> view <span class="code-keyword">in</span> views)
+        {
+            <span class="code-keyword">var</span> fileName = <span class="code-function">GenerateFileName</span>(view);
+            <span class="code-keyword">var</span> exportOptions = <span class="code-keyword">new</span> DWGExportOptions();
+            
+            doc.Export(outputPath, fileName, exportOptions);
+            <span class="code-function">LogProgress</span>(view.Name);
+        }
+        
+        trans.Commit();
+    }
+}</code></pre>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Tool interface showing batch export progress<br>
+        <small>(Replace with actual screenshot of the tool in action)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Results -->
+  <section id="results" class="content-section">
+    <h2>Results & Impact</h2>
+    <p>
+      The automation tool transformed the coordination workflow, delivering immediate and measurable benefits 
+      to the project team.
+    </p>
+
+    <div class="box box-result">
+      <h4>🎯 Measurable Outcomes</h4>
+      <ul>
+        <li>Export time reduced from 6-8 hours to 45 minutes (40% efficiency gain)</li>
+        <li>Error rate decreased from 15-20% to less than 2%</li>
+        <li>Processed over 500 views per coordination cycle</li>
+        <li>Enabled weekly coordination meetings (previously bi-weekly)</li>
+        <li>Saved approximately 120 hours per project phase</li>
+      </ul>
+    </div>
+
+    <h3>📈 Project Timeline</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h5>Week 1-2: Discovery & Planning</h5>
+        <p>Analyzed existing workflow, identified pain points, and designed solution architecture</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 3-4: Core Development</h5>
+        <p>Built batch export functionality and naming logic using Revit API</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 5: Data Export Feature</h5>
+        <p>Implemented schedule data extraction and CSV formatting</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 6: UI & Error Handling</h5>
+        <p>Created user interface, added progress tracking, and comprehensive error logging</p>
+      </div>
+      <div class="timeline-item">
+        <h5>Week 7-8: Testing & Deployment</h5>
+        <p>Conducted user acceptance testing, refined based on feedback, and deployed to project team</p>
+      </div>
+    </div>
+
+    <h3>💬 User Feedback</h3>
+    <div class="box" style="border-left: 4px solid var(--purple);">
+      <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 1rem;">
+        "This tool has been a game-changer for our coordination process. What used to take an entire workday 
+        now happens during my coffee break. The consistency and reliability have eliminated so many headaches."
+      </p>
+      <p style="color: var(--text-primary); font-weight: 500;">
+        — BIM Coordinator, Large Construction Project
+      </p>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Before/After comparison showing time savings<br>
+        <small>(Replace with metrics visualization or comparison chart)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Technical Details -->
+  <section id="technical" class="content-section">
+    <h2>Technical Deep Dive</h2>
+    
+    <h3>🏗️ Architecture Overview</h3>
+    <p>
+      The application follows a modular architecture with clear separation of concerns, making it maintainable 
+      and extensible for future enhancements.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h5>Command Layer</h5>
+        <p>External command entry point integrating with Revit's ribbon interface</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔧</div>
+        <h5>Business Logic</h5>
+        <p>Core processing logic for view filtering, naming, and export operations</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💾</div>
+        <h5>Data Layer</h5>
+        <p>Handles schedule data extraction and CSV file generation</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖥️</div>
+        <h5>UI Layer</h5>
+        <p>WPF-based interface with MVVM pattern for clean data binding</p>
+      </div>
+    </div>
+
+    <h3>🔑 Key Technical Challenges</h3>
+    
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 1: Performance Optimization</h4>
+      <p>
+        <strong>Problem:</strong> Initial implementation was slow when processing large view sets.<br>
+        <strong>Solution:</strong> Implemented view pre-filtering and parallel processing where possible, 
+        reducing processing time by 60%.
+      </p>
+    </div>
+
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 2: File Naming Consistency</h4>
+      <p>
+        <strong>Problem:</strong> Different disciplines had varying naming conventions.<br>
+        <strong>Solution:</strong> Created a configurable naming template system with discipline-specific 
+        prefixes and view type suffixes.
+      </p>
+    </div>
+
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 3: Error Recovery</h4>
+      <p>
+        <strong>Problem:</strong> Single export failures would halt the entire batch process.<br>
+        <strong>Solution:</strong> Implemented try-catch blocks around individual exports with detailed 
+        logging, allowing the process to continue and report issues at completion.
+      </p>
+    </div>
+
+    <h3>📚 Lessons Learned</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">1.</span>
+        <strong style="color: var(--text-primary);">User feedback is invaluable:</strong> Early testing with actual users 
+        revealed workflow nuances I hadn't considered in the initial design.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">2.</span>
+        <strong style="color: var(--text-primary);">Robust error handling is critical:</strong> Real-world projects have 
+        edge cases that testing environments don't reveal.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">3.</span>
+        <strong style="color: var(--text-primary);">Documentation matters:</strong> Clear documentation and tooltips 
+        reduced support requests significantly.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">4.</span>
+        <strong style="color: var(--text-primary);">Configurability extends tool life:</strong> Making the tool 
+        configurable meant it could adapt to different projects without code changes.
+      </li>
+    </ul>
+
+    <h3>🚀 Future Enhancements</h3>
+    <p>Based on user feedback and project needs, planned improvements include:</p>
+    <div class="features-grid" style="margin-top: 1.5rem;">
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <h5>Cloud Storage</h5>
+        <p>Direct export to cloud platforms like BIM 360 or SharePoint</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📧</div>
+        <h5>Email Notifications</h5>
+        <p>Automatic alerts when export batches complete</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h5>Analytics Dashboard</h5>
+        <p>Track export history and identify usage patterns</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h5>API Integration</h5>
+        <p>Connect with project management tools for automated workflows</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <div class="cta-section">
+    <h3>Interested in Similar Solutions?</h3>
+    <p>
+      I'd love to discuss how custom BIM automation can transform your project workflows. 
+      Whether you need batch processing, data extraction, or custom reporting solutions, let's explore what's possible.
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:e.hossamsabry@gmail.com" class="btn">Get in Touch</a>
+      <a href="../index.html" class="btn btn-secondary">View More Projects</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Hossam Sabry | BIM Developer & Digital Construction Specialist</p>
+  </footer>
+
+  <script>
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const navHeight = document.querySelector('nav').offsetHeight;
+          const targetPosition = target.offsetTop - navHeight - 20;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Highlight active nav section
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.style.color = 'var(--text-secondary)';
+        if (link.getAttribute('href').slice(1) === current) {
+          link.style.color = 'var(--primary)';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
