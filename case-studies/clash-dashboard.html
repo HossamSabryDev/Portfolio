@@ -497,7 +497,7 @@
     </p>
     <div class="hero-stats">
       <div class="stat-card">
-        <div class="stat-number">50%</div>
+        <div class="stat-number">~50%</div>
         <div class="stat-label">Faster Meetings</div>
       </div>
       <div class="stat-card">
@@ -505,7 +505,7 @@
         <div class="stat-label">Clashes Tracked</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">70%</div>
+        <div class="stat-number">~70%</div>
         <div class="stat-label">Resolution Rate</div>
       </div>
     </div>
@@ -531,10 +531,48 @@
     </div>
 
     <div class="screenshot">
-      <div class="screenshot-text">
-        📸 Screenshot: Traditional clash report workflow<br>
-        <small>(Replace with before state image)</small>
-      </div>
+      <svg viewBox="0 0 800 400" style="max-width: 100%; height: auto;">
+        <defs>
+          <linearGradient id="clashGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:0.2" />
+            <stop offset="100%" style="stop-color:#ffe66d;stop-opacity:0.2" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="400" fill="url(#clashGrad1)"/>
+        
+        <!-- Scattered documents -->
+        <g transform="translate(50, 80)">
+          <!-- Excel icon -->
+          <rect x="0" y="0" width="100" height="120" rx="8" fill="#16213e" stroke="#4ecdc4" stroke-width="2"/>
+          <rect x="10" y="30" width="80" height="5" fill="#2d3748"/>
+          <rect x="10" y="45" width="80" height="5" fill="#2d3748"/>
+          <rect x="10" y="60" width="80" height="5" fill="#2d3748"/>
+          <text x="50" y="100" fill="#b8bcc8" font-size="10" text-anchor="middle">Report_v1.xlsx</text>
+          
+          <!-- Navisworks icon -->
+          <rect x="150" y="20" width="100" height="120" rx="8" fill="#16213e" stroke="#4ecdc4" stroke-width="2"/>
+          <circle cx="200" cy="70" r="20" fill="none" stroke="#4ecdc4" stroke-width="2"/>
+          <circle cx="200" cy="70" r="10" fill="none" stroke="#ff6b6b" stroke-width="2"/>
+          <text x="200" y="125" fill="#b8bcc8" font-size="10" text-anchor="middle">Clashes.nwd</text>
+          
+          <!-- Email icon -->
+          <rect x="300" y="40" width="100" height="120" rx="8" fill="#16213e" stroke="#4ecdc4" stroke-width="2"/>
+          <path d="M 320 80 L 380 110 L 380 130 L 320 130 Z" fill="none" stroke="#ffe66d" stroke-width="2"/>
+          <path d="M 320 80 L 350 100 L 380 80" fill="none" stroke="#ffe66d" stroke-width="2"/>
+          <text x="350" y="150" fill="#b8bcc8" font-size="10" text-anchor="middle">Email Thread</text>
+        </g>
+        
+        <!-- Problems -->
+        <g transform="translate(480, 80)">
+          <text x="0" y="0" fill="#ffffff" font-size="16" font-weight="bold">Coordination Issues:</text>
+          <text x="0" y="30" fill="#ff6b6b" font-size="13">❌ Fragmented data</text>
+          <text x="0" y="55" fill="#ff6b6b" font-size="13">❌ No central view</text>
+          <text x="0" y="80" fill="#ff6b6b" font-size="13">❌ Manual tracking</text>
+          <text x="0" y="105" fill="#ff6b6b" font-size="13">❌ 2-hour meetings</text>
+        </g>
+        
+        <text x="400" y="380" fill="#4ecdc4" font-size="14" text-anchor="middle" opacity="0.7">Before: Scattered Clash Reports</text>
+      </svg>
     </div>
   </section>
 
@@ -608,10 +646,58 @@
     </div>
 
     <div class="screenshot">
-      <div class="screenshot-text">
-        📸 Screenshot: Dashboard main interface<br>
-        <small>(Replace with actual dashboard screenshot)</small>
-      </div>
+      <svg viewBox="0 0 800 400" style="max-width: 100%; height: auto;">
+        <defs>
+          <linearGradient id="clashGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:0.2" />
+            <stop offset="100%" style="stop-color:#ffe66d;stop-opacity:0.2" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="400" fill="url(#clashGrad2)"/>
+        
+        <!-- Dashboard mockup -->
+        <g transform="translate(50, 30)">
+          <!-- Header -->
+          <rect x="0" y="0" width="700" height="50" rx="8" fill="#16213e" stroke="#4ecdc4" stroke-width="2"/>
+          <text x="20" y="30" fill="#ffffff" font-size="18" font-weight="bold">Clash Detection Dashboard</text>
+          <rect x="600" y="15" width="80" height="20" rx="4" fill="#4ecdc4"/>
+          <text x="640" y="29" fill="#ffffff" font-size="11" text-anchor="middle">Export</text>
+          
+          <!-- Stats cards -->
+          <rect x="0" y="70" width="150" height="80" rx="8" fill="#1a1a2e" stroke="#2d3748" stroke-width="1"/>
+          <text x="75" y="110" fill="#ff6b6b" font-size="28" text-anchor="middle" font-weight="bold">247</text>
+          <text x="75" y="135" fill="#b8bcc8" font-size="12" text-anchor="middle">Critical</text>
+          
+          <rect x="170" y="70" width="150" height="80" rx="8" fill="#1a1a2e" stroke="#2d3748" stroke-width="1"/>
+          <text x="245" y="110" fill="#ffe66d" font-size="28" text-anchor="middle" font-weight="bold">382</text>
+          <text x="245" y="135" fill="#b8bcc8" font-size="12" text-anchor="middle">Major</text>
+          
+          <rect x="340" y="70" width="150" height="80" rx="8" fill="#1a1a2e" stroke="#2d3748" stroke-width="1"/>
+          <text x="415" y="110" fill="#4ecdc4" font-size="28" text-anchor="middle" font-weight="bold">70%</text>
+          <text x="415" y="135" fill="#b8bcc8" font-size="12" text-anchor="middle">Resolved</text>
+          
+          <rect x="510" y="70" width="190" height="80" rx="8" fill="#1a1a2e" stroke="#2d3748" stroke-width="1"/>
+          <text x="605" y="95" fill="#b8bcc8" font-size="11" text-anchor="middle">Resolution Rate</text>
+          <circle cx="605" cy="125" r="20" fill="none" stroke="#4ecdc4" stroke-width="4" stroke-dasharray="90 35"/>
+          
+          <!-- Chart area -->
+          <rect x="0" y="170" width="340" height="150" rx="8" fill="#1a1a2e" stroke="#2d3748" stroke-width="1"/>
+          <text x="170" y="195" fill="#b8bcc8" font-size="12" text-anchor="middle">Clash Trends</text>
+          <path d="M 20 290 L 80 260 L 140 270 L 200 240 L 260 250 L 320 220" fill="none" stroke="#4ecdc4" stroke-width="3"/>
+          
+          <!-- List area -->
+          <rect x="360" y="170" width="340" height="150" rx="8" fill="#1a1a2e" stroke="#2d3748" stroke-width="1"/>
+          <text x="530" y="195" fill="#b8bcc8" font-size="12" text-anchor="middle">Recent Clashes</text>
+          <rect x="380" y="210" width="300" height="20" rx="4" fill="#0f0f23"/>
+          <circle cx="395" cy="220" r="5" fill="#ff6b6b"/>
+          <text x="410" y="224" fill="#b8bcc8" font-size="10">MEP-STRUCT-001 - Duct vs Beam</text>
+          <rect x="380" y="240" width="300" height="20" rx="4" fill="#0f0f23"/>
+          <circle cx="395" cy="250" r="5" fill="#ffe66d"/>
+          <text x="410" y="254" fill="#b8bcc8" font-size="10">ARCH-MEP-045 - Wall vs Pipe</text>
+        </g>
+        
+        <text x="400" y="385" fill="#4ecdc4" font-size="14" text-anchor="middle" opacity="0.7">Dashboard: Centralized Clash Management</text>
+      </svg>
     </div>
   </section>
 
@@ -662,9 +748,9 @@
     <h3>💬 User Feedback</h3>
     <div class="box" style="border-left: 4px solid var(--purple);">
       <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 1rem;">
-        "This dashboard has revolutionized our coordination meetings. We can now see exactly where we stand 
+        "This dashboard has significantly improved our coordination meetings. We can now see exactly where we stand 
         at a glance and focus our time on solving problems rather than reading through reports. The historical 
-        trends help us anticipate issues before they become critical."
+        trends help us identify issues early."
       </p>
       <p style="color: var(--text-primary); font-weight: 500;">
         — Project Coordinator, Major Infrastructure Project
@@ -672,10 +758,59 @@
     </div>
 
     <div class="screenshot">
-      <div class="screenshot-text">
-        📸 Screenshot: Analytics view showing trends<br>
-        <small>(Replace with analytics screenshot)</small>
-      </div>
+      <svg viewBox="0 0 800 400" style="max-width: 100%; height: auto;">
+        <defs>
+          <linearGradient id="clashGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#a8e6cf;stop-opacity:0.2" />
+            <stop offset="100%" style="stop-color:#ffa726;stop-opacity:0.2" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="400" fill="url(#clashGrad3)"/>
+        
+        <!-- Analytics chart -->
+        <text x="400" y="35" fill="#ffffff" font-size="20" text-anchor="middle" font-weight="bold">Clash Resolution Progress</text>
+        
+        <!-- Legend at top -->
+        <g transform="translate(300, 55)">
+          <rect x="0" y="0" width="18" height="12" rx="2" fill="#ff6b6b" opacity="0.5"/>
+          <text x="25" y="10" fill="#b8bcc8" font-size="11">Open Clashes</text>
+          <rect x="120" y="0" width="18" height="12" rx="2" fill="#4ecdc4" opacity="0.5"/>
+          <text x="145" y="10" fill="#b8bcc8" font-size="11">Resolved</text>
+        </g>
+        
+        <!-- Bar chart -->
+        <g transform="translate(100, 90)">
+          <!-- Week 1 -->
+          <rect x="0" y="140" width="80" height="100" rx="4" fill="#ff6b6b" opacity="0.5"/>
+          <rect x="0" y="190" width="80" height="50" rx="4" fill="#4ecdc4" opacity="0.5"/>
+          <text x="40" y="260" fill="#b8bcc8" font-size="12" text-anchor="middle">Week 1</text>
+          
+          <!-- Week 2 -->
+          <rect x="120" y="120" width="80" height="120" rx="4" fill="#ff6b6b" opacity="0.5"/>
+          <rect x="120" y="170" width="80" height="70" rx="4" fill="#4ecdc4" opacity="0.5"/>
+          <text x="160" y="260" fill="#b8bcc8" font-size="12" text-anchor="middle">Week 2</text>
+          
+          <!-- Week 3 -->
+          <rect x="240" y="100" width="80" height="140" rx="4" fill="#ff6b6b" opacity="0.5"/>
+          <rect x="240" y="140" width="80" height="100" rx="4" fill="#4ecdc4" opacity="0.5"/>
+          <text x="280" y="260" fill="#b8bcc8" font-size="12" text-anchor="middle">Week 3</text>
+          
+          <!-- Week 4 -->
+          <rect x="360" y="90" width="80" height="150" rx="4" fill="#ff6b6b" opacity="0.5"/>
+          <rect x="360" y="120" width="80" height="120" rx="4" fill="#4ecdc4" opacity="0.5"/>
+          <text x="400" y="260" fill="#b8bcc8" font-size="12" text-anchor="middle">Week 4</text>
+          
+          <!-- Week 5 -->
+          <rect x="480" y="80" width="80" height="160" rx="4" fill="#ff6b6b" opacity="0.5"/>
+          <rect x="480" y="110" width="80" height="130" rx="4" fill="#4ecdc4" opacity="0.5"/>
+          <text x="520" y="260" fill="#b8bcc8" font-size="12" text-anchor="middle">Week 5</text>
+        </g>
+        
+        <!-- Trend line -->
+        <path d="M 140 210 L 220 200 L 340 180 L 460 160 L 580 140" fill="none" stroke="#4ecdc4" stroke-width="3" stroke-dasharray="5,5"/>
+        
+        <text x="400" y="380" fill="#4ecdc4" font-size="14" text-anchor="middle" opacity="0.7">Analytics: Improving Resolution Rates Over Time</text>
+      </svg>
     </div>
   </section>
 
@@ -799,7 +934,7 @@
       your project coordination workflows.
     </p>
     <div class="cta-buttons">
-      <a href="mailto:e.hossamsabry@gmail.com" class="btn">Schedule a Demo</a>
+      <a href="../index.html#contact" class="btn">Schedule a Demo</a>
       <a href="../index.html" class="btn btn-secondary">View More Projects</a>
     </div>
   </div>
@@ -809,7 +944,8 @@
   </footer>
 
   <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    // Smooth scroll for internal navigation links only
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
