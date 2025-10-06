@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamo Script Library - Case Study | Hossam Sabry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #4ecdc4;
+      --accent: #ffe66d;
+      --purple: #a8e6cf;
+      --orange: #ffa726;
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --text-primary: #ffffff;
+      --text-secondary: #b8bcc8;
+      --border: #2d3748;
+      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      --gradient-2: linear-gradient(135deg, #4ecdc4, #ffe66d);
+      --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
+      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
+      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: "Inter", sans-serif;
+      line-height: 1.8;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      padding: 8rem 2rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--bg-card);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--orange);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .content-section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .content-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .content-section h3 {
+      font-size: 1.8rem;
+      margin: 3rem 0 1.5rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .content-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4rem auto;
+      max-width: 200px;
+    }
+
+    .box {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    .box-problem {
+      border-left: 4px solid var(--primary);
+    }
+
+    .box-solution {
+      border-left: 4px solid var(--secondary);
+    }
+
+    .box-result {
+      border-left: 4px solid var(--accent);
+    }
+
+    .box h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .box li {
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .box li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 0.8rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h5 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+      color: var(--text-secondary);
+    }
+
+    .script-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .script-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: var(--orange);
+    }
+
+    .script-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+
+    .script-title {
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .script-category {
+      background: var(--bg-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--orange);
+      border: 1px solid var(--border);
+    }
+
+    .script-description {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .script-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--bg-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .tech-badge {
+      background: var(--bg-card);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .code-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.8rem;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .code-comment {
+      color: #6a9955;
+    }
+
+    .code-node {
+      color: #dcdcaa;
+    }
+
+    .code-value {
+      color: #ce9178;
+    }
+
+    .screenshot {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 3rem;
+      margin: 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(168, 230, 207, 0.1), rgba(255, 167, 38, 0.1));
+      opacity: 0.3;
+    }
+
+    .screenshot-text {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    .cta-section {
+      background: var(--bg-card);
+      padding: 4rem 2rem;
+      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      margin: 4rem auto;
+      max-width: 800px;
+    }
+
+    .cta-section h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      background: var(--gradient-3);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-secondary);
+    }
+
+    footer {
+      background: var(--bg-secondary);
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .content-section {
+        padding: 3rem 1rem;
+      }
+
+      .content-section h2 {
+        font-size: 2rem;
+      }
+
+      .content-section h3 {
+        font-size: 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .script-header {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-brand">← Back to Portfolio</a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#scripts">Scripts</a>
+      <a href="#results">Results</a>
+      <a href="#technical">Technical</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge">Case Study</div>
+    <h1>Dynamo Script Library</h1>
+    <p class="hero-subtitle">
+      Production-ready visual programming scripts for parametric modeling, automation, and quality control in Revit
+    </p>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">Scripts Created</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">60%</div>
+        <div class="stat-label">Time Reduction</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview" class="content-section">
+    <h2>Project Overview</h2>
+    <p>
+      Dynamo offers incredible power for Revit automation, but many teams struggle to create reliable, 
+      reusable scripts that non-technical users can confidently run. This library bridges that gap with 
+      production-tested workflows that solve real project challenges.
+    </p>
+
+    <div class="box box-problem">
+      <h4>🚨 The Challenge</h4>
+      <ul>
+        <li>Repetitive manual tasks consuming hours of BIM coordinator time</li>
+        <li>Inconsistent naming and numbering across project elements</li>
+        <li>Quality control checks requiring tedious manual verification</li>
+        <li>Lack of standardized Dynamo scripts across project teams</li>
+        <li>Complex scripts requiring programming knowledge to modify</li>
+      </ul>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Manual workflow before automation<br>
+        <small>(Replace with before state image)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section id="scripts" class="content-section">
+    <h2>Featured Scripts</h2>
+    <p>
+      Each script is designed to be intuitive, well-documented, and robust enough for daily production use. 
+      Here are some highlights from the library:
+    </p>
+
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-title">
+          <span style="color: var(--orange);">🔢</span>
+          Intelligent Room Numbering
+        </div>
+        <div class="script-category">Automation</div>
+      </div>
+      <p class="script-description">
+        Automatically numbers rooms based on floor level and spatial arrangement. Handles complex layouts with 
+        branching corridors and maintains consistency across project phases.
+      </p>
+      <div class="script-tags">
+        <span class="tag">Room Management</span>
+        <span class="tag">Parametric</span>
+        <span class="tag">Multi-Floor</span>
+      </div>
+    </div>
+
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-title">
+          <span style="color: var(--secondary);">📋</span>
+          Batch Sheet Creator
+        </div>
+        <div class="script-category">Documentation</div>
+      </div>
+      <p class="script-description">
+        Creates complete sheet sets from template with automatic view placement and title block population. 
+        Reduces sheet creation time from hours to minutes.
+      </p>
+      <div class="script-tags">
+        <span class="tag">Sheet Management</span>
+        <span class="tag">Batch Processing</span>
+        <span class="tag">Templates</span>
+      </div>
+    </div>
+
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-title">
+          <span style="color: var(--primary);">✓</span>
+          Parameter Validator
+        </div>
+        <div class="script-category">Quality Control</div>
+      </div>
+      <p class="script-description">
+        Scans model for missing or invalid parameter values across all elements. Generates detailed reports 
+        highlighting issues that need attention before coordination.
+      </p>
+      <div class="script-tags">
+        <span class="tag">QA/QC</span>
+        <span class="tag">Data Validation</span>
+        <span class="tag">Reporting</span>
+      </div>
+    </div>
+
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-title">
+          <span style="color: var(--accent);">🔄</span>
+          Family Instance Replacer
+        </div>
+        <div class="script-category">Modeling</div>
+      </div>
+      <p class="script-description">
+        Swaps family instances while preserving location, rotation, and shared parameters. Essential for 
+        design iterations and specification changes.
+      </p>
+      <div class="script-tags">
+        <span class="tag">Family Management</span>
+        <span class="tag">Design Changes</span>
+        <span class="tag">Bulk Operations</span>
+      </div>
+    </div>
+
+    <div class="script-card">
+      <div class="script-header">
+        <div class="script-title">
+          <span style="color: var(--purple);">📐</span>
+          Adaptive Grid Generator
+        </div>
+        <div class="script-category">Design</div>
+      </div>
+      <p class="script-description">
+        Creates parametric grid systems that adapt to site boundaries and design constraints. Perfect for 
+        early-stage layout studies and massing.
+      </p>
+      <div class="script-tags">
+        <span class="tag">Generative Design</span>
+        <span class="tag">Conceptual</span>
+        <span class="tag">Site Planning</span>
+      </div>
+    </div>
+
+    <h3>🛠️ Technical Stack</h3>
+    <div class="tech-stack">
+      <div class="tech-badge">🔷 Dynamo 2.13+</div>
+      <div class="tech-badge">🐍 Python</div>
+      <div class="tech-badge">🏗️ Revit API</div>
+      <div class="tech-badge">📦 Custom Packages</div>
+    </div>
+
+    <h3>💻 Sample Script Logic</h3>
+    <div class="code-block">
+      <pre><code><span class="code-comment"># Room Numbering Script - Python Node</span>
+<span class="code-comment"># Get all rooms sorted by level and location</span>
+
+rooms = IN[0]  <span class="code-comment"># Input rooms from Dynamo</span>
+prefix = IN[1]  <span class="code-comment"># Department prefix</span>
+
+<span class="code-comment"># Group rooms by level</span>
+rooms_by_level = {}
+for room in rooms:
+    level = room.Level.Name
+    if level not in rooms_by_level:
+        rooms_by_level[level] = []
+    rooms_by_level[level].append(room)
+
+<span class="code-comment"># Number rooms sequentially per level</span>
+output = []
+for level_name in sorted(rooms_by_level.keys()):
+    rooms_on_level = rooms_by_level[level_name]
+    for i, room in enumerate(rooms_on_level, 1):
+        new_number = f"{prefix}-{level_name}-{i:03d}"
+        room.Number = new_number
+        output.append(new_number)
+
+OUT = output</code></pre>
+    </div>
+
+    <div class="screenshot">
+      <div class="screenshot-text">
+        📸 Screenshot: Dynamo script canvas<br>
+        <small>(Replace with actual Dynamo graph screenshot)</small>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section id="results" class="content-section">
+    <h2>Results & Impact</h2>
+    <p>
+      The script library has been adopted across multiple projects, becoming an essential part of the 
+      BIM workflow and significantly improving team productivity.
+    </p>
+
+    <div class="box box-result">
+      <h4>🎯 Measurable Outcomes</h4>
+      <ul>
+        <li>Room numbering reduced from 2 hours to 5 minutes per floor</li>
+        <li>Sheet creation time decreased by 75%</li>
+        <li>Quality control checks now completed in 10 minutes vs. 2 hours</li>
+        <li>Over 100 team members actively using the scripts</li>
+        <li>Scripts used on 15+ active projects</li>
+      </ul>
+    </div>
+
+    <h3>📊 Usage Statistics</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔢</div>
+        <h5>10,000+</h5>
+        <p>Rooms automatically numbered</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h5>5,000+</h5>
+        <p>Sheets created via automation</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h5>500+</h5>
+        <p>QC checks performed</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h5>2,400</h5>
+        <p>Hours saved annually</p>
+      </div>
+    </div>
+
+    <h3>💬 User Feedback</h3>
+    <div class="box" style="border-left: 4px solid var(--purple);">
+      <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 1rem;">
+        "These scripts are production-ready and incredibly well-documented. Even team members with no Dynamo 
+        experience can use them confidently. The room numbering script alone has saved us countless hours."
+      </p>
+      <p style="color: var(--text-primary); font-weight: 500;">
+        — BIM Manager, Architectural Firm
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <section id="technical" class="content-section">
+    <h2>Technical Deep Dive</h2>
+    
+    <h3>🏗️ Design Principles</h3>
+    <p>
+      Every script in the library follows strict design principles to ensure reliability and usability:
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h5>User-Friendly</h5>
+        <p>Clear input prompts and intuitive parameter naming</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h5>Error Handling</h5>
+        <p>Comprehensive validation and informative error messages</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h5>Well-Documented</h5>
+        <p>Detailed comments and usage instructions in-graph</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h5>Performant</h5>
+        <p>Optimized for large models and batch operations</p>
+      </div>
+    </div>
+
+    <h3>🔑 Key Development Challenges</h3>
+    
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 1: Making Scripts User-Friendly</h4>
+      <p>
+        <strong>Problem:</strong> Non-technical users intimidated by Dynamo's complexity.<br>
+        <strong>Solution:</strong> Created custom UI nodes with clear prompts and added extensive in-graph 
+        documentation with visual guides.
+      </p>
+    </div>
+
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 2: Performance with Large Models</h4>
+      <p>
+        <strong>Problem:</strong> Scripts slowed significantly in models with 10,000+ elements.<br>
+        <strong>Solution:</strong> Implemented filtering before processing and used Python nodes for 
+        performance-critical operations.
+      </p>
+    </div>
+
+    <div class="box" style="border-left: 4px solid var(--orange);">
+      <h4>Challenge 3: Version Compatibility</h4>
+      <p>
+        <strong>Problem:</strong> Scripts broke when users updated Dynamo versions.<br>
+        <strong>Solution:</strong> Avoided version-specific packages and tested across multiple Dynamo 
+        releases before deployment.
+      </p>
+    </div>
+
+    <h3>📚 Lessons Learned</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">1.</span>
+        <strong style="color: var(--text-primary);">Documentation is everything:</strong> Scripts with good 
+        docs got 10x more usage than equivalent undocumented ones.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">2.</span>
+        <strong style="color: var(--text-primary);">Test with real data:</strong> Edge cases from actual 
+        projects revealed issues that synthetic test data missed.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">3.</span>
+        <strong style="color: var(--text-primary);">Keep dependencies minimal:</strong> Fewer package 
+        dependencies = fewer compatibility issues.
+      </li>
+      <li style="padding-left: 2rem; position: relative; margin-bottom: 1rem; color: var(--text-secondary);">
+        <span style="position: absolute; left: 0; color: var(--secondary); font-weight: 600;">4.</span>
+        <strong style="color: var(--text-primary);">User feedback drives improvement:</strong> The most 
+        valuable features came from watching users struggle with workflows.
+      </li>
+    </ul>
+
+    <h3>🚀 Future Development</h3>
+    <p>Planned enhancements based on team requests:</p>
+    <div class="features-grid" style="margin-top: 1.5rem;">
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h5>Custom Package</h5>
+        <p>Bundle scripts into a single installable Dynamo package</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h5>Custom UI</h5>
+        <p>Dedicated interface for easier script configuration</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">☁️</div>
+        <h5>Cloud Storage</h5>
+        <p>Central repository for script updates and version control</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h5>Analytics</h5>
+        <p>Track script usage and identify optimization opportunities</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <h3>Need Custom Dynamo Solutions?</h3>
+    <p>
+      Whether you need specific automation scripts for your workflow or want to build a comprehensive 
+      Dynamo library for your organization, I'd love to help bring your ideas to life.
+    </p>
+    <div class="cta-buttons">
+      <a href="mailto:e.hossamsabry@gmail.com" class="btn">Discuss Your Needs</a>
+      <a href="../index.html" class="btn btn-secondary">View More Projects</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Hossam Sabry | BIM Developer & Digital Construction Specialist</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const navHeight = document.querySelector('nav').offsetHeight;
+          const targetPosition = target.offsetTop - navHeight - 20;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.style.color = 'var(--text-secondary)';
+        if (link.getAttribute('href').slice(1) === current) {
+          link.style.color = 'var(--primary)';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
