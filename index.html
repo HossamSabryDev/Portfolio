@@ -3,6 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hossam Sabry - BIM Developer & Digital Construction Specialist. Specializing in Revit API, Dynamo, and construction automation with 2+ years of experience.">
+  <meta name="keywords" content="BIM Developer, Revit API, Dynamo, Construction Automation, Digital Construction, C#, Python, Navisworks">
+  <meta name="author" content="Hossam Sabry">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hossam Sabry | BIM Developer Portfolio">
+  <meta property="og:description" content="BIM Developer specializing in construction automation, Revit API development, and digital workflows.">
+  <meta property="og:url" content="https://yourdomain.com">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
   <title>Hossam Sabry | BIM Developer Portfolio</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MWW9X0CJQF"></script>
@@ -99,7 +112,7 @@
     .header-content {
       position: relative;
       z-index: 1;
-      max-width: 800px;
+      max-width: 900px;
     }
 
     .profile-image {
@@ -141,8 +154,19 @@
       font-size: 1.5rem;
       color: var(--text-secondary);
       font-weight: 300;
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
       animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease-out 0.3s both;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .nav-links {
@@ -150,7 +174,7 @@
       gap: 2rem;
       flex-wrap: wrap;
       justify-content: center;
-      animation: fadeInUp 1s ease-out 0.4s both;
+      animation: fadeInUp 1s ease-out 0.5s both;
     }
 
     .nav-links a {
@@ -225,6 +249,42 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .highlight-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .highlight-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
     }
 
     /* SKILLS */
@@ -318,6 +378,28 @@
       font-size: 0.9rem;
       color: var(--text-secondary);
       opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    .skill-level {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      margin-top: 1rem;
+    }
+
+    .level-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .level-dot.active {
+      background: var(--secondary);
+      box-shadow: 0 0 10px var(--secondary);
     }
 
     .skill:hover {
@@ -343,12 +425,13 @@
 
     .project {
       background: var(--bg-card);
-      padding: 2rem;
       border-radius: 1rem;
       border: 1px solid var(--border);
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .project::before {
@@ -361,6 +444,66 @@
       background: var(--gradient-1);
       transform: scaleX(0);
       transition: transform 0.3s ease;
+    }
+
+    .project-preview {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-preview::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255, 107, 107, 0.15) 0%, transparent 70%);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .project-preview svg {
+      width: 80px;
+      height: 80px;
+      opacity: 0.6;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project:hover .project-preview svg {
+      transform: scale(1.1) rotate(5deg);
+      opacity: 0.8;
+    }
+
+    .project-preview::after {
+      content: 'Preview';
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      backdrop-filter: blur(10px);
+      z-index: 2;
+    }
+
+    .project-content {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
     .project:hover {
@@ -385,6 +528,26 @@
       color: var(--text-secondary);
       margin-bottom: 1.5rem;
       line-height: 1.6;
+      flex: 1;
+    }
+
+    .project-metrics {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .metric-icon {
+      color: var(--secondary);
     }
 
     .project-buttons {
@@ -828,6 +991,14 @@
       .contact-info-modal-content {
         padding: 2rem 1rem;
       }
+
+      .about-highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .subtitle {
+        font-size: 1rem;
+      }
     }
 
     /* SMOOTH ANIMATIONS */
@@ -895,12 +1066,12 @@
   <header>
     <div class="header-content">
       <h1>Hossam Sabry</h1>
-      <p class="tagline">BIM Developer</p>
+      <p class="tagline">BIM Developer & Digital Construction Specialist</p>
+      <p class="subtitle">Transforming AEC workflows through intelligent automation, visual programming, and data-driven project coordination</p>
       <nav class="nav-links">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
-        <a href="#work">P6 Project</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -911,11 +1082,29 @@
     <h2>About Me</h2>
     <div class="about-content">
       <p>
-  Hello! I'm <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer specializing in 
-  <em>Building Information Modeling</em>, project planning, and advanced digital construction technologies. 
-  I design innovative solutions that connect design, execution, and management, enabling smarter workflows 
-  and delivering exceptional project outcomes across the AEC industry.
-</p>
+        Hello! I'm <strong>Hossam Sabry</strong>, a BIM Developer and Civil Engineer with a passion for 
+        <em>Building Information Modeling</em> and digital construction innovation. I specialize in creating 
+        automated workflows that improve design coordination and construction execution, helping 
+        teams deliver projects more efficiently.
+      </p>
+      <p style="margin-top: 1.5rem;">
+        My approach combines technical expertise with practical problem-solving, focusing on solutions 
+        that work in real-world project environments.
+      </p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-card">
+        <div class="highlight-number">2+</div>
+        <div class="highlight-label">Years Experience</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">15+</div>
+        <div class="highlight-label">Projects Delivered</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-number">~40%</div>
+        <div class="highlight-label">Avg. Time Saved</div>
+      </div>
     </div>
   </section>
 
@@ -929,8 +1118,15 @@
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
           </svg>
         </div>
-        <div class="skill-title">Revit</div>
-        <div class="skill-subtitle">BIM Modeling & Design</div>
+        <div class="skill-title">Revit API</div>
+        <div class="skill-subtitle">Advanced BIM Development</div>
+        <div class="skill-level">
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot"></div>
+        </div>
       </div>
       <div class="skill skill-navisworks">
         <div class="skill-icon">
@@ -941,7 +1137,14 @@
           </svg>
         </div>
         <div class="skill-title">Navisworks</div>
-        <div class="skill-subtitle">Model Review & Coordination</div>
+        <div class="skill-subtitle">Clash Detection & 4D</div>
+        <div class="skill-level">
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot"></div>
+        </div>
       </div>
       <div class="skill skill-dynamo">
         <div class="skill-icon">
@@ -951,7 +1154,14 @@
           </svg>
         </div>
         <div class="skill-title">Dynamo</div>
-        <div class="skill-subtitle">Visual Programming</div>
+        <div class="skill-subtitle">Computational Design</div>
+        <div class="skill-level">
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot"></div>
+        </div>
       </div>
       <div class="skill skill-primavera">
         <div class="skill-icon">
@@ -965,6 +1175,13 @@
         </div>
         <div class="skill-title">Primavera P6</div>
         <div class="skill-subtitle">Project Scheduling</div>
+        <div class="skill-level">
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot"></div>
+        </div>
       </div>
       <div class="skill skill-autocad">
         <div class="skill-icon">
@@ -978,6 +1195,13 @@
         </div>
         <div class="skill-title">AutoCAD</div>
         <div class="skill-subtitle">2D/3D Drafting</div>
+        <div class="skill-level">
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot"></div>
+        </div>
       </div>
       <div class="skill skill-programming">
         <div class="skill-icon">
@@ -988,6 +1212,13 @@
         </div>
         <div class="skill-title">Python / C#</div>
         <div class="skill-subtitle">Automation & Scripts</div>
+        <div class="skill-level">
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot active"></div>
+          <div class="level-dot"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -998,52 +1229,133 @@
     <div class="projects-grid">
       <!-- BIM Automation Tool -->
       <div class="project">
-        <h3>
-          <span style="color: var(--primary);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 9v6m-3-3h6"/>
-            </svg>
-          </span> 
-          BIM Automation Tool
-        </h3>
-        <p>An advanced Revit add-in built with C# that streamlines batch export of views to DWG format and automates schedule data export to CSV. Leverages the Revit API to significantly reduce coordination time and improve reporting accuracy.</p>
-        <div class="project-buttons">
-          <a href="https://github.com/M2Dawn/BIM-Automation-Tool" target="_blank" class="btn"
-             onclick="gtag('event','click',{event_category:'Button',event_label:'GitHub - BIM Automation Tool'})">
-            View on GitHub
-          </a>
-          <button class="btn btn-secondary"
-             onclick="openContactInfoModal(); gtag('event','click',{event_category:'Button',event_label:'Learn More - BIM Automation Tool'})">
-             Learn More
-          </button>
+        <div class="project-preview" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(78, 205, 196, 0.15));">
+          <svg viewBox="0 0 24 24" fill="#ff6b6b">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="#ff6b6b" stroke-width="2"/>
+            <path d="M12 9v6m-3-3h6"/>
+          </svg>
+        </div>
+        <div class="project-content">
+          <h3>
+            <span style="color: var(--primary);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 9v6m-3-3h6"/>
+              </svg>
+            </span> 
+            BIM Automation Tool
+          </h3>
+          <p>An advanced Revit add-in built with C# that streamlines batch export of views to DWG format and automates schedule data export to CSV. Leverages the Revit API to significantly reduce coordination time and improve reporting accuracy.</p>
+          <div class="project-metrics">
+            <div class="metric">
+              <span class="metric-icon">⚡</span>
+              <span>50% faster exports</span>
+            </div>
+            <div class="metric">
+              <span class="metric-icon">📊</span>
+              <span>Automated reporting</span>
+            </div>
+          </div>
+          <div class="project-buttons">
+            <a href="https://github.com/HossamSabryDev/BIM-Automation-Tool" target="_blank" class="btn"
+               onclick="gtag('event','click',{event_category:'Button',event_label:'GitHub - BIM Automation Tool'})">
+              View on GitHub
+            </a>
+            <a href="case-studies/bim-automation-tool.html" class="btn btn-secondary"
+               onclick="gtag('event','click',{event_category:'Button',event_label:'Learn More - BIM Automation Tool'})">
+               Learn More
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Clash Detection Dashboard -->
       <div class="project">
-        <h3>
-          <span style="color: var(--secondary);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-              <circle cx="8" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="2"/>
-              <circle cx="16" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="2"/>
-              <path d="M8 10l8 6" stroke="currentColor" stroke-width="2" fill="none"/>
-            </svg>
-          </span> 
-          Clash Detection Dashboard
-        </h3>
-        <p>A modern, interactive dashboard inspired by Navisworks that visualizes clash detection results, categorizes issues by severity, and generates automated coordination reports. Features a responsive UI designed to accelerate design review meetings.</p>
-        <div class="project-buttons">
-          <a href="clash-dashboard/index.html" target="_blank" class="btn"
-             onclick="gtag('event','click',{event_category:'Button',event_label:'Open Dashboard'})">
-            Open Dashboard
-          </a>
-          <button class="btn btn-secondary"
-             onclick="openContactInfoModal(); gtag('event','click',{event_category:'Button',event_label:'Case Study - Clash Dashboard'})">
-             Case Study
-          </button>
+        <div class="project-preview" style="background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(255, 230, 109, 0.15));">
+          <svg viewBox="0 0 24 24" fill="#4ecdc4">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            <circle cx="8" cy="8" r="2" fill="none" stroke="#4ecdc4" stroke-width="2"/>
+            <circle cx="16" cy="16" r="2" fill="none" stroke="#4ecdc4" stroke-width="2"/>
+            <path d="M8 10l8 6" stroke="#4ecdc4" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="project-content">
+          <h3>
+            <span style="color: var(--secondary);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                <circle cx="8" cy="8" r="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="16" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 10l8 6" stroke="currentColor" stroke-width="2" fill="none"/>
+              </svg>
+            </span> 
+            Clash Detection Dashboard
+          </h3>
+          <p>A modern, interactive dashboard inspired by Navisworks that visualizes clash detection results, categorizes issues by severity, and generates automated coordination reports. Features a responsive UI designed to accelerate design review meetings.</p>
+          <div class="project-metrics">
+            <div class="metric">
+              <span class="metric-icon">🎯</span>
+              <span>Real-time analytics</span>
+            </div>
+            <div class="metric">
+              <span class="metric-icon">📈</span>
+              <span>Visual reporting</span>
+            </div>
+          </div>
+          <div class="project-buttons">
+            <a href="clash-dashboard/index.html" target="_blank" class="btn"
+               onclick="gtag('event','click',{event_category:'Button',event_label:'Open Dashboard'})">
+              Open Dashboard
+            </a>
+            <a href="case-studies/clash-dashboard.html" class="btn btn-secondary"
+               onclick="gtag('event','click',{event_category:'Button',event_label:'Case Study - Clash Dashboard'})">
+               Case Study
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamo Script Library -->
+      <div class="project">
+        <div class="project-preview" style="background: linear-gradient(135deg, rgba(168, 230, 207, 0.15), rgba(255, 167, 38, 0.15));">
+          <svg viewBox="0 0 24 24" fill="#ffa726">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </div>
+        <div class="project-content">
+          <h3>
+            <span style="color: var(--orange);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </span> 
+            Dynamo Script Library
+          </h3>
+          <p>A comprehensive collection of production-ready Dynamo scripts for Revit automation. Features intelligent room numbering, batch sheet creation, parameter validation, and more—all designed for non-technical users.</p>
+          <div class="project-metrics">
+            <div class="metric">
+              <span class="metric-icon">🔢</span>
+              <span>10+ scripts</span>
+            </div>
+            <div class="metric">
+              <span class="metric-icon">⚡</span>
+              <span>50% time reduction</span>
+            </div>
+          </div>
+          <div class="project-buttons">
+            <a href="https://github.com/HossamSabryDev/Dynamo-Scripts" target="_blank" class="btn"
+               onclick="gtag('event','click',{event_category:'Button',event_label:'GitHub - Dynamo Scripts'})">
+              View on GitHub
+            </a>
+            <a href="case-studies/dynamo-scripts.html" class="btn btn-secondary"
+               onclick="gtag('event','click',{event_category:'Button',event_label:'Case Study - Dynamo Scripts'})">
+              Case Study
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1101,12 +1413,17 @@
   <section id="contact" class="animate-on-scroll">
     <h2>Let's Connect</h2>
     <div class="contact-content">
-      <p class="contact-description">Ready to collaborate on innovative BIM solutions or discuss exciting opportunities in digital construction? I'd love to hear from you!</p>
+      <p class="contact-description">Interested in collaborating on BIM solutions or discussing opportunities in digital construction? Let's connect!</p>
       <div class="social-links">
-        <!-- Track opening the email modal -->
+        <!-- Email -->
         <button class="email-button" onclick="openEmailModal(); gtag('event','click',{event_category:'Button',event_label:'Email Modal Open'})">
           <span style="color: var(--primary);">📧</span> Email
         </button>
+        <!-- GitHub -->
+        <a href="https://github.com/HossamSabryDev" target="_blank" class="email-button" style="text-decoration: none;"
+           onclick="gtag('event','click',{event_category:'Button',event_label:'GitHub Profile'})">
+          <span style="color: var(--text-primary);">💻</span> GitHub
+        </a>
       </div>
     </div>
   </section>
