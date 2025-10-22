@@ -53,6 +53,18 @@
       --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
     }
 
+    /* Light Theme */
+    [data-theme="light"] {
+      --bg-primary: #f8f9fa;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a5568;
+      --border: #e2e8f0;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 16px 64px rgba(0, 0, 0, 0.15);
+    }
+
     body {
       background: var(--bg-primary);
       color: var(--text-primary);
@@ -60,6 +72,7 @@
       line-height: 1.6;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     /* Animated background */
@@ -77,10 +90,174 @@
       animation: backgroundShift 20s ease-in-out infinite;
     }
 
+    /* Particle Canvas */
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.4;
+    }
+
     @keyframes backgroundShift {
       0%, 100% { transform: translateX(0) translateY(0); }
       33% { transform: translateX(-20px) translateY(-10px); }
       66% { transform: translateX(20px) translateY(10px); }
+    }
+
+    /* NAVIGATION BAR */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="light"] .navbar {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .navbar.scrolled {
+      box-shadow: var(--shadow);
+    }
+
+    .navbar-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .navbar-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-1);
+      transition: width 0.3s ease;
+    }
+
+    .navbar-links a:hover::after {
+      width: 100%;
+    }
+
+    .navbar-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow);
+    }
+
+    .theme-icon {
+      width: 24px;
+      height: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-icon.hidden {
+      display: none;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      .navbar-menu {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-secondary);
+        flex-direction: column;
+        padding: 2rem;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .navbar-menu.active {
+        transform: translateX(0);
+      }
+
+      .navbar-links {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .navbar-links a {
+        padding: 1rem 0;
+        width: 100%;
+        text-align: center;
+      }
     }
 
     /* HEADER */
@@ -92,7 +269,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 2rem;
+      padding: 6rem 2rem 2rem;
       background: var(--bg-secondary);
       overflow: hidden;
     }
@@ -430,10 +607,46 @@
     }
 
     /* PROJECTS */
+    .project-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      background: var(--gradient-1);
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .filter-btn.active {
+      background: var(--gradient-1);
+      border-color: transparent;
+    }
+
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
+    }
+
+    .project.hidden {
+      display: none;
     }
 
     .project {
@@ -647,6 +860,214 @@
       width: 100%;
       height: 500px;
       border: none;
+    }
+
+    /* EXPERIENCE TIMELINE */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: var(--gradient-1);
+    }
+
+    .timeline-item {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 50%;
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-item:nth-child(even) {
+      justify-content: flex-start;
+      padding-left: 50%;
+      padding-right: 0;
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      width: calc(100% - 4rem);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: var(--gradient-1);
+      border-radius: 50%;
+      border: 4px solid var(--bg-primary);
+      z-index: 1;
+      top: 2rem;
+    }
+
+    .timeline-date {
+      font-size: 0.9rem;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-company {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .timeline-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .timeline-tag {
+      background: rgba(78, 205, 196, 0.1);
+      border: 1px solid var(--secondary);
+      color: var(--secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item,
+      .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-left: 60px;
+        padding-right: 0;
+      }
+
+      .timeline-dot {
+        left: 20px;
+      }
+
+      .timeline-content {
+        width: 100%;
+      }
+    }
+
+    /* TESTIMONIALS */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 4rem;
+      color: var(--primary);
+      opacity: 0.3;
+      font-family: Georgia, serif;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .testimonial-text {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .testimonial-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--gradient-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    .testimonial-info {
+      flex: 1;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .testimonial-role {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .testimonial-rating {
+      display: flex;
+      gap: 0.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .star {
+      color: var(--accent);
+      font-size: 1rem;
     }
 
     /* CONTACT */
@@ -1046,10 +1467,49 @@
   </style>
 </head>
 <body>
+  <!-- Particle Background -->
+  <canvas id="particleCanvas"></canvas>
+
   <!-- Scroll Progress Indicator -->
   <div class="scroll-indicator">
     <div class="scroll-progress" id="scrollProgress"></div>
   </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      <a href="#" class="navbar-brand">HS</a>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="navbar-menu" id="navbarMenu">
+        <ul class="navbar-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="theme-icon" id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="theme-icon hidden" id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
 
   <!-- Email Modal -->
   <div class="email-modal" id="emailModal">
@@ -1268,12 +1728,148 @@
     </div>
   </section>
 
+  <!-- EXPERIENCE TIMELINE -->
+  <section id="experience" class="animate-on-scroll">
+    <h2>Professional Journey</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2023 - Present</div>
+          <h3 class="timeline-title">BIM Developer</h3>
+          <div class="timeline-company">Freelance / Contract Work</div>
+          <p class="timeline-description">
+            Developing custom BIM automation tools and workflows for AEC firms. Created Revit API plugins, 
+            Dynamo scripts, and clash detection dashboards that improved project coordination efficiency by 40%.
+          </p>
+          <div class="timeline-tags">
+            <span class="timeline-tag">Revit API</span>
+            <span class="timeline-tag">C#</span>
+            <span class="timeline-tag">Dynamo</span>
+            <span class="timeline-tag">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2022 - 2023</div>
+          <h3 class="timeline-title">BIM Coordinator</h3>
+          <div class="timeline-company">Construction Projects</div>
+          <p class="timeline-description">
+            Managed BIM coordination for multiple construction projects. Implemented clash detection workflows, 
+            coordinated with MEP teams, and developed automated reporting systems using Navisworks and custom scripts.
+          </p>
+          <div class="timeline-tags">
+            <span class="timeline-tag">Navisworks</span>
+            <span class="timeline-tag">Coordination</span>
+            <span class="timeline-tag">4D Simulation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2021 - 2022</div>
+          <h3 class="timeline-title">Civil Engineer</h3>
+          <div class="timeline-company">Engineering Firm</div>
+          <p class="timeline-description">
+            Worked on infrastructure and building projects, utilizing AutoCAD and Revit for design and documentation. 
+            Developed interest in BIM automation and began learning programming for construction workflows.
+          </p>
+          <div class="timeline-tags">
+            <span class="timeline-tag">AutoCAD</span>
+            <span class="timeline-tag">Revit</span>
+            <span class="timeline-tag">Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="animate-on-scroll">
+    <h2>What People Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          Hossam's BIM automation tools saved our team countless hours on repetitive tasks. 
+          His Dynamo scripts are well-documented and easy to use, even for non-technical team members.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AM</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Ahmed Mohamed</div>
+            <div class="testimonial-role">BIM Manager</div>
+            <div class="testimonial-rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          The clash detection dashboard Hossam developed transformed our coordination meetings. 
+          We can now identify and resolve issues 50% faster than before.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SK</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Sarah Khan</div>
+            <div class="testimonial-role">Project Coordinator</div>
+            <div class="testimonial-rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-text">
+          Professional, knowledgeable, and delivers quality work on time. Hossam's Revit API solutions 
+          are robust and have significantly improved our workflow efficiency.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MR</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Michael Roberts</div>
+            <div class="testimonial-role">Senior Architect</div>
+            <div class="testimonial-rating">
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- PROJECTS -->
   <section id="projects" class="animate-on-scroll">
     <h2>Open-Source Projects</h2>
+    <div class="project-filters">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="revit">Revit API</button>
+      <button class="filter-btn" data-filter="dynamo">Dynamo</button>
+      <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+    </div>
     <div class="projects-grid">
       <!-- BIM Automation Tool -->
-      <div class="project">
+      <div class="project" data-category="revit">
         <div class="project-preview" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(78, 205, 196, 0.15));">
           <div class="project-preview-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1321,7 +1917,7 @@
       </div>
 
       <!-- Clash Detection Dashboard -->
-      <div class="project">
+      <div class="project" data-category="dashboard">
         <div class="project-preview" style="background: linear-gradient(135deg, rgba(78, 205, 196, 0.15), rgba(255, 230, 109, 0.15));">
           <div class="project-preview-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#4ecdc4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1369,7 +1965,7 @@
       </div>
 
       <!-- Dynamo Script Library -->
-      <div class="project">
+      <div class="project" data-category="dynamo">
         <div class="project-preview" style="background: linear-gradient(135deg, rgba(168, 230, 207, 0.15), rgba(255, 167, 38, 0.15));">
           <div class="project-preview-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#ffa726" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1475,6 +2071,11 @@
         <button class="email-button" onclick="openEmailModal(); gtag('event','click',{event_category:'Button',event_label:'Email Modal Open'})">
           <span style="color: var(--primary);">📧</span> Email
         </button>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/hossam-sabry" target="_blank" class="email-button" style="text-decoration: none;"
+           onclick="gtag('event','click',{event_category:'Button',event_label:'LinkedIn Profile'})">
+          <span style="color: #0077b5;">💼</span> LinkedIn
+        </a>
         <!-- GitHub -->
         <a href="https://github.com/M2Dawn" target="_blank" class="email-button" style="text-decoration: none;"
            onclick="gtag('event','click',{event_category:'Button',event_label:'GitHub Profile'})">
@@ -1489,6 +2090,217 @@
   </footer>
 
   <script>
+    // Particle Background Animation
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationFrameId;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width) this.x = 0;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        if (this.y < 0) this.y = canvas.height;
+      }
+
+      draw() {
+        ctx.fillStyle = `rgba(78, 205, 196, ${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 15000);
+      for (let i = 0; i < numberOfParticles; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) {
+            ctx.strokeStyle = `rgba(78, 205, 196, ${0.15 * (1 - distance / 120)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      
+      connectParticles();
+      animationFrameId = requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      initParticles();
+    });
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+    const html = document.documentElement;
+
+    // Check for saved theme preference or default to 'dark'
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', currentTheme);
+    
+    if (currentTheme === 'light') {
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const theme = html.getAttribute('data-theme');
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Toggle icons
+      sunIcon.classList.toggle('hidden');
+      moonIcon.classList.toggle('hidden');
+      
+      // Track theme change
+      try { gtag('event','theme_toggle',{event_category:'UI',event_label:newTheme}); } catch(e){}
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navbarMenu = document.getElementById('navbarMenu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      navbarMenu.classList.toggle('active');
+      const isActive = navbarMenu.classList.contains('active');
+      mobileMenuToggle.textContent = isActive ? '✕' : '☰';
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.navbar-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navbarMenu.classList.remove('active');
+        mobileMenuToggle.textContent = '☰';
+      });
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Animated Counter for Statistics
+    function animateCounter(element, target, duration = 2000) {
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target + (element.dataset.suffix || '');
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(current) + (element.dataset.suffix || '');
+        }
+      }, 16);
+    }
+
+    // Trigger counter animation when in view
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+          entry.target.classList.add('counted');
+          const target = parseInt(entry.target.dataset.target);
+          animateCounter(entry.target, target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    // Observe all highlight numbers
+    document.querySelectorAll('.highlight-number').forEach(el => {
+      el.dataset.target = el.textContent.replace(/[^0-9]/g, '');
+      el.dataset.suffix = el.textContent.replace(/[0-9]/g, '');
+      el.textContent = '0' + el.dataset.suffix;
+      counterObserver.observe(el);
+    });
+
+    // Project Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        
+        // Update active button
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Filter projects
+        projects.forEach(project => {
+          if (filter === 'all' || project.dataset.category === filter) {
+            project.classList.remove('hidden');
+            setTimeout(() => {
+              project.style.animation = 'fadeInUp 0.5s ease-out';
+            }, 10);
+          } else {
+            project.classList.add('hidden');
+          }
+        });
+        
+        // Track filter usage
+        try { gtag('event','filter',{event_category:'Projects',event_label:filter}); } catch(e){}
+      });
+    });
+
     // Email Modal Functions
     function openEmailModal() {
       const modal = document.getElementById('emailModal');
