@@ -510,6 +510,281 @@ function initGradientAnimations() {
   });
 }
 
+// ========== ANIMATED PARTICLE NETWORK BACKGROUND ==========
+class ParticleNetwork {
+  constructor(canvasId) {
+    this.canvas = document.getElementById(canvasId);
+    if (!this.canvas) return;
+    
+    this.ctx = this.canvas.getContext('2d');
+    this.particles = [];
+    this.mouse = { x: null, y: null, radius: 150 };
+    this.particleCount = 80;
+    this.connectionDistance = 120;
+    this.colors = [
+      'rgba(102, 126, 234, 0.8)',  // Purple
+      'rgba(78, 205, 196, 0.8)',   // Teal
+      'rgba(255, 107, 107, 0.8)',  // Red
+      'rgba(255, 230, 109, 0.8)'   // Yellow
+    ];
+    
+    this.init();
+  }
+  
+  init() {
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+    
+    // Mouse tracking
+    window.addEventListener('mousemove', (e) => {
+      this.mouse.x = e.x;
+      this.mouse.y = e.y;
+    });
+    
+    window.addEventListener('mouseout', () => {
+      this.mouse.x = null;
+      this.mouse.y = null;
+    });
+    
+    // Create particles
+    this.createParticles();
+    
+    // Start animation
+    this.animate();
+  }
+  
+  resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+  }
+  
+  createParticles() {
+    this.particles = [];
+    for (let i = 0; i < this.particleCount; i++) {
+      this.particles.push({
+        x: Math.random() * this.canvas.width,
+        y: Math.random() * this.canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 2 + 1,
+        color: this.colors[Math.floor(Math.random() * this.colors.length)]
+      });
+    }
+  }
+  
+  drawParticles() {
+    this.particles.forEach(particle => {
+      this.ctx.beginPath();
+      this.ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+      this.ctx.fillStyle = particle.color;
+      this.ctx.fill();
+      
+      // Add glow effect
+      this.ctx.shadowBlur = 10;
+      this.ctx.shadowColor = particle.color;
+      this.ctx.fill();
+      this.ctx.shadowBlur = 0;
+    });
+  }
+  
+  connectParticles() {
+    for (let i = 0; i < this.particles.length; i++) {
+      for (let j = i + 1; j < this.particles.length; j++) {
+        const dx = this.particles[i].x - this.particles[j].x;
+        const dy = this.particles[i].y - this.particles[j].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < this.connectionDistance) {
+          const opacity = (1 - distance / this.connectionDistance) * 0.5;
+          this.ctx.beginPath();
+          this.ctx.strokeStyle = `rgba(102, 126, 234, ${opacity})`;
+          this.ctx.lineWidth = 1;
+          this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+          this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+          this.ctx.stroke();
+        }
+      }
+    }
+  }
+  
+  connectToMouse() {
+    if (this.mouse.x === null || this.mouse.y === null) return;
+    
+    this.particles.forEach(particle => {
+      const dx = particle.x - this.mouse.x;
+      const dy = particle.y - this.mouse.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < this.mouse.radius) {
+        const opacity = (1 - distance / this.mouse.radius) * 0.8;
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = `rgba(78, 205, 196, ${opacity})`;
+        this.ctx.lineWidth = 2;
+        this.ctx.moveTo(particle.x, particle.y);
+        this.ctx.lineTo(this.mouse.x, this.mouse.y);
+        this.ctx.stroke();
+        
+        // Push particles away from mouse
+        const force = (this.mouse.radius - distance) / this.mouse.radius;
+        const angle = Math.atan2(dy, dx);
+        particle.vx += Math.cos(angle) * force * 0.05;
+        particle.vy += Math.sin(angle) * force * 0.05;
+      }
+    });
+  }
+  
+  updateParticles() {
+    this.particles.forEach(particle => {
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+      
+      // Bounce off edges
+      if (particle.x < 0 || particle.x > this.canvas.width) {
+        particle.vx *= -1;
+      }
+      if (particle.y < 0 || particle.y > this.canvas.height) {
+        particle.vy *= -1;
+      }
+      
+      // Apply friction
+      particle.vx *= 0.99;
+      particle.vy *= 0.99;
+      
+      // Keep minimum velocity
+      if (Math.abs(particle.vx) < 0.1) particle.vx = (Math.random() - 0.5) * 0.2;
+      if (Math.abs(particle.vy) < 0.1) particle.vy = (Math.random() - 0.5) * 0.2;
+    });
+  }
+  
+  animate() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    this.drawParticles();
+    this.connectParticles();
+    this.connectToMouse();
+    this.updateParticles();
+    
+    requestAnimationFrame(() => this.animate());
+  }
+}
+
+// ========== FLOATING GEOMETRIC SHAPES ==========
+class FloatingShapes {
+  constructor() {
+    this.shapes = [];
+    this.init();
+  }
+  
+  init() {
+    // Create floating shape elements
+    for (let i = 0; i < 8; i++) {
+      const shape = document.createElement('div');
+      shape.className = 'floating-shape';
+      shape.style.cssText = `
+        position: fixed;
+        width: ${Math.random() * 100 + 50}px;
+        height: ${Math.random() * 100 + 50}px;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        opacity: ${Math.random() * 0.1 + 0.05};
+        border-radius: ${Math.random() > 0.5 ? '50%' : '10px'};
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(78, 205, 196, 0.3));
+        pointer-events: none;
+        z-index: -1;
+        filter: blur(40px);
+        animation: floatShape ${Math.random() * 20 + 15}s ease-in-out infinite;
+        animation-delay: ${Math.random() * 5}s;
+      `;
+      document.body.appendChild(shape);
+      this.shapes.push(shape);
+    }
+  }
+}
+
+// ========== GRADIENT ORBS BACKGROUND ==========
+class GradientOrbs {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    // Create gradient orb elements
+    const orbClasses = ['gradient-orb-1', 'gradient-orb-2', 'gradient-orb-3'];
+    orbClasses.forEach(className => {
+      const orb = document.createElement('div');
+      orb.className = `gradient-orb ${className}`;
+      document.body.appendChild(orb);
+    });
+  }
+}
+
+// ========== AURORA EFFECT ==========
+class AuroraEffect {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    const aurora = document.createElement('div');
+    aurora.className = 'aurora-effect';
+    document.body.appendChild(aurora);
+  }
+}
+
+// ========== MOUSE SPOTLIGHT EFFECT ==========
+class MouseSpotlight {
+  constructor() {
+    this.spotlight = null;
+    this.init();
+  }
+  
+  init() {
+    this.spotlight = document.createElement('div');
+    this.spotlight.className = 'spotlight';
+    this.spotlight.style.transform = 'translate(-50%, -50%)';
+    document.body.appendChild(this.spotlight);
+    
+    // Track mouse movement
+    document.addEventListener('mousemove', (e) => {
+      this.spotlight.style.left = e.clientX + 'px';
+      this.spotlight.style.top = e.clientY + 'px';
+    });
+  }
+}
+
+// ========== ANIMATED GRID PATTERN ==========
+class AnimatedGrid {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    const grid = document.createElement('div');
+    grid.className = 'grid-pattern';
+    document.body.appendChild(grid);
+  }
+}
+
+// Add floating shapes animation
+const floatingShapesStyle = document.createElement('style');
+floatingShapesStyle.textContent = `
+  @keyframes floatShape {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translate(50px, -50px) rotate(90deg) scale(1.1);
+    }
+    50% {
+      transform: translate(100px, 0) rotate(180deg) scale(0.9);
+    }
+    75% {
+      transform: translate(50px, 50px) rotate(270deg) scale(1.05);
+    }
+  }
+`;
+document.head.appendChild(floatingShapesStyle);
+
 // ========== INITIALIZE ALL ENHANCEMENTS ==========
 document.addEventListener('DOMContentLoaded', () => {
   // Initialize scroll reveal
@@ -532,6 +807,18 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Initialize lazy loading
   initLazyLoading();
+  
+  // Initialize particle network background
+  setTimeout(() => {
+    new ParticleNetwork('particleCanvas');
+  }, 100);
+  
+  // Initialize all background effects
+  new FloatingShapes();
+  new GradientOrbs();
+  new AuroraEffect();
+  new MouseSpotlight();
+  new AnimatedGrid();
   
   // Initialize skills chart (if Chart.js is loaded)
   setTimeout(() => {

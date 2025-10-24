@@ -13,22 +13,22 @@
     }
 
     :root {
-      --primary: #ff6b6b;
-      --secondary: #4ecdc4;
-      --accent: #ffe66d;
-      --purple: #a8e6cf;
-      --orange: #ffa726;
-      --bg-primary: #0f0f23;
-      --bg-secondary: #1a1a2e;
-      --bg-card: #16213e;
-      --text-primary: #ffffff;
-      --text-secondary: #b8bcc8;
-      --border: #2d3748;
-      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-      --gradient-2: linear-gradient(135deg, #4ecdc4, #ffe66d);
-      --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
-      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
-      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+      --primary: #3b82f6;
+      --secondary: #60a5fa;
+      --accent: #1e40af;
+      --purple: #1e3a8a;
+      --orange: #2563eb;
+      --bg-primary: #000000;
+      --bg-secondary: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #e5e7eb;
+      --text-secondary: #9ca3af;
+      --border: #1f2937;
+      --gradient-1: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      --gradient-2: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      --gradient-3: linear-gradient(135deg, #1e40af 0%, #60a5fa 100%);
+      --shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
+      --shadow-hover: 0 16px 64px rgba(37, 99, 235, 0.25);
     }
 
     body {
@@ -37,6 +37,78 @@
       font-family: "Inter", sans-serif;
       line-height: 1.8;
       scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+      z-index: -1;
+      animation: backgroundShift 20s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      33% { transform: translateX(-20px) translateY(-10px); }
+      66% { transform: translateX(20px) translateY(10px); }
+    }
+
+    /* Gradient Orbs */
+    .gradient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .gradient-orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.6), transparent);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .gradient-orb-2 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.5), transparent);
+      top: 60%;
+      right: 10%;
+      animation-delay: -5s;
+    }
+
+    .gradient-orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent);
+      bottom: 10%;
+      left: 50%;
+      animation-delay: -10s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(50px, -50px) scale(1.1);
+      }
+      66% {
+        transform: translate(-50px, 50px) scale(0.9);
+      }
     }
 
     /* Navigation */
@@ -45,11 +117,11 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(26, 26, 46, 0.95);
+      background: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       padding: 1rem 2rem;
-      z-index: 1000;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -76,7 +148,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--primary);
+      color: var(--secondary);
     }
 
     /* Hero Section */
@@ -85,6 +157,8 @@
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-badge {
@@ -157,6 +231,8 @@
       padding: 4rem 2rem;
       max-width: 900px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .content-section h2 {
@@ -397,7 +473,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
       opacity: 0.3;
     }
 
@@ -524,6 +600,11 @@
   </style>
 </head>
 <body>
+  <!-- Gradient Orbs -->
+  <div class="gradient-orb gradient-orb-1"></div>
+  <div class="gradient-orb gradient-orb-2"></div>
+  <div class="gradient-orb gradient-orb-3"></div>
+
   <!-- Navigation -->
   <nav>
     <a href="../index.html" class="nav-brand">← Back to Portfolio</a>
@@ -582,8 +663,8 @@
       <svg viewBox="0 0 800 400" style="max-width: 100%; height: auto;">
         <defs>
           <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.2" />
-            <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:0.2" />
+            <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:0.2" />
+            <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0.2" />
           </linearGradient>
         </defs>
         <rect width="800" height="400" fill="url(#grad1)"/>
@@ -591,25 +672,25 @@
         <!-- Manual workflow illustration -->
         <g transform="translate(50, 80)">
           <!-- Person icon -->
-          <circle cx="40" cy="30" r="20" fill="#ff6b6b" opacity="0.3"/>
-          <rect x="25" y="55" width="30" height="40" rx="5" fill="#ff6b6b" opacity="0.3"/>
+          <circle cx="40" cy="30" r="20" fill="#3b82f6" opacity="0.3"/>
+          <rect x="25" y="55" width="30" height="40" rx="5" fill="#3b82f6" opacity="0.3"/>
           
           <!-- Arrow -->
           <path d="M 80 75 L 140 75" stroke="#b8bcc8" stroke-width="3" stroke-dasharray="5,5"/>
           <polygon points="140,75 130,70 130,80" fill="#b8bcc8"/>
           
           <!-- Multiple documents -->
-          <rect x="160" y="50" width="80" height="50" rx="5" fill="#16213e" stroke="#2d3748" stroke-width="2"/>
-          <rect x="170" y="60" width="80" height="50" rx="5" fill="#16213e" stroke="#2d3748" stroke-width="2"/>
-          <rect x="180" y="70" width="80" height="50" rx="5" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="2"/>
+          <rect x="160" y="50" width="80" height="50" rx="5" fill="#111111" stroke="#1f2937" stroke-width="2"/>
+          <rect x="170" y="60" width="80" height="50" rx="5" fill="#111111" stroke="#1f2937" stroke-width="2"/>
+          <rect x="180" y="70" width="80" height="50" rx="5" fill="#0a0a0a" stroke="#60a5fa" stroke-width="2"/>
           <text x="220" y="100" fill="#b8bcc8" font-size="12" text-anchor="middle">200+</text>
           <text x="220" y="115" fill="#b8bcc8" font-size="12" text-anchor="middle">Views</text>
           
           <!-- Clock icon -->
-          <circle cx="320" cy="85" r="25" fill="none" stroke="#ff6b6b" stroke-width="3"/>
-          <line x1="320" y1="85" x2="320" y2="70" stroke="#ff6b6b" stroke-width="2"/>
-          <line x1="320" y1="85" x2="330" y2="95" stroke="#ff6b6b" stroke-width="2"/>
-          <text x="320" y="130" fill="#ff6b6b" font-size="14" text-anchor="middle" font-weight="bold">6-8 Hours</text>
+          <circle cx="320" cy="85" r="25" fill="none" stroke="#3b82f6" stroke-width="3"/>
+          <line x1="320" y1="85" x2="320" y2="70" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="320" y1="85" x2="330" y2="95" stroke="#3b82f6" stroke-width="2"/>
+          <text x="320" y="130" fill="#3b82f6" font-size="14" text-anchor="middle" font-weight="bold">6-8 Hours</text>
         </g>
         
         <!-- Problems list -->
@@ -621,7 +702,7 @@
           <text x="0" y="105" fill="#b8bcc8" font-size="13">❌ Tedious data entry</text>
         </g>
         
-        <text x="400" y="380" fill="#4ecdc4" font-size="14" text-anchor="middle" opacity="0.7">Before: Manual Export Workflow</text>
+        <text x="400" y="380" fill="#60a5fa" font-size="14" text-anchor="middle" opacity="0.7">Before: Manual Export Workflow</text>
       </svg>
     </div>
   </section>
@@ -722,8 +803,8 @@
       <svg viewBox="0 0 800 400" style="max-width: 100%; height: auto;">
         <defs>
           <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:0.2" />
-            <stop offset="100%" style="stop-color:#ffe66d;stop-opacity:0.2" />
+            <stop offset="0%" style="stop-color:#2563eb;stop-opacity:0.2" />
+            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.2" />
           </linearGradient>
         </defs>
         <rect width="800" height="400" fill="url(#grad2)"/>
@@ -731,37 +812,37 @@
         <!-- Tool interface mockup -->
         <g transform="translate(100, 50)">
           <!-- Window frame -->
-          <rect x="0" y="0" width="600" height="300" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="2"/>
+          <rect x="0" y="0" width="600" height="300" rx="8" fill="#0a0a0a" stroke="#60a5fa" stroke-width="2"/>
           
           <!-- Title bar -->
-          <rect x="0" y="0" width="600" height="35" rx="8" fill="#16213e"/>
+          <rect x="0" y="0" width="600" height="35" rx="8" fill="#111111"/>
           <text x="20" y="23" fill="#ffffff" font-size="14" font-weight="bold">BIM Automation Tool - Batch Export</text>
-          <circle cx="570" cy="17" r="6" fill="#ff6b6b"/>
-          <circle cx="550" cy="17" r="6" fill="#ffe66d"/>
-          <circle cx="530" cy="17" r="6" fill="#4ecdc4"/>
+          <circle cx="570" cy="17" r="6" fill="#3b82f6"/>
+          <circle cx="550" cy="17" r="6" fill="#60a5fa"/>
+          <circle cx="530" cy="17" r="6" fill="#2563eb"/>
           
           <!-- Content area -->
           <text x="20" y="65" fill="#b8bcc8" font-size="12">Export Location:</text>
-          <rect x="20" y="75" width="560" height="30" rx="4" fill="#0f0f23" stroke="#2d3748" stroke-width="1"/>
-          <text x="30" y="95" fill="#4ecdc4" font-size="11">C:\Projects\Coordination\Exports\</text>
+          <rect x="20" y="75" width="560" height="30" rx="4" fill="#000000" stroke="#1f2937" stroke-width="1"/>
+          <text x="30" y="95" fill="#60a5fa" font-size="11">C:\Projects\Coordination\Exports\</text>
           
           <text x="20" y="130" fill="#b8bcc8" font-size="12">Progress:</text>
-          <rect x="20" y="140" width="560" height="25" rx="4" fill="#0f0f23" stroke="#2d3748" stroke-width="1"/>
-          <rect x="20" y="140" width="420" height="25" rx="4" fill="#4ecdc4" opacity="0.3"/>
+          <rect x="20" y="140" width="560" height="25" rx="4" fill="#000000" stroke="#1f2937" stroke-width="1"/>
+          <rect x="20" y="140" width="420" height="25" rx="4" fill="#60a5fa" opacity="0.3"/>
           <text x="300" y="157" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="bold">75% Complete (150/200 views)</text>
           
           <!-- Status messages -->
-          <text x="20" y="190" fill="#4ecdc4" font-size="11">✓ Floor Plans exported successfully</text>
-          <text x="20" y="210" fill="#4ecdc4" font-size="11">✓ Sections exported successfully</text>
-          <text x="20" y="230" fill="#ffe66d" font-size="11">⟳ Exporting elevations...</text>
+          <text x="20" y="190" fill="#60a5fa" font-size="11">✓ Floor Plans exported successfully</text>
+          <text x="20" y="210" fill="#60a5fa" font-size="11">✓ Sections exported successfully</text>
+          <text x="20" y="230" fill="#3b82f6" font-size="11">⟳ Exporting elevations...</text>
           <text x="20" y="250" fill="#b8bcc8" font-size="11">⏳ Schedules pending...</text>
           
           <!-- Button -->
-          <rect x="480" y="260" width="100" height="30" rx="5" fill="#4ecdc4"/>
+          <rect x="480" y="260" width="100" height="30" rx="5" fill="#60a5fa"/>
           <text x="530" y="280" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="bold">Cancel</text>
         </g>
         
-        <text x="400" y="380" fill="#4ecdc4" font-size="14" text-anchor="middle" opacity="0.7">Tool Interface: Automated Batch Export in Progress</text>
+        <text x="400" y="380" fill="#60a5fa" font-size="14" text-anchor="middle" opacity="0.7">Tool Interface: Automated Batch Export in Progress</text>
       </svg>
     </div>
   </section>
@@ -826,8 +907,8 @@
       <svg viewBox="0 0 800 400" style="max-width: 100%; height: auto;">
         <defs>
           <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#a8e6cf;stop-opacity:0.2" />
-            <stop offset="100%" style="stop-color:#ffa726;stop-opacity:0.2" />
+            <stop offset="0%" style="stop-color:#1e40af;stop-opacity:0.2" />
+            <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:0.2" />
           </linearGradient>
         </defs>
         <rect width="800" height="400" fill="url(#grad3)"/>
@@ -837,11 +918,11 @@
         
         <!-- Before -->
         <g transform="translate(100, 80)">
-          <text x="100" y="0" fill="#ff6b6b" font-size="16" text-anchor="middle" font-weight="bold">BEFORE</text>
-          <rect x="20" y="20" width="160" height="200" rx="8" fill="#16213e" stroke="#ff6b6b" stroke-width="2"/>
+          <text x="100" y="0" fill="#3b82f6" font-size="16" text-anchor="middle" font-weight="bold">BEFORE</text>
+          <rect x="20" y="20" width="160" height="200" rx="8" fill="#111111" stroke="#3b82f6" stroke-width="2"/>
           
           <!-- Bar chart representation -->
-          <rect x="40" y="40" width="120" height="160" rx="4" fill="#ff6b6b" opacity="0.3"/>
+          <rect x="40" y="40" width="120" height="160" rx="4" fill="#3b82f6" opacity="0.3"/>
           <text x="100" y="130" fill="#ffffff" font-size="32" text-anchor="middle" font-weight="bold">6-8</text>
           <text x="100" y="155" fill="#ffffff" font-size="16" text-anchor="middle">Hours</text>
           
@@ -850,18 +931,18 @@
         
         <!-- Arrow -->
         <g transform="translate(350, 180)">
-          <path d="M 0 0 L 80 0" stroke="#4ecdc4" stroke-width="4"/>
-          <polygon points="80,0 70,-8 70,8" fill="#4ecdc4"/>
-          <text x="40" y="-15" fill="#4ecdc4" font-size="14" text-anchor="middle" font-weight="bold">40% Faster</text>
+          <path d="M 0 0 L 80 0" stroke="#60a5fa" stroke-width="4"/>
+          <polygon points="80,0 70,-8 70,8" fill="#60a5fa"/>
+          <text x="40" y="-15" fill="#60a5fa" font-size="14" text-anchor="middle" font-weight="bold">40% Faster</text>
         </g>
         
         <!-- After -->
         <g transform="translate(500, 80)">
-          <text x="100" y="0" fill="#4ecdc4" font-size="16" text-anchor="middle" font-weight="bold">AFTER</text>
-          <rect x="20" y="20" width="160" height="200" rx="8" fill="#16213e" stroke="#4ecdc4" stroke-width="2"/>
+          <text x="100" y="0" fill="#60a5fa" font-size="16" text-anchor="middle" font-weight="bold">AFTER</text>
+          <rect x="20" y="20" width="160" height="200" rx="8" fill="#111111" stroke="#60a5fa" stroke-width="2"/>
           
           <!-- Bar chart representation -->
-          <rect x="40" y="140" width="120" height="60" rx="4" fill="#4ecdc4" opacity="0.3"/>
+          <rect x="40" y="140" width="120" height="60" rx="4" fill="#60a5fa" opacity="0.3"/>
           <text x="100" y="175" fill="#ffffff" font-size="32" text-anchor="middle" font-weight="bold">45</text>
           <text x="100" y="195" fill="#ffffff" font-size="16" text-anchor="middle">Min</text>
           
@@ -870,12 +951,12 @@
         
         <!-- Stats -->
         <g transform="translate(50, 330)">
-          <text x="0" y="0" fill="#4ecdc4" font-size="13">✓ 500+ views per cycle</text>
-          <text x="250" y="0" fill="#4ecdc4" font-size="13">✓ 95% error reduction</text>
-          <text x="500" y="0" fill="#4ecdc4" font-size="13">✓ 120 hours saved/phase</text>
+          <text x="0" y="0" fill="#60a5fa" font-size="13">✓ 500+ views per cycle</text>
+          <text x="250" y="0" fill="#60a5fa" font-size="13">✓ 95% error reduction</text>
+          <text x="500" y="0" fill="#60a5fa" font-size="13">✓ 120 hours saved/phase</text>
         </g>
         
-        <text x="400" y="380" fill="#4ecdc4" font-size="14" text-anchor="middle" opacity="0.7">Results: Dramatic Time Savings</text>
+        <text x="400" y="380" fill="#60a5fa" font-size="14" text-anchor="middle" opacity="0.7">Results: Dramatic Time Savings</text>
       </svg>
     </div>
   </section>

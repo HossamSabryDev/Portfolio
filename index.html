@@ -48,26 +48,26 @@
     }
 
     :root {
-      --primary: #ff6b6b;
-      --secondary: #4ecdc4;
-      --accent: #ffe66d;
-      --purple: #a8e6cf;
-      --orange: #ffa726;
-      --bg-primary: #0a0a1a;
-      --bg-secondary: #13131f;
-      --bg-card: #1a1a2e;
-      --text-primary: #ffffff;
-      --text-secondary: #b8bcc8;
-      --border: #2d3748;
-      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-      --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-      --shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
-      --shadow-hover: 0 20px 60px rgba(102, 126, 234, 0.35);
-      --glow-primary: 0 0 20px rgba(102, 126, 234, 0.5);
-      --glow-secondary: 0 0 20px rgba(78, 205, 196, 0.5);
+      --primary: #3b82f6;
+      --secondary: #60a5fa;
+      --accent: #1e40af;
+      --purple: #1e3a8a;
+      --orange: #2563eb;
+      --bg-primary: #000000;
+      --bg-secondary: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #e5e7eb;
+      --text-secondary: #9ca3af;
+      --border: #1f2937;
+      --gradient-1: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+      --gradient-2: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      --gradient-3: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+      --gradient-4: linear-gradient(135deg, #1e40af 0%, #60a5fa 100%);
+      --gradient-5: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      --shadow: 0 10px 40px rgba(37, 99, 235, 0.2);
+      --shadow-hover: 0 20px 60px rgba(37, 99, 235, 0.35);
+      --glow-primary: 0 0 20px rgba(59, 130, 246, 0.5);
+      --glow-secondary: 0 0 20px rgba(96, 165, 250, 0.5);
     }
 
     /* Light Theme */
@@ -102,9 +102,9 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.08) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.06) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 40%, rgba(255, 230, 109, 0.04) 0%, transparent 50%);
+      background: radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
       z-index: -1;
       animation: backgroundShift 20s ease-in-out infinite;
     }
@@ -132,7 +132,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(26, 26, 46, 0.95);
+      background: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       padding: 1rem 2rem;
@@ -340,14 +340,14 @@
       font-size: 4.5rem;
       font-weight: 800;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: fadeInUp 1s ease-out, gradientFlow 8s ease infinite;
       letter-spacing: -0.02em;
-      text-shadow: 0 0 80px rgba(102, 126, 234, 0.5);
+      text-shadow: 0 0 80px rgba(59, 130, 246, 0.5);
     }
 
     @keyframes gradientFlow {
@@ -397,7 +397,7 @@
       background: var(--gradient-1);
       border-color: transparent;
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
       color: white;
     }
 
@@ -437,7 +437,7 @@
       height: 5px;
       background: var(--gradient-1);
       border-radius: 3px;
-      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+      box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
     }
 
     /* ABOUT */
@@ -692,9 +692,9 @@
 
     .skill:hover {
       transform: translateY(-15px) scale(1.03);
-      box-shadow: 0 25px 70px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 25px 70px rgba(37, 99, 235, 0.4);
       border-color: transparent;
-      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(102, 126, 234, 0.05) 100%);
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(37, 99, 235, 0.05) 100%);
     }
 
     .skill:hover::before {
@@ -730,7 +730,7 @@
       background: var(--gradient-1);
       border-color: transparent;
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
       color: white;
     }
 
@@ -775,7 +775,7 @@
     .project-preview {
       width: 100%;
       height: 220px;
-      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(37, 99, 235, 0.1));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -844,7 +844,7 @@
       border-color: rgba(255, 255, 255, 0.3);
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
                   inset 0 2px 0 rgba(255, 255, 255, 0.3),
-                  0 0 40px rgba(102, 126, 234, 0.4);
+                  0 0 40px rgba(37, 99, 235, 0.4);
     }
 
     .project:hover .project-preview-icon::before {
@@ -876,8 +876,8 @@
 
     .project:hover {
       transform: translateY(-10px) scale(1.01);
-      box-shadow: 0 25px 60px rgba(102, 126, 234, 0.3);
-      border-color: rgba(102, 126, 234, 0.3);
+      box-shadow: 0 25px 60px rgba(37, 99, 235, 0.3);
+      border-color: rgba(37, 99, 235, 0.3);
     }
 
     .project:hover::before {
@@ -939,7 +939,7 @@
       font-family: inherit;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
     }
 
     .btn::before {
@@ -962,7 +962,7 @@
 
     .btn:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
     }
 
     .btn-secondary {
@@ -2395,31 +2395,68 @@
     <div class="certifications-grid">
       <div class="cert-card">
         <div class="cert-badge">Verified</div>
-        <div class="cert-icon">🏆</div>
+        <div class="cert-icon" style="background: linear-gradient(135deg, #0696D7 0%, #0477BF 100%);">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4L28 16H40L30 24L34 36L24 28L14 36L18 24L8 16H20L24 4Z" fill="white"/>
+            <circle cx="24" cy="24" r="3" fill="white"/>
+          </svg>
+        </div>
         <div class="cert-title">Autodesk Certified Professional</div>
         <div class="cert-issuer">Autodesk</div>
-        <div class="cert-date">2024</div>
       </div>
       <div class="cert-card">
         <div class="cert-badge">Active</div>
-        <div class="cert-icon">💡</div>
+        <div class="cert-icon" style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="8" width="24" height="32" rx="2" fill="white" opacity="0.9"/>
+            <rect x="16" y="12" width="16" height="2" fill="#FF6B35"/>
+            <rect x="16" y="16" width="16" height="2" fill="#FF6B35"/>
+            <rect x="16" y="20" width="12" height="2" fill="#FF6B35"/>
+            <path d="M20 28L23 31L28 26" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <div class="cert-title">BIM Coordinator</div>
         <div class="cert-issuer">Professional Training</div>
-        <div class="cert-date">2023</div>
       </div>
       <div class="cert-card">
         <div class="cert-badge">Completed</div>
-        <div class="cert-icon">⚙️</div>
+        <div class="cert-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="14" width="28" height="20" rx="2" stroke="white" stroke-width="2" fill="none"/>
+            <path d="M16 20L20 24L28 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="28" r="2" fill="white"/>
+            <rect x="14" y="28" width="10" height="2" fill="white"/>
+          </svg>
+        </div>
         <div class="cert-title">Revit API Development</div>
         <div class="cert-issuer">Self-Taught & Projects</div>
-        <div class="cert-date">2023-2025</div>
       </div>
       <div class="cert-card">
         <div class="cert-badge">Certified</div>
-        <div class="cert-icon">📊</div>
+        <div class="cert-icon" style="background: linear-gradient(135deg, #C74634 0%, #E57373 100%);">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="12" width="6" height="24" rx="1" fill="white"/>
+            <rect x="16" y="8" width="6" height="28" rx="1" fill="white"/>
+            <rect x="24" y="14" width="6" height="22" rx="1" fill="white"/>
+            <rect x="32" y="10" width="6" height="26" rx="1" fill="white"/>
+            <path d="M10 10L18 6L26 12L34 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <div class="cert-title">Primavera P6</div>
         <div class="cert-issuer">Oracle</div>
-        <div class="cert-date">2024</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">Certified</div>
+        <div class="cert-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="28" height="28" rx="3" stroke="white" stroke-width="2" fill="none"/>
+            <path d="M18 24L22 28L30 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="24" r="2" fill="white"/>
+            <path d="M14 14L20 20M28 20L34 14M14 34L20 28M28 28L34 34" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="cert-title">BIM Automation</div>
+        <div class="cert-issuer">ITI Professional Training Program</div>
       </div>
     </div>
   </section>
@@ -2431,7 +2468,7 @@
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-date">2025 - Present</div>
+          <div class="timeline-date">January 2025 - Present</div>
           <h3 class="timeline-title">BIM Developer</h3>
           <div class="timeline-company">Freelance / Contract Work</div>
           <p class="timeline-description">
@@ -2450,7 +2487,7 @@
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-date">2024 - 2025</div>
+          <div class="timeline-date">March 2024 - December 2024</div>
           <h3 class="timeline-title">BIM Coordinator</h3>
           <div class="timeline-company">Construction Projects</div>
           <p class="timeline-description">
@@ -2468,7 +2505,7 @@
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
-          <div class="timeline-date">2023 - 2024</div>
+          <div class="timeline-date">June 2023 - February 2024</div>
           <h3 class="timeline-title">Structural Engineer</h3>
           <div class="timeline-company">Engineering Firm</div>
           <p class="timeline-description">

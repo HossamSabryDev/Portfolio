@@ -3,302 +3,913 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Clash Detection Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+<title>Clash Detection Dashboard - Next Level</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-  :root { --bg:#0f1115; --card:#121417; --accent:#1e90ff; --accent2:#00b894; --muted:#aeb6bf; color-scheme: dark; }
-  body { margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto; background:var(--bg); color:#eaeaea; }
-  header { padding:20px 24px; display:flex; align-items:center; gap:16px; border-bottom:1px solid rgba(255,255,255,0.03); }
-  header h1 { margin:0; font-family: Montserrat, sans-serif; color:var(--accent); font-size:20px; }
-  .container { max-width:1100px; margin:28px auto; padding:0 18px; }
-  .controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:18px; }
-  .btn { background:var(--accent); border:none; color:#fff; padding:10px 14px; border-radius:8px; cursor:pointer; font-weight:600; }
-  .btn.secondary { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); }
-  .card { background:var(--card); padding:18px; border-radius:10px; margin-bottom:16px; box-shadow:0 6px 18px rgba(0,0,0,0.5); }
-  .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:14px; }
-  .stat { font-size:18px; font-weight:700; color:#fff; }
-  .muted { color:var(--muted); font-size:13px; }
-  table { width:100%; border-collapse:collapse; font-size:13px; }
-  th, td { text-align:left; padding:10px 8px; border-bottom:1px solid rgba(255,255,255,0.03); }
-  th { font-weight:600; color:var(--muted); font-size:12px; }
-  .filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
-  .input, select { background:transparent; border:1px solid rgba(255,255,255,0.06); color:#eaeaea; padding:8px 10px; border-radius:8px; }
-  .small { font-size:12px; padding:6px 8px; }
-  .tag { background:rgba(255,255,255,0.04); padding:6px 8px; border-radius:6px; font-weight:600; display:inline-block; margin-right:8px;}
-  footer { color:var(--muted); text-align:center; margin:30px 0 60px 0; }
-  @media (max-width:700px){ header{flex-direction:column;align-items:flex-start} }
+  :root { 
+    --bg: #000000; 
+    --bg-secondary: #0a0a0a; 
+    --card: #111111; 
+    --primary: #3b82f6; 
+    --secondary: #60a5fa; 
+    --accent: #1e40af; 
+    --text-primary: #e5e7eb; 
+    --text-secondary: #9ca3af; 
+    --border: rgba(59, 130, 246, 0.1); 
+    --gradient-1: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6);
+    --gradient-2: linear-gradient(135deg, #2563eb, #3b82f6, #60a5fa);
+    color-scheme: dark; 
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body { 
+    margin: 0; 
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto; 
+    background: var(--bg); 
+    color: var(--text-primary); 
+    overflow-x: hidden;
+    position: relative;
+  }
+  
+  /* Animated Background */
+  .bg-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+      radial-gradient(at 20% 30%, rgba(30, 58, 138, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, rgba(37, 99, 235, 0.12) 0px, transparent 50%),
+      radial-gradient(at 40% 70%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
+    animation: bgMove 20s ease-in-out infinite;
+  }
+  
+  @keyframes bgMove {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  
+  header { 
+    padding: 24px 32px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 16px; 
+    border-bottom: 1px solid var(--border);
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .header-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    animation: iconFloat 3s ease-in-out infinite;
+  }
+  
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  
+  header h1 { 
+    margin: 0; 
+    font-family: Montserrat, sans-serif; 
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 24px; 
+    font-weight: 700;
+  }
+  
+  .header-subtitle {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .container { 
+    max-width: 1400px; 
+    margin: 32px auto; 
+    padding: 0 24px; 
+  }
+  
+  /* Glassmorphic Cards */
+  .card { 
+    background: rgba(17, 17, 17, 0.8); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 24px; 
+    border-radius: 16px; 
+    margin-bottom: 24px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(59, 130, 246, 0.1);
+    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(59, 130, 246, 0.2),
+                inset 0 1px 0 rgba(59, 130, 246, 0.2);
+  }
+  
+  /* Upload Zone */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(59, 130, 246, 0.02);
+  }
+  
+  .upload-zone:hover,
+  .upload-zone.drag-over {
+    border-color: var(--primary);
+    background: rgba(59, 130, 246, 0.08);
+    transform: scale(1.02);
+  }
+  
+  .upload-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.6;
+  }
+  
+  .upload-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+  
+  .upload-hint {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  
+  #fileInput {
+    display: none;
+  }
+  
+  /* Buttons */
+  .btn { 
+    background: var(--gradient-1); 
+    border: none; 
+    color: #fff; 
+    padding: 12px 20px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  .btn:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .btn:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+  }
+  
+  .btn.secondary { 
+    background: transparent; 
+    border: 1px solid var(--border); 
+    color: var(--text-primary); 
+  }
+  
+  .btn.secondary:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--primary);
+  }
+  
+  .btn-icon {
+    font-size: 16px;
+  }
+  
+  /* Stats Grid */
+  .stats-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 16px; 
+    margin-bottom: 24px; 
+  }
+  
+  .stat-card {
+    background: rgba(17, 17, 17, 0.6);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-2);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .stat-card:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+  }
+  
+  .stat-label {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .stat-value { 
+    font-size: 32px; 
+    font-weight: 800; 
+    color: #fff;
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .stat-change {
+    font-size: 12px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .stat-change.positive { color: #60a5fa; }
+  .stat-change.negative { color: #3b82f6; }
+  
+  /* Filter Section */
+  .filter-section {
+    margin-bottom: 24px;
+  }
+  
+  .filter-row { 
+    display: flex; 
+    gap: 12px; 
+    flex-wrap: wrap; 
+    margin-bottom: 16px; 
+  }
+  
+  .input, select { 
+    background: rgba(17, 17, 17, 0.6); 
+    border: 1px solid var(--border); 
+    color: var(--text-primary); 
+    padding: 10px 14px; 
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .input::placeholder {
+    color: var(--text-secondary);
+  }
+  
+  /* Table */
+  .table-container {
+    overflow: auto;
+    max-height: 500px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  
+  table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 13px; 
+  }
+  
+  thead {
+    position: sticky;
+    top: 0;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+  
+  th, td { 
+    text-align: left; 
+    padding: 14px 12px; 
+    border-bottom: 1px solid var(--border); 
+  }
+  
+  th { 
+    font-weight: 600; 
+    color: var(--text-secondary); 
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  tbody tr {
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  tbody tr:hover {
+    background: rgba(59, 130, 246, 0.08);
+  }
+  
+  tbody tr.selected {
+    background: rgba(59, 130, 246, 0.15);
+    border-left: 3px solid var(--primary);
+  }
+  
+  /* Priority Badges */
+  .priority-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  
+  .priority-high {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+  
+  .priority-medium {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+  
+  .priority-low {
+    background: rgba(96, 165, 250, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(96, 165, 250, 0.3);
+  }
+  
+  /* Status Badges */
+  .status-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  
+  .status-open {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+  
+  .status-assigned {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+  
+  .status-resolved {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+  }
+  
+  /* Details Panel */
+  .details-panel {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+  }
+  
+  .details-main {
+    display: grid;
+    gap: 16px;
+  }
+  
+  .detail-item {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .detail-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 120px;
+  }
+  
+  .detail-value {
+    color: var(--text-primary);
+  }
+  
+  .details-actions {
+    background: rgba(17, 17, 17, 0.4);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  
+  .action-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  
+  .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Charts */
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .chart-card {
+    background: rgba(17, 17, 17, 0.6);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  
+  .chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+  }
+  
+  .chart-container {
+    position: relative;
+    height: 300px;
+  }
+  
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 30px;
+  }
+  
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gradient-1);
+  }
+  
+  .timeline-item {
+    position: relative;
+    padding-bottom: 24px;
+  }
+  
+  .timeline-dot {
+    position: absolute;
+    left: -24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  
+  .timeline-content {
+    background: rgba(17, 17, 17, 0.4);
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  
+  .timeline-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  
+  .timeline-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  
+  .timeline-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .tab {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .tab:hover {
+    color: var(--text-primary);
+  }
+  
+  .tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+  
+  .tab-content {
+    display: none;
+  }
+  
+  .tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Loading */
+  .loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 16px 24px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+  }
+  
+  .toast.show {
+    transform: translateX(0);
+  }
+  
+  .toast.success {
+    border-left: 4px solid #22c55e;
+  }
+  
+  .toast.error {
+    border-left: 4px solid #ef4444;
+  }
+  
+  footer { 
+    color: var(--text-secondary); 
+    text-align: center; 
+    margin: 60px 0 40px 0;
+    font-size: 13px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    header { 
+      flex-direction: column; 
+      align-items: flex-start; 
+    }
+    
+    .details-panel {
+      grid-template-columns: 1fr;
+    }
+    
+    .charts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 </style>
 </head>
 <body>
+<div class="bg-gradient"></div>
+
 <header>
-  <h1>Clash Detection Dashboard</h1>
-  <div class="muted">Visualize · Categorize · Report</div>
+  <div class="header-left">
+    <div class="header-icon">⚡</div>
+    <div>
+      <h1>Clash Detection Dashboard</h1>
+      <div class="header-subtitle">Advanced BIM Coordination Platform</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button id="downloadExcel" class="btn secondary">
+      <span class="btn-icon">📊</span>
+      <span>Export Excel</span>
+    </button>
+    <button id="downloadCsv" class="btn">
+      <span class="btn-icon">📥</span>
+      <span>Download CSV</span>
+    </button>
+    <button id="printReport" class="btn secondary">
+      <span class="btn-icon">🖨️</span>
+      <span>Print PDF</span>
+    </button>
+  </div>
 </header>
 
 <div class="container">
 
+  <!-- Upload Section -->
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <div>
-        <div class="muted">Load clash export (CSV)</div>
-        <input id="fileInput" type="file" accept=".csv,.json" class="input small" />
-      </div>
-      <div style="display:flex;gap:8px">
-        <button id="downloadCsv" class="btn">Download CSV Report</button>
-        <button id="printReport" class="btn secondary">Print Report (PDF)</button>
-      </div>
+    <input id="fileInput" type="file" accept=".csv,.json" />
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-icon">📁</div>
+      <div class="upload-text">Drag & Drop your clash data file here</div>
+      <div class="upload-hint">or click to browse • Supports CSV & JSON formats</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="filter-row">
-      <input id="search" class="input" placeholder="Search by ClashID, Model, Notes..." />
-      <select id="statusFilter" class="input small">
-        <option value="">All Status</option>
-        <option>Open</option><option>Assigned</option><option>Resolved</option>
-      </select>
-      <select id="priorityFilter" class="input small">
-        <option value="">All Priority</option>
-        <option>High</option><option>Medium</option><option>Low</option>
-      </select>
-      <select id="modelFilter" class="input small"><option value="">All Models</option></select>
-      <button id="clearFilters" class="btn secondary">Clear</button>
+  <!-- Stats Dashboard -->
+  <div class="stats-grid" id="summary">
+    <div class="stat-card">
+      <div class="stat-label">Total Clashes</div>
+      <div class="stat-value" id="totalClashes">0</div>
+      <div class="stat-change positive" id="totalChange">📈 +0 from last week</div>
     </div>
-
-    <div class="grid" id="summary">
-      <div class="card">
-        <div class="muted">Total Clashes</div>
-        <div class="stat" id="totalClashes">0</div>
-      </div>
-      <div class="card">
-        <div class="muted">Open</div>
-        <div class="stat" id="openClashes">0</div>
-      </div>
-      <div class="card">
-        <div class="muted">Assigned</div>
-        <div class="stat" id="assignedClashes">0</div>
-      </div>
-      <div class="card">
-        <div class="muted">Resolved</div>
-        <div class="stat" id="resolvedClashes">0</div>
-      </div>
+    <div class="stat-card">
+      <div class="stat-label">Open</div>
+      <div class="stat-value" id="openClashes">0</div>
+      <div class="stat-change negative" id="openChange">⚠️ Needs attention</div>
     </div>
-
-    <div style="overflow:auto; max-height:520px">
-      <table id="clashTable">
-        <thead>
-          <tr>
-            <th>ClashID</th><th>Model A</th><th>Model B</th><th>Category</th><th>Priority</th><th>Location</th><th>Status</th><th>AssignedTo</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <div class="stat-card">
+      <div class="stat-label">Assigned</div>
+      <div class="stat-value" id="assignedClashes">0</div>
+      <div class="stat-change" id="assignedChange">👥 In progress</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Resolved</div>
+      <div class="stat-value" id="resolvedClashes">0</div>
+      <div class="stat-change positive" id="resolvedChange">✅ Completed</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="muted">Details</div>
-    <div id="detailsArea" style="margin-top:10px">Select a row to see details here.</div>
+  <!-- Tabs Navigation -->
+  <div class="tabs">
+    <button class="tab active" data-tab="overview">📊 Overview</button>
+    <button class="tab" data-tab="table">📋 Clash Table</button>
+    <button class="tab" data-tab="analytics">📈 Analytics</button>
+    <button class="tab" data-tab="timeline">⏱️ Timeline</button>
   </div>
 
-  <footer>© Clash Detection Dashboard · Exported data consumed from Navisworks</footer>
-</div>
-
-<script>
-  // Minimal CSV parser (handles quoted cells)
-  function parseCSV(text) {
-    const rows = [];
-    const lines = text.split(/\r\n|\n/);
-    let i = 0;
-    // find header
-    while(i < lines.length && lines[i].trim() === '') i++;
-    if(i >= lines.length) return rows;
-    const header = parseLine(lines[i++]);
-    for(; i<lines.length; i++){
-      if(lines[i].trim() === '') continue;
-      const cols = parseLine(lines[i]);
-      if(cols.length === 0) continue;
-      const obj = {};
-      for(let j=0;j<header.length;j++) obj[header[j]] = cols[j] ?? '';
-      rows.push(obj);
-    }
-    return rows;
-  }
-  function parseLine(line) {
-    const res = [];
-    let cur = '', inQuotes = false;
-    for(let i=0;i<line.length;i++){
-      const ch = line[i];
-      if(inQuotes){
-        if(ch === '"' && line[i+1] === '"'){ cur += '"'; i++; }
-        else if(ch === '"') inQuotes = false;
-        else cur += ch;
-      } else {
-        if(ch === ','){ res.push(cur); cur = ''; }
-        else if(ch === '"'){ inQuotes = true; }
-        else cur += ch;
-      }
-    }
-    res.push(cur);
-    return res.map(s => s.trim());
-  }
-
-  let clashes = [];
-  const fileInput = document.getElementById('fileInput');
-  const tbody = document.querySelector('#clashTable tbody');
-  const search = document.getElementById('search');
-  const statusFilter = document.getElementById('statusFilter');
-  const priorityFilter = document.getElementById('priorityFilter');
-  const modelFilter = document.getElementById('modelFilter');
-  const totalClashes = document.getElementById('totalClashes');
-  const openClashes = document.getElementById('openClashes');
-  const assignedClashes = document.getElementById('assignedClashes');
-  const resolvedClashes = document.getElementById('resolvedClashes');
-  const detailsArea = document.getElementById('detailsArea');
-
-  fileInput.addEventListener('change', async (e) => {
-    const f = e.target.files[0];
-    if(!f) return;
-    const text = await f.text();
-    if(f.name.toLowerCase().endsWith('.json')){
-      clashes = JSON.parse(text);
-    } else {
-      clashes = parseCSV(text);
-    }
-    initModelFilter();
-    renderTable();
-    updateSummary();
-  });
-
-  function initModelFilter(){
-    const models = new Set();
-    clashes.forEach(c => { if(c.ModelA) models.add(c.ModelA); if(c.ModelB) models.add(c.ModelB); });
-    modelFilter.innerHTML = '<option value="">All Models</option>';
-    Array.from(models).sort().forEach(m => {
-      const opt = document.createElement('option'); opt.value = m; opt.textContent = m; modelFilter.appendChild(opt);
-    });
-  }
-
-  function renderTable(){
-    const q = search.value.trim().toLowerCase();
-    tbody.innerHTML = '';
-    const filtered = clashes.filter(c => {
-      if(statusFilter.value && (c.Status ?? '').toLowerCase() !== statusFilter.value.toLowerCase()) return false;
-      if(priorityFilter.value && (c.Priority ?? '').toLowerCase() !== priorityFilter.value.toLowerCase()) return false;
-      if(modelFilter.value && !( (c.ModelA||'').toLowerCase() === modelFilter.value.toLowerCase() || (c.ModelB||'').toLowerCase() === modelFilter.value.toLowerCase() )) return false;
-      if(q && !( (c.ClashID||'').toLowerCase().includes(q) || (c.ModelA||'').toLowerCase().includes(q) || (c.ModelB||'').toLowerCase().includes(q) || (c.Notes||'').toLowerCase().includes(q) )) return false;
-      return true;
-    });
-
-    filtered.forEach(c => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${c.ClashID||''}</td><td>${c.ModelA||''}</td><td>${c.ModelB||''}</td><td>${c.Category||''}</td><td>${c.Priority||''}</td><td>${c.Location||''}</td><td>${c.Status||'Open'}</td><td>${c.AssignedTo||''}</td>`;
-      tr.style.cursor = 'pointer';
-      tr.addEventListener('click', () => showDetails(c));
-      tbody.appendChild(tr);
-    });
-  }
-
-  function showDetails(c){
-    detailsArea.innerHTML = `
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <div style="flex:1">
-          <div class="tag">ID: ${c.ClashID||''}</div>
-          <div style="margin-top:8px"><strong>Models:</strong> ${c.ModelA||''} ⇄ ${c.ModelB||''}</div>
-          <div style="margin-top:6px"><strong>Category:</strong> ${c.Category||''}</div>
-          <div style="margin-top:6px"><strong>Priority:</strong> ${c.Priority||''}</div>
-          <div style="margin-top:6px"><strong>Location:</strong> ${c.Location||''}</div>
-          <div style="margin-top:6px"><strong>Coordinates:</strong> ${c.X||''}, ${c.Y||''}, ${c.Z||''}</div>
-          <div style="margin-top:6px"><strong>Status:</strong> ${c.Status||'Open'}</div>
-          <div style="margin-top:6px"><strong>Assigned To:</strong> ${c.AssignedTo||''}</div>
-          <div style="margin-top:8px"><strong>Notes:</strong><div style="margin-top:6px">${(c.Notes||'').replace(/\n/g,'<br/>')}</div></div>
+  <!-- Tab: Overview -->
+  <div class="tab-content active" id="overview">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">Clash Distribution by Priority</div>
+        <div class="chart-container">
+          <canvas id="priorityChart"></canvas>
         </div>
-        <div style="min-width:220px">
-          <div class="muted">Quick update</div>
-          <div style="margin-top:8px;display:flex;gap:8px;flex-direction:column">
-            <input id="assignName" class="input small" placeholder="Assign to (name)" />
-            <select id="statusSelect" class="input small">
-              <option>Open</option><option>Assigned</option><option>Resolved</option>
-            </select>
-            <button class="btn" id="saveUpdate">Save</button>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Status Progress</div>
+        <div class="chart-container">
+          <canvas id="statusChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Clash Table -->
+  <div class="tab-content" id="table">
+    <div class="card">
+      <div class="filter-section">
+        <div class="filter-row">
+          <input id="search" class="input" placeholder="🔍 Search by ClashID, Model, Notes..." />
+          <select id="statusFilter" class="input">
+            <option value="">All Status</option>
+            <option>Open</option><option>Assigned</option><option>Resolved</option>
+          </select>
+          <select id="priorityFilter" class="input">
+            <option value="">All Priority</option>
+            <option>High</option><option>Medium</option><option>Low</option>
+          </select>
+          <select id="modelFilter" class="input"><option value="">All Models</option></select>
+          <button id="clearFilters" class="btn secondary">Clear Filters</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table id="clashTable">
+          <thead>
+            <tr>
+              <th>ClashID</th><th>Model A</th><th>Model B</th><th>Category</th><th>Priority</th><th>Location</th><th>Status</th><th>Assigned To</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Analytics -->
+  <div class="tab-content" id="analytics">
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">Clashes by Model</div>
+        <div class="chart-container">
+          <canvas id="modelChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Resolution Trend</div>
+        <div class="chart-container">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab: Timeline -->
+  <div class="tab-content" id="timeline">
+    <div class="card">
+      <div class="timeline" id="timelineContainer">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-date">No data loaded</div>
+            <div class="timeline-title">Upload clash data to view timeline</div>
+            <div class="timeline-desc">Timeline will show clash creation and resolution history</div>
           </div>
         </div>
       </div>
-    `;
-    // wire save button
-    document.getElementById('saveUpdate').onclick = () => {
-      const name = document.getElementById('assignName').value.trim();
-      const newStatus = document.getElementById('statusSelect').value;
-      c.AssignedTo = name;
-      c.Status = newStatus;
-      renderTable();
-      updateSummary();
-      showDetails(c);
-    };
-  }
+    </div>
+  </div>
 
-  function updateSummary(){
-    totalClashes.textContent = clashes.length;
-    openClashes.textContent = clashes.filter(c => (c.Status||'Open').toLowerCase() === 'open').length;
-    assignedClashes.textContent = clashes.filter(c => (c.Status||'').toLowerCase() === 'assigned').length;
-    resolvedClashes.textContent = clashes.filter(c => (c.Status||'').toLowerCase() === 'resolved').length;
-  }
+  <!-- Details Panel -->
+  <div class="card" id="detailsCard" style="display:none;">
+    <h3 style="margin-top:0;color:var(--text-primary);">Clash Details</h3>
+    <div id="detailsArea" class="details-panel">
+      <div class="details-main">
+        <div class="detail-item">
+          <div class="detail-label">Clash ID:</div>
+          <div class="detail-value" id="detailClashId">-</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Models:</div>
+          <div class="detail-value" id="detailModels">-</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Category:</div>
+          <div class="detail-value" id="detailCategory">-</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Priority:</div>
+          <div class="detail-value" id="detailPriority">-</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Location:</div>
+          <div class="detail-value" id="detailLocation">-</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Coordinates:</div>
+          <div class="detail-value" id="detailCoords">-</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Status:</div>
+          <div class="detail-value" id="detailStatus">-</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Notes:</div>
+          <div class="detail-value" id="detailNotes">-</div>
+        </div>
+      </div>
+      <div class="details-actions">
+        <div class="action-title">Quick Update</div>
+        <div class="form-group">
+          <label class="form-label">Assign To</label>
+          <input id="assignName" class="input" placeholder="Enter name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select id="statusSelect" class="input">
+            <option>Open</option><option>Assigned</option><option>Resolved</option>
+          </select>
+        </div>
+        <button class="btn" id="saveUpdate" style="width:100%;">Save Changes</button>
+      </div>
+    </div>
+  </div>
 
-  search.addEventListener('input', renderTable);
-  statusFilter.addEventListener('change', renderTable);
-  priorityFilter.addEventListener('change', renderTable);
-  modelFilter.addEventListener('change', renderTable);
-  document.getElementById('clearFilters').addEventListener('click', () => {
-    search.value=''; statusFilter.value=''; priorityFilter.value=''; modelFilter.value=''; renderTable();
-  });
+  <footer>© 2025 Clash Detection Dashboard · Advanced BIM Coordination Platform</footer>
+</div>
 
-  // Download CSV: takes current filtered view and generates CSV
-  document.getElementById('downloadCsv').addEventListener('click', () => {
-    const rows = [];
-    // header
-    rows.push(['ClashID','ModelA','ModelB','Category','Priority','Location','X','Y','Z','Status','AssignedTo','Notes','CreatedAt']);
-    // gather current filtered items from displayed rows
-    const displayed = Array.from(tbody.querySelectorAll('tr')).map(tr => tr.querySelectorAll('td')[0].textContent);
-    const toExport = clashes.filter(c => displayed.includes(c.ClashID));
-    toExport.forEach(c => rows.push([c.ClashID,c.ModelA,c.ModelB,c.Category,c.Priority,c.Location,c.X,c.Y,c.Z,c.Status,c.AssignedTo, (c.Notes||''), c.CreatedAt || '']));
-    const csv = rows.map(r => r.map(cell => `"${(''+cell).replace(/"/g,'""')}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = 'clash-report.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-  });
-
-  // Print/Save as PDF
-  document.getElementById('printReport').addEventListener('click', () => {
-    // simple printable view: open new window with summary + table
-    const printWindow = window.open('', '_blank');
-    const style = `<style>
-      body{font-family:Inter,Arial;color:#111;background:#fff;padding:20px}
-      h1{color:#111}
-      table{width:100%;border-collapse:collapse}
-      th,td{border:1px solid #ddd;padding:8px;text-align:left;font-size:12px}
-    </style>`;
-    let html = `<html><head><title>Clash Report</title>${style}</head><body><h1>Clash Report</h1>`;
-    html += `<p>Total clashes: ${clashes.length}</p>`;
-    html += '<table><thead><tr><th>ClashID</th><th>Models</th><th>Priority</th><th>Location</th><th>Status</th><th>Assigned</th></tr></thead><tbody>';
-    clashes.forEach(c => {
-      html += `<tr><td>${c.ClashID||''}</td><td>${(c.ModelA||'')+' ⇄ '+(c.ModelB||'')}</td><td>${c.Priority||''}</td><td>${c.Location||''}</td><td>${c.Status||''}</td><td>${c.AssignedTo||''}</td></tr>`;
-    });
-    html += '</tbody></table></body></html>';
-    printWindow.document.write(html);
-    printWindow.document.close();
-    printWindow.focus();
-    // Wait briefly then trigger print
-    setTimeout(()=>printWindow.print(), 500);
-  });
-
-  // Example: load sample data if you want quick demo
-  const sampleCsv = `ClashID,ModelA,ModelB,Category,Priority,Location,X,Y,Z,Status,AssignedTo,Notes,CreatedAt
-C-0001,Structure.rvt,MEP.rvt,Structure-MEP,High,Level 02,12.3,45.6,3.5,Open,,Beam interference with pipe,2025-09-01T08:00:00Z
-C-0002,Architectural.rvt,MEP.rvt,Arch-MEP,Medium,Level 01,5.1,22.0,0.8,Assigned,Ahmed,Door swing conflict,2025-09-02T12:30:00Z
-`;
-  // Uncomment to preload sample:
-  // clashes = parseCSV(sampleCsv); initModelFilter(); renderTable(); updateSummary();
-
-</script>
+<script src="dashboard.js"></script>
 </body>
 </html>

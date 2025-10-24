@@ -1,0 +1,21 @@
+ClashID,ModelA,ModelB,Category,Priority,Location,X,Y,Z,Status,AssignedTo,Notes,CreatedAt
+C-0001,Structure.rvt,MEP.rvt,Structure-MEP,High,Level 02,12.3,45.6,3.5,Open,,Beam interference with HVAC duct - requires coordination,2025-01-15T08:00:00Z
+C-0002,Architectural.rvt,MEP.rvt,Arch-MEP,Medium,Level 01,5.1,22.0,0.8,Assigned,Ahmed,Door swing conflicts with water pipe,2025-01-16T12:30:00Z
+C-0003,Structure.rvt,Architectural.rvt,Structure-Arch,Low,Level 03,18.7,33.2,7.2,Resolved,Sarah,Column position adjusted per coordination meeting,2025-01-17T09:15:00Z
+C-0004,MEP.rvt,MEP.rvt,MEP-MEP,High,Level 02,14.5,48.9,3.8,Open,,Pipe clash with electrical conduit - critical path,2025-01-18T14:20:00Z
+C-0005,Structure.rvt,MEP.rvt,Structure-MEP,Medium,Level 04,22.1,55.3,10.5,Assigned,John,Beam depth needs verification with structural engineer,2025-01-19T10:45:00Z
+C-0006,Architectural.rvt,Structure.rvt,Arch-Structure,High,Level 01,8.9,28.4,1.2,Open,,Wall conflicts with structural column,2025-01-20T08:30:00Z
+C-0007,MEP.rvt,Architectural.rvt,MEP-Arch,Low,Level 03,19.3,41.7,7.8,Resolved,Maria,Ceiling height adjusted for ductwork,2025-01-21T15:00:00Z
+C-0008,Structure.rvt,MEP.rvt,Structure-MEP,High,Level 02,13.2,47.1,3.6,Assigned,Ahmed,Steel beam interferes with main supply duct,2025-01-22T09:00:00Z
+C-0009,Architectural.rvt,MEP.rvt,Arch-MEP,Medium,Level 04,23.5,58.9,10.9,Open,,Window conflicts with exterior conduit routing,2025-01-23T11:20:00Z
+C-0010,MEP.rvt,MEP.rvt,MEP-MEP,Low,Level 01,6.7,24.3,1.5,Resolved,John,Pipe rerouted around electrical panel,2025-01-24T14:45:00Z
+C-0011,Structure.rvt,Architectural.rvt,Structure-Arch,Medium,Level 03,17.8,35.6,7.4,Assigned,Sarah,Beam conflicts with ceiling design,2025-01-25T10:00:00Z
+C-0012,MEP.rvt,Structure.rvt,MEP-Structure,High,Level 02,15.1,49.8,4.1,Open,,Duct penetration through structural slab needs approval,2025-01-26T08:15:00Z
+C-0013,Architectural.rvt,MEP.rvt,Arch-MEP,Low,Level 04,24.2,60.1,11.2,Resolved,Maria,Light fixture relocated to avoid conflict,2025-01-27T13:30:00Z
+C-0014,Structure.rvt,MEP.rvt,Structure-MEP,High,Level 01,7.4,26.8,1.8,Assigned,Ahmed,Foundation conflicts with underground utilities,2025-01-28T09:45:00Z
+C-0015,MEP.rvt,Architectural.rvt,MEP-Arch,Medium,Level 03,20.6,44.2,8.3,Open,,HVAC unit conflicts with architectural feature,2025-01-29T11:00:00Z
+C-0016,Structure.rvt,Structure.rvt,Structure-Structure,Low,Level 02,14.8,50.5,4.3,Resolved,John,Rebar conflict resolved during detailing,2025-01-30T15:20:00Z
+C-0017,Architectural.rvt,MEP.rvt,Arch-MEP,High,Level 04,25.3,62.7,11.8,Open,,Ceiling grid conflicts with sprinkler system,2025-01-31T08:00:00Z
+C-0018,MEP.rvt,Structure.rvt,MEP-Structure,Medium,Level 01,9.2,29.6,2.1,Assigned,Sarah,Electrical conduit through structural column,2025-02-01T10:30:00Z
+C-0019,Structure.rvt,Architectural.rvt,Structure-Arch,Low,Level 03,21.4,46.9,8.7,Resolved,Maria,Minor clash resolved with model update,2025-02-02T14:00:00Z
+C-0020,MEP.rvt,MEP.rvt,MEP-MEP,High,Level 02,16.7,52.3,4.8,Open,,Major duct and pipe intersection requires redesign,2025-02-03T09:15:00Z

@@ -13,22 +13,22 @@
     }
 
     :root {
-      --primary: #ff6b6b;
-      --secondary: #4ecdc4;
-      --accent: #ffe66d;
-      --purple: #a8e6cf;
-      --orange: #ffa726;
-      --bg-primary: #0f0f23;
-      --bg-secondary: #1a1a2e;
-      --bg-card: #16213e;
-      --text-primary: #ffffff;
-      --text-secondary: #b8bcc8;
-      --border: #2d3748;
-      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-      --gradient-2: linear-gradient(135deg, #4ecdc4, #ffe66d);
-      --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
-      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
-      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+      --primary: #3b82f6;
+      --secondary: #60a5fa;
+      --accent: #1e40af;
+      --purple: #1e3a8a;
+      --orange: #2563eb;
+      --bg-primary: #000000;
+      --bg-secondary: #0a0a0a;
+      --bg-card: #111111;
+      --text-primary: #e5e7eb;
+      --text-secondary: #9ca3af;
+      --border: #1f2937;
+      --gradient-1: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      --gradient-2: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      --gradient-3: linear-gradient(135deg, #1e40af 0%, #60a5fa 100%);
+      --shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
+      --shadow-hover: 0 16px 64px rgba(37, 99, 235, 0.25);
     }
 
     body {
@@ -37,6 +37,78 @@
       font-family: "Inter", sans-serif;
       line-height: 1.8;
       scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+      z-index: -1;
+      animation: backgroundShift 20s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      33% { transform: translateX(-20px) translateY(-10px); }
+      66% { transform: translateX(20px) translateY(10px); }
+    }
+
+    /* Gradient Orbs */
+    .gradient-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .gradient-orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(30, 58, 138, 0.6), transparent);
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .gradient-orb-2 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.5), transparent);
+      top: 60%;
+      right: 10%;
+      animation-delay: -5s;
+    }
+
+    .gradient-orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent);
+      bottom: 10%;
+      left: 50%;
+      animation-delay: -10s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(50px, -50px) scale(1.1);
+      }
+      66% {
+        transform: translate(-50px, 50px) scale(0.9);
+      }
     }
 
     nav {
@@ -44,11 +116,11 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(26, 26, 46, 0.95);
+      background: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       padding: 1rem 2rem;
-      z-index: 1000;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -75,7 +147,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--primary);
+      color: var(--secondary);
     }
 
     .hero {
@@ -83,6 +155,8 @@
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-badge {
@@ -154,6 +228,8 @@
       padding: 4rem 2rem;
       max-width: 900px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .content-section h2 {
@@ -530,6 +606,11 @@
   </style>
 </head>
 <body>
+  <!-- Gradient Orbs -->
+  <div class="gradient-orb gradient-orb-1"></div>
+  <div class="gradient-orb gradient-orb-2"></div>
+  <div class="gradient-orb gradient-orb-3"></div>
+
   <nav>
     <a href="../index.html" class="nav-brand">← Back to Portfolio</a>
     <div class="nav-links">
