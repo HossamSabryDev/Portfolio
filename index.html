@@ -17,6 +17,10 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   
   <title>Hossam Sabry | BIM Developer Portfolio</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MWW9X0CJQF"></script>
 <script>
@@ -27,6 +31,13 @@
   gtag('config', 'G-MWW9X0CJQF');
 </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js for Skills Visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Enhanced Styles -->
+  <link rel="stylesheet" href="assets/css/enhancements.css">
+  
   <style>
     * {
       margin: 0;
@@ -40,29 +51,35 @@
       --accent: #ffe66d;
       --purple: #a8e6cf;
       --orange: #ffa726;
-      --bg-primary: #0f0f23;
-      --bg-secondary: #1a1a2e;
-      --bg-card: #16213e;
+      --bg-primary: #0a0a1a;
+      --bg-secondary: #13131f;
+      --bg-card: #1a1a2e;
       --text-primary: #ffffff;
       --text-secondary: #b8bcc8;
       --border: #2d3748;
-      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-      --gradient-2: linear-gradient(135deg, #4ecdc4, #ffe66d);
-      --gradient-3: linear-gradient(135deg, #a8e6cf, #ffa726);
-      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
-      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+      --shadow-hover: 0 20px 60px rgba(102, 126, 234, 0.35);
+      --glow-primary: 0 0 20px rgba(102, 126, 234, 0.5);
+      --glow-secondary: 0 0 20px rgba(78, 205, 196, 0.5);
     }
 
     /* Light Theme */
     [data-theme="light"] {
-      --bg-primary: #f8f9fa;
+      --bg-primary: #f5f7fa;
       --bg-secondary: #ffffff;
       --bg-card: #ffffff;
       --text-primary: #1a1a2e;
       --text-secondary: #4a5568;
       --border: #e2e8f0;
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      --shadow-hover: 0 16px 64px rgba(0, 0, 0, 0.15);
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.12);
+      --glow-primary: 0 0 20px rgba(102, 126, 234, 0.3);
+      --glow-secondary: 0 0 20px rgba(78, 205, 196, 0.3);
     }
 
     body {
@@ -185,6 +202,7 @@
 
     .navbar-links a:hover {
       color: var(--primary);
+      transform: translateY(-2px);
     }
 
     /* Theme Toggle */
@@ -317,14 +335,22 @@
     }
 
     header h1 {
-      font-size: 4rem;
-      font-weight: 700;
+      font-size: 4.5rem;
+      font-weight: 800;
       margin-bottom: 1rem;
-      background: var(--gradient-1);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: fadeInUp 1s ease-out;
+      animation: fadeInUp 1s ease-out, gradientFlow 8s ease infinite;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 80px rgba(102, 126, 234, 0.5);
+    }
+
+    @keyframes gradientFlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
     .tagline {
@@ -368,8 +394,9 @@
     .nav-links a:hover {
       background: var(--gradient-1);
       border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      color: white;
     }
 
     @keyframes fadeInUp {
@@ -404,10 +431,11 @@
       bottom: -1rem;
       left: 50%;
       transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
+      width: 80px;
+      height: 5px;
       background: var(--gradient-1);
-      border-radius: 2px;
+      border-radius: 3px;
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
     }
 
     /* ABOUT */
@@ -496,65 +524,133 @@
     }
 
     .skill-icon {
-      width: 80px;
-      height: 80px;
+      width: 90px;
+      height: 90px;
       margin: 0 auto 1.5rem;
-      border-radius: 18px;
+      border-radius: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 
-                  0 2px 4px rgba(0, 0, 0, 0.2),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      overflow: visible;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 
+                  0 4px 8px rgba(0, 0, 0, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.15),
+                  inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+      transform-style: preserve-3d;
     }
 
     .skill-icon svg {
-      width: 48px;
-      height: 48px;
-      transition: all 0.3s ease;
+      width: 52px;
+      height: 52px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     }
 
     .skill-icon::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
       background: inherit;
-      filter: brightness(1.2);
+      filter: blur(25px) brightness(1.3);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+      border-radius: inherit;
     }
 
     .skill:hover .skill-icon::before {
-      opacity: 1;
+      opacity: 0.8;
+      animation: iconGlowPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes iconGlowPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.5; }
     }
 
     .skill:hover .skill-icon svg {
-      transform: scale(1.1) rotate(5deg);
+      transform: scale(1.15) rotate(8deg);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
     }
 
     .skill-revit .skill-icon { 
-      background: linear-gradient(135deg, #0696d7 0%, #005a9e 100%);
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
+      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4), 
+                  0 4px 8px rgba(14, 165, 233, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.2);
     }
     .skill-navisworks .skill-icon { 
-      background: linear-gradient(135deg, #5cb85c 0%, #357a38 100%);
+      background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4), 
+                  0 4px 8px rgba(16, 185, 129, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.2);
     }
     .skill-dynamo .skill-icon { 
-      background: linear-gradient(135deg, #ff9500 0%, #ff6b00 100%);
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4), 
+                  0 4px 8px rgba(245, 158, 11, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.2);
     }
     .skill-primavera .skill-icon { 
-      background: linear-gradient(135deg, #e53935 0%, #b71c1c 100%);
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+      box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4), 
+                  0 4px 8px rgba(239, 68, 68, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.2);
     }
     .skill-autocad .skill-icon { 
-      background: linear-gradient(135deg, #e32227 0%, #a71d24 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4), 
+                  0 4px 8px rgba(220, 38, 38, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.2);
     }
     .skill-programming .skill-icon { 
-      background: linear-gradient(135deg, #5e35b1 0%, #4527a0 100%);
+      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4), 
+                  0 4px 8px rgba(139, 92, 246, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .skill:hover .skill-revit .skill-icon {
+      box-shadow: 0 12px 32px rgba(14, 165, 233, 0.6), 
+                  0 6px 12px rgba(14, 165, 233, 0.4),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(14, 165, 233, 0.3);
+    }
+    .skill:hover .skill-navisworks .skill-icon {
+      box-shadow: 0 12px 32px rgba(16, 185, 129, 0.6), 
+                  0 6px 12px rgba(16, 185, 129, 0.4),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(16, 185, 129, 0.3);
+    }
+    .skill:hover .skill-dynamo .skill-icon {
+      box-shadow: 0 12px 32px rgba(245, 158, 11, 0.6), 
+                  0 6px 12px rgba(245, 158, 11, 0.4),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(245, 158, 11, 0.3);
+    }
+    .skill:hover .skill-primavera .skill-icon {
+      box-shadow: 0 12px 32px rgba(239, 68, 68, 0.6), 
+                  0 6px 12px rgba(239, 68, 68, 0.4),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(239, 68, 68, 0.3);
+    }
+    .skill:hover .skill-autocad .skill-icon {
+      box-shadow: 0 12px 32px rgba(220, 38, 38, 0.6), 
+                  0 6px 12px rgba(220, 38, 38, 0.4),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(220, 38, 38, 0.3);
+    }
+    .skill:hover .skill-programming .skill-icon {
+      box-shadow: 0 12px 32px rgba(139, 92, 246, 0.6), 
+                  0 6px 12px rgba(139, 92, 246, 0.4),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(139, 92, 246, 0.3);
     }
 
     .skill-title {
@@ -593,9 +689,10 @@
     }
 
     .skill:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--primary);
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 25px 70px rgba(102, 126, 234, 0.4);
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(102, 126, 234, 0.05) 100%);
     }
 
     .skill:hover::before {
@@ -603,7 +700,7 @@
     }
 
     .skill:hover .skill-icon {
-      transform: scale(1.1) rotate(5deg);
+      transform: scale(1.15) translateY(-5px);
     }
 
     /* PROJECTS */
@@ -630,8 +727,9 @@
     .filter-btn:hover {
       background: var(--gradient-1);
       border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      color: white;
     }
 
     .filter-btn.active {
@@ -699,35 +797,61 @@
     }
 
     .project-preview-icon {
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       position: relative;
       z-index: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .project-preview-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      background: var(--gradient-1);
+      filter: blur(25px);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: -1;
+      border-radius: inherit;
     }
 
     .project-preview-icon svg {
-      width: 60px;
-      height: 60px;
-      transition: all 0.3s ease;
+      width: 65px;
+      height: 65px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
     }
 
     .project:hover .project-preview-icon {
-      transform: translateY(-10px) scale(1.1);
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-15px) scale(1.15) rotate(5deg);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(102, 126, 234, 0.4);
+    }
+
+    .project:hover .project-preview-icon::before {
+      opacity: 0.5;
     }
 
     .project:hover .project-preview-icon svg {
-      transform: scale(1.1);
+      transform: scale(1.15) rotate(-5deg);
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
     }
 
     .project-preview::after {
@@ -749,8 +873,9 @@
     }
 
     .project:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 25px 60px rgba(102, 126, 234, 0.3);
+      border-color: rgba(102, 126, 234, 0.3);
     }
 
     .project:hover::before {
@@ -802,19 +927,40 @@
       background: var(--gradient-1);
       color: white;
       border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.5rem;
-      font-weight: 500;
+      padding: 0.9rem 1.8rem;
+      border-radius: 0.7rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       text-decoration: none;
       display: inline-block;
       font-family: inherit;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
     }
 
     .btn-secondary {
@@ -1453,6 +1599,341 @@
       }
     }
 
+    /* LOADING SCREEN */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 1.5rem;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    /* BACK TO TOP BUTTON */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-1);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* CURSOR TRAIL */
+    .cursor-trail {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--secondary);
+      pointer-events: none;
+      opacity: 0.3;
+      transition: transform 0.2s ease;
+      z-index: 9998;
+      mix-blend-mode: screen;
+    }
+
+    /* 3D TILT EFFECT */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease;
+    }
+
+    /* CERTIFICATIONS SECTION */
+    .certifications-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-2);
+      opacity: 0.1;
+      transition: left 0.4s ease;
+    }
+
+    .cert-card:hover::before {
+      left: 0;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--secondary);
+    }
+
+    .cert-icon {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 1.5rem;
+      background: var(--gradient-2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 24px rgba(240, 147, 251, 0.3),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.2),
+                  inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .cert-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      background: inherit;
+      filter: blur(20px);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+      border-radius: inherit;
+    }
+
+    .cert-card:hover .cert-icon {
+      transform: scale(1.15) rotate(10deg);
+      box-shadow: 0 12px 32px rgba(240, 147, 251, 0.5),
+                  inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                  0 0 40px rgba(240, 147, 251, 0.3);
+    }
+
+    .cert-card:hover .cert-icon::before {
+      opacity: 0.6;
+    }
+
+    .cert-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-issuer {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-date {
+      font-size: 0.85rem;
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    .cert-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* TECH STACK VISUALIZATION */
+    .tech-stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .tech-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1.2rem;
+      padding: 1.8rem 1rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-1);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .tech-item:hover::before {
+      opacity: 0.1;
+    }
+
+    .tech-item:hover {
+      transform: translateY(-8px) scale(1.08);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+
+    .tech-item-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.8rem;
+      display: block;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      position: relative;
+      z-index: 1;
+    }
+
+    .tech-item:hover .tech-item-icon {
+      transform: scale(1.2) rotate(5deg);
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .tech-item-name {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    .tech-item:hover .tech-item-name {
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* ANIMATED SKILL BARS */
+    .skill-bar-container {
+      margin-top: 1rem;
+    }
+
+    .skill-bar-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .skill-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--gradient-1);
+      border-radius: 10px;
+      width: 0;
+      transition: width 1.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .skill-bar-container.animated .skill-bar-fill {
+      width: var(--skill-width);
+    }
+
     /* SMOOTH ANIMATIONS */
     .animate-on-scroll {
       opacity: 0;
@@ -1464,9 +1945,131 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* PARALLAX SECTIONS */
+    .parallax-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      width: 100%;
+      height: calc(100% + 100px);
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.1s ease-out;
+      z-index: -1;
+    }
+
+    /* ACCESSIBILITY - KEYBOARD NAVIGATION */
+    body.keyboard-nav *:focus {
+      outline: 3px solid var(--secondary);
+      outline-offset: 2px;
+    }
+
+    body:not(.keyboard-nav) *:focus {
+      outline: none;
+    }
+
+    /* SKIP TO CONTENT LINK */
+    .skip-to-content {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      z-index: 10000;
+      transition: top 0.3s ease;
+    }
+
+    .skip-to-content:focus {
+      top: 0;
+    }
+
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* MOBILE ENHANCEMENTS */
+    @media (max-width: 768px) {
+      .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+      }
+
+      .tech-stack-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1rem;
+      }
+
+      .certifications-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cert-card {
+        padding: 1.5rem;
+      }
+
+      /* Disable tilt on mobile */
+      .tilt-card {
+        transform: none !important;
+      }
+
+      /* Optimize particle count for mobile */
+      #particleCanvas {
+        opacity: 0.2;
+      }
+    }
+
+    /* PRINT STYLES */
+    @media print {
+      .navbar,
+      .back-to-top,
+      .scroll-indicator,
+      #particleCanvas,
+      .email-modal,
+      .contact-info-modal,
+      .theme-toggle,
+      .mobile-menu-toggle {
+        display: none !important;
+      }
+
+      body {
+        background: white;
+        color: black;
+      }
+
+      section {
+        page-break-inside: avoid;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Skip to Content Link for Accessibility -->
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loader"></div>
+    <div class="loading-text">Loading Portfolio...</div>
+  </div>
+
   <!-- Particle Background -->
   <canvas id="particleCanvas"></canvas>
 
@@ -1474,6 +2077,11 @@
   <div class="scroll-indicator">
     <div class="scroll-progress" id="scrollProgress"></div>
   </div>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    ↑
+  </button>
 
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
@@ -1489,6 +2097,7 @@
           <li><a href="#experience">Experience</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -1554,7 +2163,7 @@
   </div>
 
   <!-- HEADER -->
-  <header>
+  <header id="main-content" role="banner">
     <div class="header-content">
       <h1>Hossam Sabry</h1>
       <p class="tagline">BIM Developer</p>
@@ -1602,6 +2211,9 @@
   <!-- SKILLS -->
   <section id="skills" class="animate-on-scroll">
     <h2>Technical Skills</h2>
+    <p style="text-align: center; color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem; font-size: 1.1rem;">
+      Comprehensive expertise across BIM platforms, automation tools, and programming languages
+    </p>
     <div class="skills-grid">
       <div class="skill skill-revit">
         <div class="skill-icon">
@@ -1724,6 +2336,88 @@
           <div class="level-dot"></div>
           <div class="level-dot"></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="tech-stack" class="animate-on-scroll" style="background: var(--bg-secondary); padding: 6rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2>Tech Stack & Tools</h2>
+      <p style="text-align: center; color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem; font-size: 1.1rem;">
+        Technologies and tools I work with daily
+      </p>
+      <div class="tech-stack-grid">
+        <div class="tech-item" title="C# - Primary language for Revit API">
+          <span class="tech-item-icon">🔷</span>
+          <div class="tech-item-name">C#</div>
+        </div>
+        <div class="tech-item" title="Python - Scripting and automation">
+          <span class="tech-item-icon">🐍</span>
+          <div class="tech-item-name">Python</div>
+        </div>
+        <div class="tech-item" title="JavaScript - Web dashboards">
+          <span class="tech-item-icon">⚡</span>
+          <div class="tech-item-name">JavaScript</div>
+        </div>
+        <div class="tech-item" title="HTML/CSS - Frontend development">
+          <span class="tech-item-icon">🎨</span>
+          <div class="tech-item-name">HTML/CSS</div>
+        </div>
+        <div class="tech-item" title="Git - Version control">
+          <span class="tech-item-icon">📦</span>
+          <div class="tech-item-name">Git</div>
+        </div>
+        <div class="tech-item" title="Visual Studio - IDE">
+          <span class="tech-item-icon">💻</span>
+          <div class="tech-item-name">VS</div>
+        </div>
+        <div class="tech-item" title="Revit API - BIM automation">
+          <span class="tech-item-icon">🏗️</span>
+          <div class="tech-item-name">Revit API</div>
+        </div>
+        <div class="tech-item" title="Dynamo - Visual programming">
+          <span class="tech-item-icon">🔗</span>
+          <div class="tech-item-name">Dynamo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications" class="animate-on-scroll">
+    <h2>Certifications & Training</h2>
+    <p style="text-align: center; color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem; font-size: 1.1rem;">
+      Professional certifications and continuous learning
+    </p>
+    <div class="certifications-grid">
+      <div class="cert-card">
+        <div class="cert-badge">Verified</div>
+        <div class="cert-icon">🏆</div>
+        <div class="cert-title">Autodesk Certified Professional</div>
+        <div class="cert-issuer">Autodesk</div>
+        <div class="cert-date">2024</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">Active</div>
+        <div class="cert-icon">💡</div>
+        <div class="cert-title">BIM Coordinator</div>
+        <div class="cert-issuer">Professional Training</div>
+        <div class="cert-date">2023</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">Completed</div>
+        <div class="cert-icon">⚙️</div>
+        <div class="cert-title">Revit API Development</div>
+        <div class="cert-issuer">Self-Taught & Projects</div>
+        <div class="cert-date">2023-2025</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">Certified</div>
+        <div class="cert-icon">📊</div>
+        <div class="cert-title">Primavera P6</div>
+        <div class="cert-issuer">Oracle</div>
+        <div class="cert-date">2024</div>
       </div>
     </div>
   </section>
@@ -2061,20 +2755,132 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="animate-on-scroll">
+  <!-- SKILLS VISUALIZATION -->
+  <section id="skills-chart" class="animate-on-scroll scroll-reveal">
+    <h2>📊 Skills Proficiency</h2>
+    <div class="skills-chart-container glass-card">
+      <div class="chart-wrapper">
+        <canvas id="skillsChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW -->
+  <section id="blog-preview" class="animate-on-scroll scroll-reveal">
+    <h2>📝 Latest Articles</h2>
+    <div class="blog-grid">
+      <article class="blog-card stagger-item">
+        <div class="blog-image-container">
+          <span class="blog-category">Revit API</span>
+        </div>
+        <div class="blog-content">
+          <h3 class="blog-title">Getting Started with Revit API Development</h3>
+          <p class="blog-excerpt">
+            A comprehensive guide to building your first Revit plugin using C# and the Revit API.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 8 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card stagger-item">
+        <div class="blog-image-container">
+          <span class="blog-category">Dynamo</span>
+        </div>
+        <div class="blog-content">
+          <h3 class="blog-title">Advanced Dynamo Scripting Techniques</h3>
+          <p class="blog-excerpt">
+            Explore advanced Dynamo workflows for parametric design and automation.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 10 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="blog-card stagger-item">
+        <div class="blog-image-container">
+          <span class="blog-category">Best Practices</span>
+        </div>
+        <div class="blog-content">
+          <h3 class="blog-title">BIM Automation: From Concept to Production</h3>
+          <p class="blog-excerpt">
+            Learn how to take your BIM automation projects from prototype to production-ready solutions.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 12 min read</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="blog.html" class="btn magnetic-btn ripple">View All Articles →</a>
+    </div>
+  </section>
+
+  <!-- CONTACT WITH FORM -->
+  <section id="contact" class="animate-on-scroll scroll-reveal">
     <h2>Let's Connect</h2>
     <div class="contact-content">
       <p class="contact-description">Interested in collaborating on BIM solutions or discussing opportunities in digital construction? Let's connect!</p>
-      <div class="social-links">
+      
+      <!-- Contact Form -->
+      <form id="contactForm" class="contact-form">
+        <div class="form-group">
+          <label for="name" class="form-label">Name *</label>
+          <input type="text" id="name" name="name" class="form-input" required placeholder="Your name">
+          <span class="form-error">Please enter your name</span>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email *</label>
+          <input type="email" id="email" name="email" class="form-input" required placeholder="your.email@example.com">
+          <span class="form-error">Please enter a valid email</span>
+        </div>
+
+        <div class="form-group">
+          <label for="subject" class="form-label">Subject</label>
+          <input type="text" id="subject" name="subject" class="form-input" placeholder="What's this about?">
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">Message *</label>
+          <textarea id="message" name="message" class="form-textarea" required placeholder="Tell me about your project or inquiry..."></textarea>
+          <span class="form-error">Please enter a message</span>
+        </div>
+
+        <button type="submit" class="submit-btn magnetic-btn ripple">
+          <span class="btn-text">Send Message</span>
+          <div class="spinner"></div>
+        </button>
+
+        <div class="form-success">
+          ✅ Thank you! Your message has been sent successfully. I'll get back to you soon!
+        </div>
+      </form>
+
+      <div class="social-links" style="margin-top: 3rem;">
         <!-- Email -->
-        <button class="email-button" onclick="openEmailModal(); gtag('event','click',{event_category:'Button',event_label:'Email Modal Open'})">
+        <button class="email-button magnetic-btn" onclick="openEmailModal(); gtag('event','click',{event_category:'Button',event_label:'Email Modal Open'})">
           <span style="color: var(--primary);">📧</span> Email
         </button>
         <!-- GitHub -->
-        <a href="https://github.com/M2Dawn" target="_blank" class="email-button" style="text-decoration: none;"
+        <a href="https://github.com/M2Dawn" target="_blank" class="email-button magnetic-btn" style="text-decoration: none;"
            onclick="gtag('event','click',{event_category:'Button',event_label:'GitHub Profile'})">
           <span style="color: var(--text-primary);">💻</span> GitHub
+        </a>
+        <!-- Download Resume -->
+        <a href="#" class="resume-download magnetic-btn" onclick="showToast('Resume download coming soon!', 'success'); return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Resume
         </a>
       </div>
     </div>
@@ -2082,10 +2888,101 @@
 
   <footer>
     <p>© 2025 Hossam Sabry | Crafted with passion for BIM innovation</p>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+      Built with modern web technologies | Open to opportunities
+    </p>
   </footer>
 
   <script>
-    // Particle Background Animation
+    // ========== LOADING SCREEN ==========
+    window.addEventListener('load', () => {
+      const loadingScreen = document.getElementById('loadingScreen');
+      setTimeout(() => {
+        loadingScreen.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }, 800);
+    });
+
+    // ========== BACK TO TOP BUTTON ==========
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      try { gtag('event','click',{event_category:'Navigation',event_label:'Back to Top'}); } catch(e){}
+    });
+
+    // ========== 3D TILT EFFECT ==========
+    function addTiltEffect(element) {
+      element.addEventListener('mousemove', (e) => {
+        const rect = element.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+        
+        element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+      
+      element.addEventListener('mouseleave', () => {
+        element.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+      });
+    }
+
+    // Apply tilt to project cards
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.project').forEach(card => {
+        card.classList.add('tilt-card');
+        addTiltEffect(card);
+      });
+      
+      document.querySelectorAll('.cert-card').forEach(card => {
+        card.classList.add('tilt-card');
+        addTiltEffect(card);
+      });
+    });
+
+    // ========== PARALLAX SCROLLING ==========
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const parallaxElements = document.querySelectorAll('.parallax-section');
+      
+      parallaxElements.forEach(element => {
+        const speed = 0.5;
+        const yPos = -(scrolled * speed);
+        element.style.transform = `translateY(${yPos}px)`;
+      });
+    });
+
+    // ========== ENHANCED SKILL ANIMATIONS ==========
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const skillBars = entry.target.querySelectorAll('.skill-bar-container');
+          skillBars.forEach((bar, index) => {
+            setTimeout(() => {
+              bar.classList.add('animated');
+            }, index * 100);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    // ========== PARTICLE BACKGROUND ANIMATION ==========
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -2478,8 +3375,100 @@
       }, 120);
     }, 500);
 
-    // OPTIONAL: track any other external link clicks automatically (keeps things comprehensive)
-    // This is non-invasive and won't alter existing inline events. It will send an event for outbound links.
+    // ========== ENHANCED PROJECT CARD INTERACTIONS ==========
+    document.querySelectorAll('.project').forEach(project => {
+      project.addEventListener('mouseenter', function() {
+        this.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      });
+    });
+
+    // ========== TECH STACK ANIMATIONS ==========
+    const techItems = document.querySelectorAll('.tech-item');
+    techItems.forEach((item, index) => {
+      item.style.animationDelay = `${index * 0.05}s`;
+      item.addEventListener('click', () => {
+        item.style.animation = 'pulse 0.6s ease';
+        setTimeout(() => {
+          item.style.animation = '';
+        }, 600);
+      });
+    });
+
+    // ========== SMOOTH REVEAL FOR SECTIONS ==========
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, index * 100);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.cert-card, .tech-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease';
+      revealObserver.observe(el);
+    });
+
+    // ========== KEYBOARD NAVIGATION ==========
+    document.addEventListener('keydown', (e) => {
+      // Press 'T' to scroll to top
+      if (e.key === 't' || e.key === 'T') {
+        if (!e.target.matches('input, textarea')) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+      // Press 'B' to scroll to bottom
+      if (e.key === 'b' || e.key === 'B') {
+        if (!e.target.matches('input, textarea')) {
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+      }
+    });
+
+    // ========== PERFORMANCE OPTIMIZATION ==========
+    // Lazy load images if any are added later
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+
+    // ========== ACCESSIBILITY ENHANCEMENTS ==========
+    // Add focus visible styles for keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-nav');
+      }
+    });
+
+    document.addEventListener('mousedown', () => {
+      document.body.classList.remove('keyboard-nav');
+    });
+
+    // ========== CONSOLE EASTER EGG ==========
+    console.log('%c👋 Hello Developer!', 'font-size: 20px; font-weight: bold; color: #ff6b6b;');
+    console.log('%cInterested in how this portfolio was built?', 'font-size: 14px; color: #4ecdc4;');
+    console.log('%cCheck out the source code and feel free to reach out!', 'font-size: 14px; color: #ffe66d;');
+    console.log('%c📧 e.hossamsabry@gmail.com', 'font-size: 14px; font-weight: bold; color: #a8e6cf;');
+
+    // ========== TRACK OUTBOUND LINKS ==========
     (function trackOutboundLinks() {
       try {
         document.querySelectorAll('a[target="_blank"]').forEach(a => {
@@ -2491,6 +3480,47 @@
         });
       } catch (e) {}
     })();
+
+    // ========== SYSTEM THEME DETECTION ==========
+    if (!localStorage.getItem('theme')) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = prefersDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      
+      if (theme === 'light') {
+        document.getElementById('sunIcon').classList.add('hidden');
+        document.getElementById('moonIcon').classList.remove('hidden');
+      }
+    }
+
+    // ========== PERFORMANCE MONITORING ==========
+    window.addEventListener('load', () => {
+      if (window.performance) {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        console.log(`⚡ Page loaded in ${pageLoadTime}ms`);
+        
+        try {
+          gtag('event', 'timing_complete', {
+            name: 'page_load',
+            value: pageLoadTime,
+            event_category: 'Performance'
+          });
+        } catch(e) {}
+      }
+    });
+    // ========== VIEWPORT HEIGHT FIX FOR MOBILE ==========
+    function setVH() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
   </script>
+  
+  <!-- Enhanced Features Script -->
+  <script src="assets/js/enhancements.js"></script>
 </body>
 </html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hossam Sabry's Blog - Insights on BIM Development, Construction Automation, and Digital Workflows">
+  <meta name="keywords" content="BIM Blog, Revit API Tutorials, Dynamo Tips, Construction Technology">
+  <meta name="author" content="Hossam Sabry">
+  
+  <title>Blog | Hossam Sabry - BIM Developer</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #4ecdc4;
+      --accent: #ffe66d;
+      --bg-primary: #0f0f23;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #16213e;
+      --text-primary: #ffffff;
+      --text-secondary: #b8bcc8;
+      --border: #2d3748;
+      --gradient-1: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+      --shadow: 0 8px 32px rgba(255, 107, 107, 0.15);
+      --shadow-hover: 0 16px 64px rgba(255, 107, 107, 0.25);
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: "Inter", sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 3rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      transform: translateX(-5px);
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .blog-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(78, 205, 196, 0.2));
+    }
+
+    .blog-category {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--gradient-1);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .blog-content {
+      padding: 1.5rem;
+    }
+
+    .blog-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .blog-excerpt {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .blog-date,
+    .blog-read-time {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .coming-soon {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-secondary);
+    }
+
+    .coming-soon h2 {
+      font-size: 2rem;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📝 Blog & Articles</h1>
+    <p class="subtitle">Insights on BIM Development, Automation, and Digital Construction</p>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+  </header>
+
+  <div class="container">
+    <div class="blog-grid">
+      <!-- Blog Post 1 -->
+      <article class="blog-card">
+        <div class="blog-image-container">
+          <span class="blog-category">Revit API</span>
+        </div>
+        <div class="blog-content">
+          <h2 class="blog-title">Getting Started with Revit API Development</h2>
+          <p class="blog-excerpt">
+            A comprehensive guide to building your first Revit plugin using C# and the Revit API. Learn the fundamentals and best practices.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 8 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Blog Post 2 -->
+      <article class="blog-card">
+        <div class="blog-image-container">
+          <span class="blog-category">Dynamo</span>
+        </div>
+        <div class="blog-content">
+          <h2 class="blog-title">Advanced Dynamo Scripting Techniques</h2>
+          <p class="blog-excerpt">
+            Explore advanced Dynamo workflows for parametric design and automation. Includes real-world examples and code snippets.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 10 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Blog Post 3 -->
+      <article class="blog-card">
+        <div class="blog-image-container">
+          <span class="blog-category">Best Practices</span>
+        </div>
+        <div class="blog-content">
+          <h2 class="blog-title">BIM Automation: From Concept to Production</h2>
+          <p class="blog-excerpt">
+            Learn how to take your BIM automation projects from prototype to production-ready solutions that teams can rely on.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 12 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Blog Post 4 -->
+      <article class="blog-card">
+        <div class="blog-image-container">
+          <span class="blog-category">Tutorials</span>
+        </div>
+        <div class="blog-content">
+          <h2 class="blog-title">Building Interactive Dashboards for Construction Data</h2>
+          <p class="blog-excerpt">
+            Step-by-step tutorial on creating interactive dashboards to visualize construction project data and clash detection results.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 15 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Blog Post 5 -->
+      <article class="blog-card">
+        <div class="blog-image-container">
+          <span class="blog-category">Industry Insights</span>
+        </div>
+        <div class="blog-content">
+          <h2 class="blog-title">The Future of Digital Construction</h2>
+          <p class="blog-excerpt">
+            Exploring emerging trends in construction technology, from AI-powered BIM to digital twins and beyond.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 7 min read</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Blog Post 6 -->
+      <article class="blog-card">
+        <div class="blog-image-container">
+          <span class="blog-category">Python</span>
+        </div>
+        <div class="blog-content">
+          <h2 class="blog-title">Python for BIM: Automating Repetitive Tasks</h2>
+          <p class="blog-excerpt">
+            Discover how Python can streamline your BIM workflows with practical examples and reusable scripts.
+          </p>
+          <div class="blog-meta">
+            <span class="blog-date">📅 Coming Soon</span>
+            <span class="blog-read-time">⏱️ 9 min read</span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="coming-soon">
+      <h2>🚀 More Articles Coming Soon!</h2>
+      <p>Stay tuned for in-depth tutorials, case studies, and insights on BIM development and construction automation.</p>
+    </div>
+  </div>
+</body>
+</html>
