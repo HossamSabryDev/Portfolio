@@ -1,0 +1,263 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #3b82f6;
+  --secondary: #60a5fa;
+  --accent: #1e40af;
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: #111111;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --border: #1f2937;
+  --gradient-1: linear-gradient(135deg, #1e3a8a, #2563eb, #3b82f6);
+  --gradient-2: linear-gradient(135deg, #3b82f6, #60a5fa);
+  --shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+  --shadow-hover: 0 16px 64px rgba(59, 130, 246, 0.25);
+  --code-bg: #0d1117;
+  --code-border: #1e3a8a;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Inter", sans-serif;
+  line-height: 1.8;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-5px);
+  color: var(--primary);
+}
+
+.category-badge {
+  display: inline-block;
+  background: var(--gradient-2);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: var(--gradient-2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.meta-info {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+article {
+  margin-top: 3rem;
+  padding: 2rem 0;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary);
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: var(--secondary);
+  margin: 2rem 0 1rem;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+ul, ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  color: var(--text-primary);
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+code {
+  font-family: "Fira Code", monospace;
+  background: var(--code-bg);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: var(--secondary);
+  border: 1px solid var(--code-border);
+}
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border: none;
+  display: block;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.info-box {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(30, 64, 175, 0.1));
+  border-left: 4px solid var(--primary);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+}
+
+.info-box h4 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.warning-box {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(30, 64, 175, 0.15));
+  border-left: 4px solid var(--secondary);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 8px;
+}
+
+.warning-box h4 {
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th {
+  background: var(--gradient-1);
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.code-header {
+  background: var(--gradient-1);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: -1px;
+}
+
+.code-block {
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  pre {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+}
