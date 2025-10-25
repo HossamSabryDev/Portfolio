@@ -194,26 +194,46 @@ class ContactForm {
   }
 
   async sendEmail(data) {
-    // Simulate API delay
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log('Email data:', data);
-        resolve();
-      }, 1500);
-    });
-    
-    /* 
-    // EmailJS Integration Example:
-    return emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data)
-      .then(response => {
-        console.log('SUCCESS!', response.status, response.text);
-        return response;
-      })
-      .catch(error => {
-        console.error('FAILED...', error);
-        throw error;
+    // Check if EmailJS is loaded
+    if (typeof emailjs === 'undefined') {
+      console.warn('EmailJS not loaded. Form data:', data);
+      // Simulate success for demo purposes
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('Email data (not sent):', data);
+          resolve();
+        }, 1500);
       });
-    */
+    }
+    
+    // EmailJS credentials - Fully configured!
+    // Get them from: https://dashboard.emailjs.com/
+    const SERVICE_ID = 'service_f6ehl85';      // ✅ Your EmailJS Service ID
+    const TEMPLATE_ID = 'template_dks5llc';    // ✅ Your EmailJS Template ID
+    const PUBLIC_KEY = '0o6S42Yn8J2Sleaw1';    // ✅ Your EmailJS Public Key
+    
+    // Initialize EmailJS (only needs to be done once)
+    if (!window.emailjsInitialized) {
+      emailjs.init(PUBLIC_KEY);
+      window.emailjsInitialized = true;
+    }
+    
+    // Send email using EmailJS
+    return emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      from_name: data.name,
+      from_email: data.email,
+      subject: data.subject,
+      message: data.message,
+      to_name: 'Hossam Sabry'  // Your name
+    })
+    .then(response => {
+      console.log('✅ Email sent successfully!', response.status, response.text);
+      return response;
+    })
+    .catch(error => {
+      console.error('❌ Email sending failed:', error);
+      throw error;
+    });
   }
 }
 
