@@ -1182,19 +1182,36 @@
 
     .analytics-screenshot {
       position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: transparent;
+      border: none;
       border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
+      padding: 0;
       overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .analytics-screenshot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(96, 165, 250, 0.03) 100%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .analytics-image {
       width: 100%;
       height: auto;
-      border-radius: 0.5rem;
+      border-radius: 1rem;
       display: block;
+      opacity: 0.95;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     .analytics-overlay {
@@ -1239,7 +1256,7 @@
 
     @media (max-width: 768px) {
       .analytics-screenshot {
-        padding: 1rem;
+        padding: 0;
       }
 
       .analytics-overlay {
