@@ -8,7 +8,7 @@ A modern, responsive portfolio website showcasing BIM development expertise, aut
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 
-## 👤 Author
+##  Author
 
 **Hossam Sabry**
 - BIM Developer & Digital Construction Specialist
@@ -16,7 +16,7 @@ A modern, responsive portfolio website showcasing BIM development expertise, aut
 - Email: e.hossamsabry@gmail.com
 
 
-## 📈 Future Enhancements
+##  Future Enhancements
 
 - [ ] Add more case studies
 - [ ] Implement blog search functionality
