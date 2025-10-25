@@ -26,6 +26,3 @@ A modern, responsive portfolio website showcasing BIM development expertise, aut
 - [ ] Implement multi-language support
 - [ ] Add more interactive demos
 
-**Built with ❤️ for BIM innovation**
-
-⭐ Star this repo if you find it helpful!
