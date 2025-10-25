@@ -10,7 +10,6 @@ A modern, responsive portfolio website showcasing BIM development expertise, aut
 
 ## Author
 
-**Hossam Sabry**
 - BIM Developer & Digital Construction Specialist
 - GitHub: [@M2Dawn](https://github.com/M2Dawn)
 - Email: e.hossamsabry@gmail.com
