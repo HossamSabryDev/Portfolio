@@ -18,4 +18,4 @@ User-agent: DotBot
 Disallow: /
 
 # Sitemap (update this with your actual domain)
-# Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://m2dawn.github.io/Portfolio/sitemap.xml
