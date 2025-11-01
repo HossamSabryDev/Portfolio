@@ -1,0 +1,21 @@
+# robots.txt for Hossam Sabry Portfolio
+
+# Allow all legitimate search engine bots
+User-agent: *
+Allow: /
+
+# Disallow common bad bots (optional)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap (update this with your actual domain)
+# Sitemap: https://yourdomain.com/sitemap.xml
